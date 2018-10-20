@@ -13,20 +13,20 @@ public:
 	~ModuleSceneIntro();
 
 	bool Start();
+	update_status PreUpdate();
 	update_status Update();
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
 public:
-	p2List<PhysBody*> circles;
-	p2List<PhysBody*> boxes;
-	p2List<PhysBody*> ricks;
+	p2List<PhysBody*>	bodies;
+	PhysBody*			back;
 
-	PhysBody* sensor;
-	bool sensed;
+	PhysBody*			sensor;
+	bool				sensed;
 
-	SDL_Texture* circle;
-	SDL_Texture* box;
-	SDL_Texture* rick;
+	SDL_Texture*		ball_tx;
+	SDL_Texture*		background_tx;
+	
 	uint bonus_fx;
 };
