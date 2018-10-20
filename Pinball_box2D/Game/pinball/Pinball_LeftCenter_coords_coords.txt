@@ -1,0 +1,4 @@
+// Pivot 0, 0
+int Pinball_LeftCenter_coords[2] = {
+	3760, 1836
+};
