@@ -265,7 +265,44 @@ bool ModuleSceneIntro::Start()
 		116, 141,
 		129, 129
 	};
+		// flipper_structure_left_chain
+		int flipper_structure_left_chain[26] = {
+			49, 760,
+			49, 860,
+			51, 865,
+			137, 934,
+			141, 931,
+			145, 917,
+			145, 911,
+			62, 844,
+			59, 838,
+			60, 761,
+			58, 755,
+			51, 755,
+			49, 760
+		};
+		// fliper_structure_right_chain
+		int fliper_structure_right_chain[28] = {
+			395, 761,
+			395, 837,
+			393, 843,
+			312, 911,
+			309, 915,
+			311, 924,
+			314, 936,
+			319, 935,
+			402, 867,
+			405, 862,
+			405, 761,
+			404, 755,
+			397, 755,
+			395, 761
+		};
 
+		
+
+	
+	
 
 
 
@@ -278,6 +315,8 @@ bool ModuleSceneIntro::Start()
 	//sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50, this);
 	structure_right = App->physics->CreateChain(0, 0, structure_right_chain, 103, b2_staticBody);
 	structure_left = App->physics->CreateChain(0, 0, structure_left_chain, 121, b2_staticBody);
+	flipper_structure_left = App->physics->CreateChain(0, 0, flipper_structure_left_chain, 25, b2_staticBody);
+	flipper_structure_right = App->physics->CreateChain(0, 0, fliper_structure_right_chain, 27, b2_staticBody);
 
 	return ret;
 }
