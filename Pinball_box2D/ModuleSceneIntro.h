@@ -23,6 +23,11 @@ public:
 	PhysBody*			back;
 	PhysBody*			flipper_left;
 	PhysBody*			flipper_right;
+	PhysBody*			structure_right;
+	PhysBody*			structure_left;
+	PhysBody*			flipper_structure_left;
+	PhysBody*			flipper_structure_right;
+
 
 	PhysBody*			sensor;
 	bool				sensed;
