@@ -21,12 +21,15 @@ public:
 public:
 	p2List<PhysBody*>	bodies;
 	PhysBody*			back;
+	PhysBody*			flipper_left;
+	PhysBody*			flipper_right;
 
 	PhysBody*			sensor;
 	bool				sensed;
 
 	SDL_Texture*		ball_tx;
 	SDL_Texture*		background_tx;
+	SDL_Texture*		layout_tx;
 	
 	uint bonus_fx;
 };
