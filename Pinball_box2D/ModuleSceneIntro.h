@@ -20,21 +20,21 @@ public:
 
 public:
 	p2List<PhysBody*>	bodies;
-	PhysBody*			back;
-	PhysBody*			flipper_left;
-	PhysBody*			flipper_right;
-	PhysBody*			structure_right;
-	PhysBody*			structure_left;
-	PhysBody*			flipper_structure_left;
-	PhysBody*			flipper_structure_right;
+	PhysBody*			back = nullptr;
+	PhysBody*			flipper_left = nullptr;
+	PhysBody*			flipper_right = nullptr;
+	PhysBody*			structure_right = nullptr;
+	PhysBody*			structure_left = nullptr;
+	PhysBody*			flipper_structure_left = nullptr;
+	PhysBody*			flipper_structure_right = nullptr;
 
 
-	PhysBody*			sensor;
+	PhysBody*			sensor = nullptr;
 	bool				sensed;
 
-	SDL_Texture*		ball_tx;
-	SDL_Texture*		background_tx;
-	SDL_Texture*		layout_tx;
+	SDL_Texture*		ball_tx = nullptr;
+	SDL_Texture*		background_tx = nullptr;
+	SDL_Texture*		layout_tx = nullptr;
 	
 	uint bonus_fx;
 };

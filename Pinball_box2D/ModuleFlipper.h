@@ -24,15 +24,15 @@ public:
 	void MoveRight();
 
 public:
-	PhysBody*			flipper_left;
-	PhysBody*			motor_left;
-	PhysBody*			flipper_right;
-	PhysBody*			motor_right;
+	PhysBody*			flipper_left = nullptr;
+	PhysBody*			motor_left = nullptr;
+	PhysBody*			flipper_right = nullptr;
+	PhysBody*			motor_right = nullptr;
 
 	bool action_left = false;
 	bool action_right = false;
 
-	SDL_Texture*		flipper_tx;
+	SDL_Texture*		flipper_tx = nullptr;
 
 };
 #endif // !__MODULEFLIPPER_H__
