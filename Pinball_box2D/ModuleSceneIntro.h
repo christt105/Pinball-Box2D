@@ -20,30 +20,38 @@ public:
 
 public:
 	p2List<PhysBody*>	bodies;
-	PhysBody*			back;
-	PhysBody*			flipper_left;
-	PhysBody*			flipper_right;
-	PhysBody*			structure_right;
-	PhysBody*			structure_left;
-	PhysBody*			flipper_structure_left;
-	PhysBody*			flipper_structure_right;
-	PhysBody*			triangle_right;
-	PhysBody*			triangle_left;
-	PhysBody*			capsule1;
-	PhysBody*			capsule2;
-	PhysBody*			capsule3;
-	PhysBody*			circle1;
-	PhysBody*			circle2;
-	PhysBody*			circle3;
+
+	PhysBody*			back = nullptr;
+	PhysBody*			flipper_left = nullptr;
+	PhysBody*			flipper_right = nullptr;
+	PhysBody*			structure_right = nullptr;
+	PhysBody*			structure_left = nullptr;
+	PhysBody*			flipper_structure_left = nullptr;
+	PhysBody*			flipper_structure_right = nullptr;
+	PhysBody*			back = nullptr;
+	PhysBody*			flipper_left = nullptr;
+	PhysBody*			flipper_right = nullptr;
+	PhysBody*			structure_right = nullptr;
+	PhysBody*			structure_left = nullptr;
+	PhysBody*			flipper_structure_left = nullptr;
+	PhysBody*			flipper_structure_right = nullptr;
+	PhysBody*			triangle_right = nullptr;
+	PhysBody*			triangle_left = nullptr;
+	PhysBody*			capsule1 = nullptr;
+	PhysBody*			capsule2 = nullptr;
+	PhysBody*			capsule3 = nullptr;
+	PhysBody*			circle1 = nullptr;
+	PhysBody*			circle2 = nullptr;
+	PhysBody*			circle3 = nullptr;
 
 
 
-	PhysBody*			sensor;
+	PhysBody*			sensor = nullptr;
 	bool				sensed;
 
-	SDL_Texture*		ball_tx;
-	SDL_Texture*		background_tx;
-	SDL_Texture*		layout_tx;
+	SDL_Texture*		ball_tx = nullptr;
+	SDL_Texture*		background_tx = nullptr;
+	SDL_Texture*		layout_tx = nullptr;
 	
 	uint bonus_fx;
 };

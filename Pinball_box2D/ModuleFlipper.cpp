@@ -19,7 +19,7 @@ bool ModuleFlipper::Start() {
 	LOG("Loading Flippers assets");
 	bool ret = true;
 
-	//texture_tx = App->textures->Load(".png");
+	flipper_tx = App->textures->Load("pinball/Textures/flippersAndTriangularBoundsFx.png");
 	int flipper_left_chain[26] = {
 			-3, -11,
 			57, -7,
@@ -73,6 +73,15 @@ update_status ModuleFlipper::Update() {
 		MoveRight();
 	}
 
+	int flipper_left_x, flipper_left_y, flipper_right_x, flipper_right_y;
+
+	flipper_left->GetPosition(flipper_left_x, flipper_left_y);
+	//flipper_right->GetPosition(flipper_right_x, flipper_right_y);
+
+
+	App->renderer->Blit(flipper_tx, flipper_left_x, flipper_left_y, NULL, 1.0F, flipper_left->GetRotation()/*,flipper_left_pivotX,flipper_left_pivotY*/);
+
+
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -86,13 +95,6 @@ void ModuleFlipper::MoveRight() {
 
 update_status ModuleFlipper::PostUpdate() {
 
-	int flipper_left_x, flipper_left_y, flipper_right_x, flipper_right_y;
-
-	flipper_left->GetPosition(flipper_left_x, flipper_left_y);
-	//flipper_right->GetPosition(flipper_right_x, flipper_right_y);
-
-
-	App->renderer->Blit(flipper_tx, flipper_left_x, flipper_left_y, NULL, 1.0F, flipper_left->GetRotation()/*,flipper_left_pivotX,flipper_left_pivotY*/);
 
 	return update_status::UPDATE_CONTINUE;
 }
