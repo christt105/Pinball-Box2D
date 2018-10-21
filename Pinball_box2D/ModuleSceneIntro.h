@@ -29,6 +29,13 @@ public:
 	PhysBody*			flipper_structure_right;
 	PhysBody*			triangle_right;
 	PhysBody*			triangle_left;
+	PhysBody*			capsule1;
+	PhysBody*			capsule2;
+	PhysBody*			capsule3;
+	PhysBody*			circle1;
+	PhysBody*			circle2;
+	PhysBody*			circle3;
+
 
 
 	PhysBody*			sensor;

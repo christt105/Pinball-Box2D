@@ -185,10 +185,8 @@ bool ModuleSceneIntro::Start()
 		322, 213,
 		322, 130
 	};
-
-	
-		// Left Half big structure
-		int structure_left_chain[122] = {
+	// Left Half big structure
+	int structure_left_chain[122] = {
 		129, 129,
 		129, 215,
 		122, 228,
@@ -251,78 +249,119 @@ bool ModuleSceneIntro::Start()
 		116, 141,
 		129, 129
 	};
-		// flipper_structure_left_chain
-		int flipper_structure_left_chain[26] = {
-			49, 760,
-			49, 860,
-			51, 865,
-			137, 934,
-			141, 931,
-			145, 917,
-			145, 911,
-			62, 844,
-			59, 838,
-			60, 761,
-			58, 755,
-			51, 755,
-			49, 760
-		};
-		// fliper_structure_right_chain
-		int fliper_structure_right_chain[28] = {
-			395, 761,
-			395, 837,
-			393, 843,
-			312, 911,
-			309, 915,
-			311, 924,
-			314, 936,
-			319, 935,
-			402, 867,
-			405, 862,
-			405, 761,
-			404, 755,
-			397, 755,
-			395, 761
-		};
-		// Left Triangle
-		int triangle_left_chain[18] = {
-			136, 843,
-			100, 758,
-			93, 758,
-			91, 765,
-			91, 820,
-			126, 854,
-			134, 855,
-			137, 850,
-			136, 843
-		};
+	// flipper_structure_left_chain
+	int flipper_structure_left_chain[26] = {
+		49, 760,
+		49, 860,
+		51, 865,
+		137, 934,
+		141, 931,
+		145, 917,
+		145, 911,
+		62, 844,
+		59, 838,
+		60, 761,
+		58, 755,
+		51, 755,
+		49, 760
+	};
+	// fliper_structure_right_chain
+	int fliper_structure_right_chain[28] = {
+		395, 761,
+		395, 837,
+		393, 843,
+		312, 911,
+		309, 915,
+		311, 924,
+		314, 936,
+		319, 935,
+		402, 867,
+		405, 862,
+		405, 761,
+		404, 755,
+		397, 755,
+		395, 761
+	};
+	// Left Triangle
+	int triangle_left_chain[18] = {
+		136, 843,
+		100, 758,
+		93, 758,
+		91, 765,
+		91, 820,
+		126, 854,
+		134, 855,
+		137, 850,
+		136, 843
+	};
 
-		// Right Triangle
-		int triangle_right_chain[16] = {
-			361, 759,
-			364, 765,
-			364, 820,
-			328, 855,
-			319, 856,
-			318, 846,
-			355, 759,
-			361, 759
-		};
+	// Right Triangle
+	int triangle_right_chain[16] = {
+		361, 759,
+		364, 765,
+		364, 820,
+		328, 855,
+		319, 856,
+		318, 846,
+		355, 759,
+		361, 759
+	};
 
+	//Top barriers
+	int capsule_1_top_chain[18] = {
+		171, 106,
+		175, 102,
+		183, 102,
+		186, 106,
+		186, 156,
+		182, 161,
+		176, 161,
+		171, 156,
+		171, 106
+	};
+	int capsule_2_top_chain[18] = {
+		221, 109,
+		225, 102,
+		233, 102,
+		238, 108,
+		238, 156,
+		233, 162,
+		226, 162,
+		221, 156,
+		221, 109
+	};
+	int capsule_3_top_chain[18] = {
+		270, 109,
+		274, 102,
+		282, 102,
+		286, 108,
+		286, 155,
+		281, 161,
+		275, 161,
+		270, 155,
+		270, 109
+	};
 
+	//Chains
 	back = App->physics->CreateChain(0, 0, background_chain, 165, b2_staticBody);
-
-	//flipper_right = App->physics->CreateChain(0, 0, flipper_right_chain, 15, b2_staticBody);
-
-	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50, this);
 	structure_right = App->physics->CreateChain(0, 0, structure_right_chain, 103, b2_staticBody);
 	structure_left = App->physics->CreateChain(0, 0, structure_left_chain, 121, b2_staticBody);
 	flipper_structure_left = App->physics->CreateChain(0, 0, flipper_structure_left_chain, 25, b2_staticBody);
 	flipper_structure_right = App->physics->CreateChain(0, 0, fliper_structure_right_chain, 27, b2_staticBody);
-
 	triangle_right = App->physics->CreateChain(0, 0, triangle_left_chain, 17, b2_staticBody);
 	triangle_left = App->physics->CreateChain(0, 0, triangle_right_chain, 15, b2_staticBody);
+	capsule1 = App->physics->CreateChain(0, 0, capsule_1_top_chain, 17, b2_staticBody);
+	capsule2 = App->physics->CreateChain(0, 0, capsule_2_top_chain, 17, b2_staticBody);
+	capsule3 = App->physics->CreateChain(0, 0, capsule_3_top_chain, 17, b2_staticBody);
+	//flipper_right = App->physics->CreateChain(0, 0, flipper_right_chain, 15, b2_staticBody);
 
+	//Circle
+	circle1 = App->physics->CreateCircleStatic(225, 210, 20);
+	circle2 = App->physics->CreateCircleStatic(285, 270, 20);
+	circle3 = App->physics->CreateCircleStatic(170, 270, 20);
+
+	//Rectangle Sensor
+	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50, this);
 	return ret;
 }
 
