@@ -27,6 +27,8 @@ public:
 	PhysBody*			structure_left;
 	PhysBody*			flipper_structure_left;
 	PhysBody*			flipper_structure_right;
+	PhysBody*			triangle_right;
+	PhysBody*			triangle_left;
 
 
 	PhysBody*			sensor;
