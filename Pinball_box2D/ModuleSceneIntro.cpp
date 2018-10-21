@@ -128,21 +128,7 @@ bool ModuleSceneIntro::Start()
 			0, 91
 	};
 
-	int flipper_left_chain[26] = {
-			-3, -11,
-			57, -7,
-			62, -6,
-			66, -2,
-			66, 3,
-			64, 9,
-			57, 12,
-			-3, 13,
-			-9, 9,
-			-12, 3,
-			-11, -4,
-			-7, -8,
-			-3, -11
-	};
+	
 
 	// Right Half big structure
 	int structure_right_chain[104] = {
@@ -326,7 +312,6 @@ bool ModuleSceneIntro::Start()
 
 	back = App->physics->CreateChain(0, 0, background_chain, 165, b2_staticBody);
 
-	flipper_left = App->physics->CreateChain(155, 925, flipper_left_chain, 25, b2_staticBody);
 	//flipper_right = App->physics->CreateChain(0, 0, flipper_right_chain, 15, b2_staticBody);
 
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50, this);
@@ -350,6 +335,7 @@ bool ModuleSceneIntro::CleanUp()
 
 	App->textures->Unload(ball_tx);
 	App->textures->Unload(background_tx);
+	App->textures->Unload(layout_tx);
 
 	return true;
 }
