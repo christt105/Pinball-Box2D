@@ -129,25 +129,25 @@ bool ModuleSceneIntro::Start()
 	};
 
 	int flipper_left_chain[26] = {
-		501, 616,
-		558, 655,
-		562, 661,
-		561, 666,
-		559, 672,
-		553, 674,
-		544, 672,
-		515, 655,
-		487, 638,
-		483, 629,
-		488, 620,
-		493, 616,
-		501, 616
+			-3, -11,
+			57, -7,
+			62, -6,
+			66, -2,
+			66, 3,
+			64, 9,
+			57, 12,
+			-3, 13,
+			-9, 9,
+			-12, 3,
+			-11, -4,
+			-7, -8,
+			-3, -11
 	};
 
 	back = App->physics->CreateChain(0, 0, background_chain, 165, b2_staticBody);
 
-	/*flipper_left = App->physics->CreateChain(0, 0, flipper_left_chain, 50, b2_staticBody);
-	flipper_right = App->physics->CreateChain(0, 0, flipper_right_chain, 15, b2_staticBody);*/
+	flipper_left = App->physics->CreateChain(155, 925, flipper_left_chain, 25, b2_staticBody);
+	//flipper_right = App->physics->CreateChain(0, 0, flipper_right_chain, 15, b2_staticBody);
 
 	//sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50, this);
 
