@@ -2,6 +2,8 @@
 #include "Module.h"
 #include "Globals.h"
 #include "p2Point.h"
+#include "p2List.h"
+
 
 class ModulePlayer : public Module
 {
@@ -14,5 +16,9 @@ public:
 	bool CleanUp();
 
 public:
+	p2List<PhysBody*>	bodies;
+	PhysBody*			ball;
+	SDL_Texture*		ball_tx;
 
+	bool dead;
 };

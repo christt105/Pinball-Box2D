@@ -6,10 +6,11 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
+#include "ModulePlayer.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	ball_tx = background_tx = NULL;
+	background_tx = NULL;
 	sensed = false;
 }
 
@@ -24,7 +25,6 @@ bool ModuleSceneIntro::Start()
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
-	ball_tx = App->textures->Load("pinball/Textures/Pinball_Ball.png");
 	background_tx = App->textures->Load("pinball/Textures/Background.png");
 	layout_tx = App->textures->Load("pinball/Textures/Layout.png");
 
@@ -361,7 +361,7 @@ bool ModuleSceneIntro::Start()
 	circle3 = App->physics->CreateCircleStatic(170, 270, 20);
 
 	//Rectangle Sensor
-	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50, this);
+	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 50, this);
 	return ret;
 }
 
@@ -372,7 +372,7 @@ bool ModuleSceneIntro::CleanUp()
 
 	back = nullptr;
 
-	App->textures->Unload(ball_tx);
+	
 	App->textures->Unload(background_tx);
 	App->textures->Unload(layout_tx);
 
@@ -403,22 +403,7 @@ update_status ModuleSceneIntro::PreUpdate() {
 // Update: draw objects
 update_status ModuleSceneIntro::Update()
 {
-	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-	{
-		bodies.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 11));
-		bodies.getLast()->data->listener = this;
-	}
-
-	// All draw functions ------------------------------------------------------
-	p2List_item<PhysBody*>* b = bodies.getFirst();
-
-	while(b != NULL)
-	{
-		int x, y;
-		b->data->GetPosition(x, y);
-		App->renderer->Blit(ball_tx, x, y, NULL, 1.0f, b->data->GetRotation());
-		b = b->next;
-	}
+	
 
 	return UPDATE_CONTINUE;
 }
@@ -426,9 +411,9 @@ update_status ModuleSceneIntro::Update()
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	int x, y;
-
+	App->player->dead = true;
 	
-	App->audio->PlayFx(bonus_fx);
+	//App->audio->PlayFx(bonus_fx);
 
 	/*
 	if(bodyA)
