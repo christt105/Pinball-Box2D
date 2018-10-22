@@ -19,7 +19,6 @@ public:
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
 public:
-	p2List<PhysBody*>	bodies;
 
 	
 	PhysBody*			back = nullptr;
@@ -43,7 +42,6 @@ public:
 	PhysBody*			sensor = nullptr;
 	bool				sensed;
 
-	SDL_Texture*		ball_tx = nullptr;
 	SDL_Texture*		background_tx = nullptr;
 	SDL_Texture*		layout_tx = nullptr;
 	
