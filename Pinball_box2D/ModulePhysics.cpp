@@ -105,10 +105,30 @@ PhysBody* ModulePhysics::CreateCircleStatic(int x, int y, int radius)
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height)
+b2PrismaticJoint* ModulePhysics::CreatePrismaticJoint(b2Body* myBodyA, b2Body* myBodyB, b2Vec2 Aanchor, b2Vec2 Banchor)
+{
+	b2PrismaticJointDef def;
+	def.bodyA = myBodyA;
+	def.bodyB = myBodyB;
+	def.localAxisA.Set(0, -1);
+	def.localAnchorA.Set(Aanchor.x, Aanchor.y);
+	def.localAnchorB.Set(Banchor.x, Banchor.y);
+	def.enableLimit = true;
+	def.upperTranslation = 0;
+	def.lowerTranslation = -1;
+	def.enableMotor = true;
+	def.maxMotorForce = 500;
+	def.motorSpeed = 0;
+
+	b2PrismaticJoint* Pjoint = (b2PrismaticJoint*)world->CreateJoint(&def);
+
+	return Pjoint;
+}
+
+PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, b2BodyType type)
 {
 	b2BodyDef body;
-	body.type = b2_dynamicBody;
+	body.type = type;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);
@@ -130,7 +150,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height)
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int height, Module *listener)
+PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int height/*, Module *listener*/)
 {
 	b2BodyDef body;
 	body.type = b2_staticBody;
@@ -153,7 +173,7 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 	b->SetUserData(pbody);
 	pbody->width = width;
 	pbody->height = height;
-	pbody->listener = listener;
+	//pbody->listener = listener;
 
 	return pbody;
 }

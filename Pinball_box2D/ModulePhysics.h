@@ -44,10 +44,12 @@ public:
 
 	PhysBody* CreateCircle(int x, int y, int radius, b2BodyType type = b2_dynamicBody);
 	PhysBody* CreateCircleStatic(int x, int y, int radius);
-	PhysBody* CreateRectangle(int x, int y, int width, int height);
-	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, Module* listener);
+	PhysBody* CreateRectangle(int x, int y, int width, int height, b2BodyType type = b2_dynamicBody);
+	PhysBody* CreateRectangleSensor(int x, int y, int width, int height/*, Module* listener*/);
 	PhysBody* CreateChain(int x, int y, int* points, int size, b2BodyType type = b2_dynamicBody);
 	PhysBody* CreatePolygon(int x, int y, int* points, int size, b2BodyType type = b2_dynamicBody);
+	b2PrismaticJoint* CreatePrismaticJoint(b2Body* myBodyA, b2Body* myBodyB, b2Vec2 Aanchor, b2Vec2 Banchor);
+
 	
 	b2RevoluteJoint*  CreateJoint(b2JointDef*);
 

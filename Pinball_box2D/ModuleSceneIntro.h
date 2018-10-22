@@ -5,6 +5,16 @@
 #include "Globals.h"
 
 class PhysBody;
+class b2PrismaticJoint;
+class b2Vec2;
+
+struct Kicker {
+	PhysBody* launch;
+	PhysBody* stop;
+	b2PrismaticJoint* joint;
+	SDL_Texture* kicker_tx = nullptr;
+	float force = 0.0f;
+};
 
 class ModuleSceneIntro : public Module
 {
@@ -37,13 +47,17 @@ public:
 	PhysBody*			circle2 = nullptr;
 	PhysBody*			circle3 = nullptr;
 
-
+	Kicker kicker;
 
 	PhysBody*			sensor = nullptr;
 	bool				sensed;
 
 	SDL_Texture*		background_tx = nullptr;
 	SDL_Texture*		layout_tx = nullptr;
+	SDL_Texture*		circle_robound_tx;
+
+	SDL_Rect			circle_robound1_rect;
+	SDL_Rect			circle_robound2_rect;
 	
 	uint bonus_fx;
 };

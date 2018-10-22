@@ -12,6 +12,14 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 {
 	background_tx = NULL;
 	sensed = false;
+
+	circle_robound1_rect.x = 190;
+	circle_robound1_rect.y = 17;
+	circle_robound1_rect.w = circle_robound1_rect.h = 45;
+
+	circle_robound2_rect.x = 260;
+	circle_robound2_rect.y = 17;
+	circle_robound2_rect.w = circle_robound2_rect.h = 45;
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -27,7 +35,7 @@ bool ModuleSceneIntro::Start()
 
 	background_tx = App->textures->Load("pinball/Textures/Background.png");
 	layout_tx = App->textures->Load("pinball/Textures/Layout.png");
-
+	circle_robound_tx = App->textures->Load("pinball/Textures/Circle_rebound.png");
 	bonus_fx = App->audio->LoadFx("pinball/Audio/SFx/bonus.wav");
 
 	int background_chain[166] = {
@@ -359,8 +367,17 @@ bool ModuleSceneIntro::Start()
 	circle2 = App->physics->CreateCircleStatic(285, 270, 20);
 	circle3 = App->physics->CreateCircleStatic(170, 270, 20);
 
+	//Kicker
+	kicker.launch = App->physics->CreateRectangleSensor(488, 936, 24, 15);
+	kicker.stop = App->physics->CreateRectangle(488, 938, 24, 20, b2_dynamicBody);
+	kicker.joint = App->physics->CreatePrismaticJoint(kicker.launch->body, kicker.stop->body, { 0, 0 }, { 0, 0 }); // 0, 0 equals A and B anchors
+	kicker.kicker_tx = App->textures->Load("pinball/Textures/kicker.png");
+	
+
 	//Rectangle Sensor
-	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 50, this);
+	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 50);
+	sensor->listener = this;
+
 	return ret;
 }
 
@@ -371,9 +388,11 @@ bool ModuleSceneIntro::CleanUp()
 
 	back = nullptr;
 
-	
 	App->textures->Unload(background_tx);
 	App->textures->Unload(layout_tx);
+	App->textures->Unload(kicker.kicker_tx);
+	App->textures->Unload(circle_robound_tx);
+
 
 	return true;
 }
@@ -402,8 +421,50 @@ update_status ModuleSceneIntro::PreUpdate() {
 // Update: draw objects
 update_status ModuleSceneIntro::Update()
 {
-	
+	int x, y;
 
+	// Rebound Circles
+	App->renderer->Blit(circle_robound_tx, 202, 187, &circle_robound1_rect);
+	App->renderer->Blit(circle_robound_tx, 262, 247, &circle_robound2_rect);
+	App->renderer->Blit(circle_robound_tx, 147, 247, &circle_robound2_rect);
+
+	//Kicker
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) //Keep pressing
+	{
+		kicker.joint->SetMotorSpeed(-2);
+		kicker.force += 0.5f;
+		if (kicker.force > 40)
+		{
+			kicker.force = 40;
+		}
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP) //Stop pressing
+	{
+		kicker.joint->SetMotorSpeed(kicker.force);
+		kicker.force = 0;
+	}
+	else if (kicker.joint->GetMotorSpeed() < 1) 
+	{
+		kicker.stop->body->SetTransform({ kicker.stop->body->GetPosition().x, kicker.launch->body->GetPosition().y }, 0);
+	}
+	
+	
+	//After being launched set speed to 0 
+	if (kicker.stop->body->GetPosition().y < kicker.launch->body->GetPosition().y + 0.01f && kicker.stop->body->GetPosition().y > kicker.launch->body->GetPosition().y - 0.01f)
+	{
+		//kicker.joint->SetMotorSpeed(0);
+		
+	}
+
+	//Center it again
+	if (kicker.stop->body->GetPosition().y < kicker.launch->body->GetPosition().y)
+	{
+		kicker.stop->body->SetTransform({ kicker.stop->body->GetPosition().x, kicker.launch->body->GetPosition().y }, 0);
+	}
+
+	kicker.stop->GetPosition(x, y);
+	App->renderer->Blit(kicker.kicker_tx, x, y);
+	 
 	return UPDATE_CONTINUE;
 }
 
