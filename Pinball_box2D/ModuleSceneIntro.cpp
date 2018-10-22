@@ -37,6 +37,7 @@ bool ModuleSceneIntro::Start()
 	layout_tx = App->textures->Load("pinball/Textures/Layout.png");
 	circle_robound_tx = App->textures->Load("pinball/Textures/Circle_rebound.png");
 	bonus_fx = App->audio->LoadFx("pinball/Audio/SFx/bonus.wav");
+	kicker_fx = App->audio->LoadFx("pinball/Audio/SFx/kicker.wav");
 
 	int background_chain[166] = {
 	464, 256,
@@ -443,6 +444,8 @@ update_status ModuleSceneIntro::Update()
 	{
 		kicker.joint->SetMotorSpeed(kicker.force);
 		kicker.force = 0;
+		App->audio->PlayFx(kicker_fx, 0);
+
 	}
 	else if (kicker.joint->GetMotorSpeed() < 1) 
 	{

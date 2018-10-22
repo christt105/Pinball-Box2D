@@ -60,4 +60,5 @@ public:
 	SDL_Rect			circle_robound2_rect;
 	
 	uint bonus_fx;
+	uint kicker_fx;
 };
