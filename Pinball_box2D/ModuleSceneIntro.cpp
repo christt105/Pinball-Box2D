@@ -448,17 +448,9 @@ update_status ModuleSceneIntro::Update()
 		kicker.stop->body->SetTransform({ kicker.stop->body->GetPosition().x, kicker.launch->body->GetPosition().y }, 0);
 	}
 	
-	
-	//After being launched set speed to 0 
-	if (kicker.stop->body->GetPosition().y < kicker.launch->body->GetPosition().y + 0.01f && kicker.stop->body->GetPosition().y > kicker.launch->body->GetPosition().y - 0.01f)
-	{
-		//kicker.joint->SetMotorSpeed(0);
-		
-	}
-
-	//Center it again
 	if (kicker.stop->body->GetPosition().y < kicker.launch->body->GetPosition().y)
 	{
+		kicker.joint->SetMotorSpeed(0);
 		kicker.stop->body->SetTransform({ kicker.stop->body->GetPosition().x, kicker.launch->body->GetPosition().y }, 0);
 	}
 
