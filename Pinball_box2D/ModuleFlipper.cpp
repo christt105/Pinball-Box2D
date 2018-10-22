@@ -31,6 +31,16 @@ bool ModuleFlipper::Start() {
 			6, 13
 	};
 
+	int flipper_right_chain[14] = {
+		-6, 13,
+		-12, 1,
+		-76, 5,
+		-85, 13,
+		-79, 22,
+		-16, 25,
+		-6, 13
+	};
+
 	left.flipper = App->physics->CreatePolygon(100, 920, flipper_left_chain, 14);
 	left.rotor = App->physics->CreateCircleStatic(160, 930, 3);
 
@@ -45,6 +55,19 @@ bool ModuleFlipper::Start() {
 	revolutionDef.lowerAngle = -20 * DEGTORAD;
 	left.joint = (b2RevoluteJoint*)App->physics->CreateJoint(&revolutionDef);
 
+	right.flipper = App->physics->CreatePolygon(300, 920, flipper_right_chain, 14);
+	right.rotor = App->physics->CreateCircleStatic(300, 932, 3);
+
+	revolutionDef.bodyA = right.rotor->body;
+	revolutionDef.bodyB = right.flipper->body;
+	revolutionDef.collideConnected = false;
+	revolutionDef.localAnchorA.Set(0, 0);
+	revolutionDef.localAnchorB.Set(PIXEL_TO_METERS(-20), PIXEL_TO_METERS(5));
+	revolutionDef.enableLimit = true;
+	revolutionDef.upperAngle = 30 * DEGTORAD;
+	revolutionDef.lowerAngle = -20 * DEGTORAD;
+	right.joint = (b2RevoluteJoint*)App->physics->CreateJoint(&revolutionDef);
+
 	return ret;
 }
 
@@ -55,6 +78,9 @@ bool ModuleFlipper::CleanUp() {
 	flipper_tx = nullptr;
 
 	left.flipper = nullptr;
+	left.rotor = nullptr;
+	right.flipper = nullptr;
+	right.rotor = nullptr;
 
 	return true;
 }
@@ -63,26 +89,39 @@ update_status ModuleFlipper::PreUpdate() {
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) && !left.mov)
 		left.mov = true;
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) && !right.mov)
+		right.mov = true;
 
 	return update_status::UPDATE_CONTINUE;
 }
 
 update_status ModuleFlipper::Update() {
+
 	if (left.mov) {
 		MoveLeft();
 		left.mov = false;
 	}
+	else {
+		left.flipper->body->ApplyAngularImpulse(0.2f, true);
+	}
 
-	/*if (action_right) {
+	if (right.mov) {
 		MoveRight();
-	}*/
+		right.mov = false;
+	}
+	else {
+		right.flipper->body->ApplyAngularImpulse(-0.2f, true);
+	}
+
 	int flipper_left_x, flipper_left_y, flipper_right_x, flipper_right_y;
 
 	left.flipper->GetPosition(flipper_left_x, flipper_left_y);
-	//flipper_right->GetPosition(flipper_right_x, flipper_right_y);
+	right.flipper->GetPosition(flipper_right_x, flipper_right_y);
 
-	SDL_Rect r = { 0,0,87,27 };
-	App->renderer->Blit(flipper_tx, flipper_left_x, flipper_left_y, &r, 1.0F, left.flipper->GetRotation(), 5, 5);
+	SDL_Rect f1 = { 0,0,87,27 };
+	SDL_Rect f2 = { 100,0,87,27 };
+	App->renderer->Blit(flipper_tx, flipper_left_x, flipper_left_y, &f1, 1.0F, left.flipper->GetRotation(), 5, 5);
+	App->renderer->Blit(flipper_tx, flipper_right_x, flipper_right_y, &f2, 1.0F, right.flipper->GetRotation(), 100, 5);
 
 
 	return update_status::UPDATE_CONTINUE;
@@ -93,7 +132,7 @@ void ModuleFlipper::MoveLeft() {
 }
 
 void ModuleFlipper::MoveRight() {
-
+	right.flipper->body->ApplyAngularImpulse(3.0f, true);
 }
 
 update_status ModuleFlipper::PostUpdate() {
