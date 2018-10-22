@@ -434,10 +434,10 @@ update_status ModuleSceneIntro::Update()
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) //Keep pressing
 	{
 		kicker.joint->SetMotorSpeed(-2);
-		kicker.force += 0.5f;
-		if (kicker.force > 40)
+		kicker.force += 1.0f;
+		if (kicker.force > 100)
 		{
-			kicker.force = 40;
+			kicker.force = 100;
 		}
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP) //Stop pressing
