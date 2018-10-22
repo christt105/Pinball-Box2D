@@ -5,6 +5,7 @@
 #include "ModulePhysics.h"
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
+#include "ModuleAudio.h"
 
 
 ModuleFlipper::ModuleFlipper(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -68,6 +69,8 @@ bool ModuleFlipper::Start() {
 	revolutionDef.lowerAngle = -20 * DEGTORAD;
 	right.joint = (b2RevoluteJoint*)App->physics->CreateJoint(&revolutionDef);
 
+	fx_flipper = App->audio->LoadFx("pinball/Audio/SFx/Flipper.wav");
+
 	return ret;
 }
 
@@ -87,9 +90,9 @@ bool ModuleFlipper::CleanUp() {
 
 update_status ModuleFlipper::PreUpdate() {
 
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) && !left.mov)
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && !left.mov)
 		left.mov = true;
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) && !right.mov)
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && !right.mov)
 		right.mov = true;
 
 	return update_status::UPDATE_CONTINUE;
@@ -99,14 +102,16 @@ update_status ModuleFlipper::Update() {
 
 	if (left.mov) {
 		MoveLeft();
+		App->audio->PlayFx(fx_flipper);
 		left.mov = false;
 	}
 	else {
-		left.flipper->body->ApplyAngularImpulse(0.2f, true);
+		left.flipper->body->ApplyAngularImpulse(0.2f, true); //Apply force contraty to set origin faster
 	}
 
 	if (right.mov) {
 		MoveRight();
+		App->audio->PlayFx(fx_flipper);
 		right.mov = false;
 	}
 	else {
