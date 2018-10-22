@@ -56,7 +56,7 @@ bool ModuleFlipper::Start() {
 	left.joint = (b2RevoluteJoint*)App->physics->CreateJoint(&revolutionDef);
 
 	right.flipper = App->physics->CreatePolygon(300, 920, flipper_right_chain, 14);
-	right.rotor = App->physics->CreateCircleStatic(300, 932, 3);
+	right.rotor = App->physics->CreateCircleStatic(295, 930, 3);
 
 	revolutionDef.bodyA = right.rotor->body;
 	revolutionDef.bodyB = right.flipper->body;
@@ -121,7 +121,7 @@ update_status ModuleFlipper::Update() {
 	SDL_Rect f1 = { 0,0,87,27 };
 	SDL_Rect f2 = { 100,0,87,27 };
 	App->renderer->Blit(flipper_tx, flipper_left_x, flipper_left_y, &f1, 1.0F, left.flipper->GetRotation(), 5, 5);
-	App->renderer->Blit(flipper_tx, flipper_right_x, flipper_right_y, &f2, 1.0F, right.flipper->GetRotation(), 100, 5);
+	App->renderer->Blit(flipper_tx, flipper_right_x-f2.w, flipper_right_y, &f2, 1.0F, right.flipper->GetRotation(), 90, 10);
 
 
 	return update_status::UPDATE_CONTINUE;
