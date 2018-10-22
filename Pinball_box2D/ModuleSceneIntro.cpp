@@ -353,7 +353,6 @@ bool ModuleSceneIntro::Start()
 	capsule1 = App->physics->CreateChain(0, 0, capsule_1_top_chain, 17, b2_staticBody);
 	capsule2 = App->physics->CreateChain(0, 0, capsule_2_top_chain, 17, b2_staticBody);
 	capsule3 = App->physics->CreateChain(0, 0, capsule_3_top_chain, 17, b2_staticBody);
-	//flipper_right = App->physics->CreateChain(0, 0, flipper_right_chain, 15, b2_staticBody);
 
 	//Circle
 	circle1 = App->physics->CreateCircleStatic(225, 210, 20);
