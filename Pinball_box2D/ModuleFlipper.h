@@ -7,6 +7,16 @@
 #include "Globals.h"
 
 class PhysBody;
+class b2RevoluteJoint;
+
+struct Flipper {
+	PhysBody*			flipper = nullptr;
+	PhysBody*			rotor = nullptr;
+
+	bool				mov = false;
+
+	b2RevoluteJoint*	joint = nullptr;
+};
 
 class ModuleFlipper : public Module
 {
@@ -24,13 +34,8 @@ public:
 	void MoveRight();
 
 public:
-	PhysBody*			flipper_left = nullptr;
-	PhysBody*			motor_left = nullptr;
-	PhysBody*			flipper_right = nullptr;
-	PhysBody*			motor_right = nullptr;
-
-	bool action_left = false;
-	bool action_right = false;
+	Flipper		left;
+	Flipper		right;
 
 	SDL_Texture*		flipper_tx = nullptr;
 

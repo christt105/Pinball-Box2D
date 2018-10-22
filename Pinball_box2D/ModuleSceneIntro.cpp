@@ -343,22 +343,21 @@ bool ModuleSceneIntro::Start()
 	};
 
 	//Chains
-	back = App->physics->CreateChain(0, 0, background_chain, 165, b2_staticBody);
-	structure_right = App->physics->CreateChain(0, 0, structure_right_chain, 103, b2_staticBody);
-	structure_left = App->physics->CreateChain(0, 0, structure_left_chain, 121, b2_staticBody);
-	flipper_structure_left = App->physics->CreateChain(0, 0, flipper_structure_left_chain, 25, b2_staticBody);
-	flipper_structure_right = App->physics->CreateChain(0, 0, fliper_structure_right_chain, 27, b2_staticBody);
-	triangle_right = App->physics->CreateChain(0, 0, triangle_left_chain, 17, b2_staticBody);
-	triangle_left = App->physics->CreateChain(0, 0, triangle_right_chain, 15, b2_staticBody);
-	capsule1 = App->physics->CreateChain(0, 0, capsule_1_top_chain, 17, b2_staticBody);
-	capsule2 = App->physics->CreateChain(0, 0, capsule_2_top_chain, 17, b2_staticBody);
-	capsule3 = App->physics->CreateChain(0, 0, capsule_3_top_chain, 17, b2_staticBody);
-	//flipper_right = App->physics->CreateChain(0, 0, flipper_right_chain, 15, b2_staticBody);
+	//back = App->physics->CreateChain(0, 0, background_chain, 165, b2_staticBody);
+	//structure_right = App->physics->CreateChain(0, 0, structure_right_chain, 103, b2_staticBody);
+	//structure_left = App->physics->CreateChain(0, 0, structure_left_chain, 121, b2_staticBody);
+	//flipper_structure_left = App->physics->CreateChain(0, 0, flipper_structure_left_chain, 25, b2_staticBody);
+	//flipper_structure_right = App->physics->CreateChain(0, 0, fliper_structure_right_chain, 27, b2_staticBody);
+	//triangle_right = App->physics->CreateChain(0, 0, triangle_left_chain, 17, b2_staticBody);
+	//triangle_left = App->physics->CreateChain(0, 0, triangle_right_chain, 15, b2_staticBody);
+	//capsule1 = App->physics->CreateChain(0, 0, capsule_1_top_chain, 17, b2_staticBody);
+	//capsule2 = App->physics->CreateChain(0, 0, capsule_2_top_chain, 17, b2_staticBody);
+	//capsule3 = App->physics->CreateChain(0, 0, capsule_3_top_chain, 17, b2_staticBody);
 
-	//Circle
-	circle1 = App->physics->CreateCircleStatic(225, 210, 20);
-	circle2 = App->physics->CreateCircleStatic(285, 270, 20);
-	circle3 = App->physics->CreateCircleStatic(170, 270, 20);
+	////Circle
+	//circle1 = App->physics->CreateCircleStatic(225, 210, 20);
+	//circle2 = App->physics->CreateCircleStatic(285, 270, 20);
+	//circle3 = App->physics->CreateCircleStatic(170, 270, 20);
 
 	//Rectangle Sensor
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50, this);
