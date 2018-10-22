@@ -21,13 +21,7 @@ public:
 public:
 	p2List<PhysBody*>	bodies;
 
-	PhysBody*			back = nullptr;
-	PhysBody*			flipper_left = nullptr;
-	PhysBody*			flipper_right = nullptr;
-	PhysBody*			structure_right = nullptr;
-	PhysBody*			structure_left = nullptr;
-	PhysBody*			flipper_structure_left = nullptr;
-	PhysBody*			flipper_structure_right = nullptr;
+	
 	PhysBody*			back = nullptr;
 	PhysBody*			flipper_left = nullptr;
 	PhysBody*			flipper_right = nullptr;
