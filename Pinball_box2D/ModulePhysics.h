@@ -26,8 +26,8 @@ public:
 
 public:
 	int width, height;
-	b2Body* body;
-	Module* listener;
+	b2Body* body = nullptr;
+	Module* listener = nullptr;
 };
 
 // Module --------------------------------------
@@ -58,11 +58,11 @@ public:
 
 private:
 
-	bool debug;
-	b2World* world;
-	b2Body* ground;
+	bool debug = false;
+	b2World* world = nullptr;
+	b2Body* ground = nullptr;
 
 	// Mouse joint
-	b2MouseJoint* mouse_joint;
-	b2Body* body_clicked;
+	b2MouseJoint* mouse_joint = nullptr;
+	b2Body* body_clicked = nullptr;
 };

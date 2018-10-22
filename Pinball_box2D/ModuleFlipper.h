@@ -37,6 +37,8 @@ public:
 	Flipper		left;
 	Flipper		right;
 
+	uint fx_flipper;
+
 	SDL_Texture*		flipper_tx = nullptr;
 
 };

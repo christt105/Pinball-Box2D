@@ -364,6 +364,7 @@ bool ModuleSceneIntro::Start()
 
 	//Circle
 	circle1 = App->physics->CreateCircleStatic(225, 210, 20);
+	circle1->listener = this;
 	circle2 = App->physics->CreateCircleStatic(285, 270, 20);
 	circle3 = App->physics->CreateCircleStatic(170, 270, 20);
 
@@ -464,6 +465,10 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	int x, y;
 	App->player->dead = true;
+
+	if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3) {
+		LOG("COLLISION WITH A CIRCLE");
+	}
 	
 	//App->audio->PlayFx(bonus_fx);
 

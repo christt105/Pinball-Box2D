@@ -5,6 +5,7 @@
 #include "ModulePhysics.h"
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
+#include "ModuleAudio.h"
 
 
 ModuleFlipper::ModuleFlipper(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -56,7 +57,7 @@ bool ModuleFlipper::Start() {
 	left.joint = (b2RevoluteJoint*)App->physics->CreateJoint(&revolutionDef);
 
 	right.flipper = App->physics->CreatePolygon(300, 920, flipper_right_chain, 14);
-	right.rotor = App->physics->CreateCircleStatic(300, 932, 3);
+	right.rotor = App->physics->CreateCircleStatic(295, 930, 3);
 
 	revolutionDef.bodyA = right.rotor->body;
 	revolutionDef.bodyB = right.flipper->body;
@@ -67,6 +68,8 @@ bool ModuleFlipper::Start() {
 	revolutionDef.upperAngle = 30 * DEGTORAD;
 	revolutionDef.lowerAngle = -20 * DEGTORAD;
 	right.joint = (b2RevoluteJoint*)App->physics->CreateJoint(&revolutionDef);
+
+	fx_flipper = App->audio->LoadFx("pinball/Audio/SFx/Flipper.wav");
 
 	return ret;
 }
@@ -87,9 +90,9 @@ bool ModuleFlipper::CleanUp() {
 
 update_status ModuleFlipper::PreUpdate() {
 
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) && !left.mov)
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && !left.mov)
 		left.mov = true;
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) && !right.mov)
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && !right.mov)
 		right.mov = true;
 
 	return update_status::UPDATE_CONTINUE;
@@ -99,14 +102,16 @@ update_status ModuleFlipper::Update() {
 
 	if (left.mov) {
 		MoveLeft();
+		App->audio->PlayFx(fx_flipper);
 		left.mov = false;
 	}
 	else {
-		left.flipper->body->ApplyAngularImpulse(0.2f, true);
+		left.flipper->body->ApplyAngularImpulse(0.2f, true); //Apply force contraty to set origin faster
 	}
 
 	if (right.mov) {
 		MoveRight();
+		App->audio->PlayFx(fx_flipper);
 		right.mov = false;
 	}
 	else {
@@ -121,7 +126,7 @@ update_status ModuleFlipper::Update() {
 	SDL_Rect f1 = { 0,0,87,27 };
 	SDL_Rect f2 = { 100,0,87,27 };
 	App->renderer->Blit(flipper_tx, flipper_left_x, flipper_left_y, &f1, 1.0F, left.flipper->GetRotation(), 5, 5);
-	App->renderer->Blit(flipper_tx, flipper_right_x, flipper_right_y, &f2, 1.0F, right.flipper->GetRotation(), 100, 5);
+	App->renderer->Blit(flipper_tx, flipper_right_x-f2.w, flipper_right_y, &f2, 1.0F, right.flipper->GetRotation(), 90, 10);
 
 
 	return update_status::UPDATE_CONTINUE;
