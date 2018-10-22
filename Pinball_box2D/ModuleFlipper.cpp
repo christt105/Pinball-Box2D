@@ -43,10 +43,8 @@ bool ModuleFlipper::Start() {
 		70 ,-7
 	};
 
-	//left.flipper = App->physics->CreateRectangle(70, 70, 40, 20);//App->physics->CreatePolygon(160, 925, flipper_left_chain, 8);
-	//left.rotor = App->physics->CreateCircleStatic(70, 70, 10);
-	left.flipper = App->physics->CreateRectangle(70, 70, 40, 20);//App->physics->CreatePolygon(160, 925, flipper_left_chain, 8);
-	left.rotor = App->physics->CreateCircleStatic(70, 70, 1);
+	left.flipper = App->physics->CreatePolygon(160, 925, flipper_left_chain, 8);
+	left.rotor = App->physics->CreateCircleStatic(160, 925, 1);
 
 	b2RevoluteJointDef revolutionDef;
 	revolutionDef.bodyA = left.rotor->body;
@@ -55,19 +53,9 @@ bool ModuleFlipper::Start() {
 	revolutionDef.localAnchorA.Set(0, 0);
 	revolutionDef.localAnchorB.Set(0, 0);
 	revolutionDef.enableLimit = true;
-	revolutionDef.upperAngle = -b2_pi / 2;
-	revolutionDef.upperAngle = b2_pi / 2;
-	left.joint = (b2RevoluteJoint*)App->physics->CreateJoint(&revolutionDef);
-	//b2RevoluteJointDef revolutionDef;
-	//revolutionDef.bodyA = left.rotor->body;
-	//revolutionDef.bodyB = left.flipper->body;
-	//revolutionDef.collideConnected = false;
-	//*revolutionDef.localAnchorA.Set(0, 0);
-	//revolutionDef.localAnchorB.Set(0, 0);
-	//revolutionDef.enableLimit = true;
-	//revolutionDef.upperAngle = -b2_pi / 2;
-	//revolutionDef.upperAngle = b2_pi / 2;*/
-	//left.joint = (b2RevoluteJoint*)App->physics->CreateJoint(revolutionDef);
+	revolutionDef.upperAngle = 30 * DEGTORAD; 
+	revolutionDef.lowerAngle = -25 * DEGTORAD;
+	left.joint = (b2RevoluteJoint*)App->physics->CreateJoint(&revolutionDef);;
 
 	return ret;
 }
@@ -78,38 +66,31 @@ bool ModuleFlipper::CleanUp() {
 	App->textures->Unload(flipper_tx);
 	flipper_tx = nullptr;
 
-	//left.flipper = nullptr;
-	//flipper_right = nullptr;
+	left.flipper = nullptr;
 
 	return true;
 }
 
 update_status ModuleFlipper::PreUpdate() {
 
-	//if (App->input->GetKey(SDL_SCANCODE_LEFT) && !left.mov)
-	//	left.mov = true;
-
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT)) {
-		App->physics->CreateRectangle(70, 70, 40, 10);
-	}
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) && !left.mov)
+		left.mov = true;
 
 	return update_status::UPDATE_CONTINUE;
 }
 
 update_status ModuleFlipper::Update() {
-	/*if (left.mov) {
+	if (left.mov) {
 		MoveLeft();
-	}*/
+	}
 
 	/*if (action_right) {
 		MoveRight();
 	}*/
-
-	//left.flipper->body->SetTransform(b2Vec2(160, 925), left.flipper->GetRotation());
-
+	LOG("%.2f", left.flipper->GetRotation());
 	int flipper_left_x, flipper_left_y, flipper_right_x, flipper_right_y;
 
-	//left.flipper->GetPosition(flipper_left_x, flipper_left_y);
+	left.flipper->GetPosition(flipper_left_x, flipper_left_y);
 	//flipper_right->GetPosition(flipper_right_x, flipper_right_y);
 
 
@@ -120,7 +101,7 @@ update_status ModuleFlipper::Update() {
 }
 
 void ModuleFlipper::MoveLeft() {
-	//left.flipper->body->ApplyAngularImpulse(2.0f, true);
+	left.flipper->body->ApplyAngularImpulse(2.0f, true);
 }
 
 void ModuleFlipper::MoveRight() {
