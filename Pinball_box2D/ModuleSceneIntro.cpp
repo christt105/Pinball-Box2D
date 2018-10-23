@@ -43,6 +43,7 @@ bool ModuleSceneIntro::Start()
 	bonus_fx = App->audio->LoadFx("pinball/Audio/SFx/bonus.wav");
 	kicker_fx = App->audio->LoadFx("pinball/Audio/SFx/kicker.wav");
 	circle_fx = App->audio->LoadFx("pinball/Audio/SFx/CircleRebounder.wav");
+	triangle_fx = App->audio->LoadFx("pinball/Audio/SFx/Triangle.wav");
 
 	int background_chain[166] = {
 	464, 256,
@@ -532,9 +533,11 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	}
 	
 	if (bodyA == triangle_left) {
-		bodyB->body->ApplyLinearImpulse(b2Vec2(-2, -1), bodyB->body->GetWorldCenter(), true);
+		bodyB->body->ApplyLinearImpulse(b2Vec2(-2, -2), bodyB->body->GetWorldCenter(), true);
+		App->audio->PlayFx(triangle_fx);
 	}
 	if (bodyA == triangle_right) {
-		bodyB->body->ApplyLinearImpulse(b2Vec2(2, -1), bodyB->body->GetWorldCenter(), true);
+		bodyB->body->ApplyLinearImpulse(b2Vec2(2, -2), bodyB->body->GetWorldCenter(), true);
+		App->audio->PlayFx(triangle_fx);
 	}
 }
