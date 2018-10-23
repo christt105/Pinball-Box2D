@@ -367,7 +367,9 @@ bool ModuleSceneIntro::Start()
 	circle1 = App->physics->CreateCircleStatic(225, 210, 20);
 	circle2 = App->physics->CreateCircleStatic(285, 270, 20);
 	circle3 = App->physics->CreateCircleStatic(170, 270, 20);
-	//circle1->listener = this;
+	circle1->listener = this;
+	circle2->listener = this;
+	circle3->listener = this;
 
 	//Kicker
 	kicker.launch = App->physics->CreateRectangleSensor(488, 936, 24, 15);
@@ -509,9 +511,13 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	}
 	
 
-	/*if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3) {
-		LOG("COLLISION WITH A CIRCLE");
-	}*/
+	if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3) {
+		LOG("HE COLISIONADO CON UN CIRCULO");
+		b2Vec2 force(bodyB->body->GetLocalCenter() - bodyA->body->GetLocalCenter());
+		force *= 10;
+		b2Vec2 forceTest(0.0f, -5.0f);
+		bodyB->body->ApplyLinearImpulse(forceTest, bodyB->body->GetWorldCenter(), true);
+	}
 	
 	//App->audio->PlayFx(bonus_fx);
 
