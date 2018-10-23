@@ -16,6 +16,8 @@ struct Kicker {
 	float force = 0.0f;
 };
 
+
+
 class ModuleSceneIntro : public Module
 {
 public:
@@ -47,15 +49,15 @@ public:
 	PhysBody*			circle2 = nullptr;
 	PhysBody*			circle3 = nullptr;
 
+public: 
+
 	Kicker kicker;
 
 	PhysBody*			sensor = nullptr;
 
-
 	PhysBody*			unlocker = nullptr;
 	PhysBody*			unlocker_rectangle = nullptr;
 	bool				unlocker_closed = false;
-
 
 	bool				sensed;
 

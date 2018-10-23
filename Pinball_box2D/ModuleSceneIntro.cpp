@@ -7,6 +7,7 @@
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "ModulePlayer.h"
+#include "ModuleWindow.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -379,8 +380,6 @@ bool ModuleSceneIntro::Start()
 	unlocker = App->physics->CreateRectangleSensor( 400, 120, 20, 20);
 	unlocker->listener = this;
 
-	
-
 	//Rectangle Sensor
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 50);
 	sensor->listener = this;
@@ -430,6 +429,11 @@ update_status ModuleSceneIntro::Update()
 {
 	int x, y;
 
+	// Title info
+	p2SString title("My name is Jeff!!!");
+
+	App->window->SetTitle(title.GetString());
+
 	// Rebound Circles
 	App->renderer->Blit(circle_robound_tx, 202, 187, &circle_robound1_rect);
 	App->renderer->Blit(circle_robound_tx, 262, 247, &circle_robound2_rect);
@@ -471,14 +475,14 @@ update_status ModuleSceneIntro::Update()
 		if (unlocker_rectangle == nullptr)
 		{
 			unlocker_rectangle = App->physics->CreateRectangle(420, 140, 2, 70, b2_staticBody);
-			LOG("A NEW RECTANGLE CREATED");
+			LOG("A NEW UNLOCKER CREATED");
 		}
 
 	if (!unlocker_closed && unlocker_rectangle != nullptr)
 	{
 		unlocker_rectangle->body->GetWorld()->DestroyBody(unlocker_rectangle->body);
 		unlocker_rectangle = nullptr;
-		LOG("-- RECTANGLE DESTROYED ");
+		LOG("-- UNLOCKER DESTROYED ");
 
 	}
 		
