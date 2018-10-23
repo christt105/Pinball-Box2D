@@ -376,8 +376,10 @@ bool ModuleSceneIntro::Start()
 	kicker.kicker_tx = App->textures->Load("pinball/Textures/kicker.png");
 	
 	//Unlocker
-	unlocker = App->physics->CreateRectangleSensor( 445, 165, 20, 20);
+	unlocker = App->physics->CreateRectangleSensor( 400, 120, 20, 20);
 	unlocker->listener = this;
+
+	
 
 	//Rectangle Sensor
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 50);
@@ -463,6 +465,23 @@ update_status ModuleSceneIntro::Update()
 
 	kicker.stop->GetPosition(x, y);
 	App->renderer->Blit(kicker.kicker_tx, x, y);
+
+	//Unlock
+	if(unlocker_closed)
+		if (unlocker_rectangle == nullptr)
+		{
+			unlocker_rectangle = App->physics->CreateRectangle(420, 140, 2, 70, b2_staticBody);
+		}
+		
+	else
+		if (unlocker_rectangle != nullptr)
+		{
+			
+			unlocker_rectangle->body->GetWorld()->DestroyBody(unlocker_rectangle->body);
+			unlocker_rectangle = nullptr;
+		}
+	
+
 	 
 	return UPDATE_CONTINUE;
 }
@@ -470,7 +489,19 @@ update_status ModuleSceneIntro::Update()
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	int x, y;
-	App->player->dead = true;
+
+	if (bodyA == sensor)
+	{
+		App->player->dead = true;
+		unlocker_closed = false;
+	}
+
+
+	if (bodyA == unlocker)
+	{
+		unlocker_closed = true;
+	}
+	
 
 	if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3) {
 		LOG("COLLISION WITH A CIRCLE");

@@ -53,6 +53,9 @@ public:
 
 
 	PhysBody*			unlocker = nullptr;
+	PhysBody*			unlocker_rectangle = nullptr;
+	bool				unlocker_closed = false;
+
 
 	bool				sensed;
 
