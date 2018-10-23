@@ -8,6 +8,8 @@
 #include "ModulePhysics.h"
 #include "ModulePlayer.h"
 #include "ModuleWindow.h"
+#include "p2Point.h"
+
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -428,13 +430,12 @@ update_status ModuleSceneIntro::PreUpdate() {
 update_status ModuleSceneIntro::Update()
 {
 	int x, y;
-
-	//// Title info
-	//App->input->GetMouseX();
-	//App->input->GetMouseY();
-	//iPoint map_coordinates_pixel(x, y);
-	//p2SString title("sdadasd");
-	//App->window->SetTitle(title.GetString());
+	
+	
+	// Title info
+	iPoint map_coordinates_pixel(App->input->GetMouseX(), App->input->GetMouseY());
+	p2SString title("Pixel: %d, %d", map_coordinates_pixel.x + App->renderer->camera.x, map_coordinates_pixel.y + App->renderer->camera.y);
+	App->window->SetTitle(title.GetString());
 
 	// Rebound Circles
 	App->renderer->Blit(circle_robound_tx, 202, 187, &circle_robound1_rect);

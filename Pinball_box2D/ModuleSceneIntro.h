@@ -2,11 +2,13 @@
 #include "Module.h"
 #include "p2List.h"
 #include "p2Point.h"
+#include "p2SString.h"
 #include "Globals.h"
 
 class PhysBody;
 class b2PrismaticJoint;
 class b2Vec2;
+
 
 struct Kicker {
 	PhysBody* launch;
