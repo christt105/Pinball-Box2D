@@ -38,9 +38,11 @@ private:
 private:
 	Uint32	interval = 2000; //2 seconds interval btw mark changes direction
 	Uint32	interval_ball = 3000; //3 seconds interval ball is suspended on air
+	Uint32	interval_mark = 1000; //1 seconds while is deactive throwing ball
 
 	Uint32	time_start = 0;
 	Uint32	time_ball = 0;
+	Uint32	time_mark = 0;
 
 	float	angle = 0.0F;
 
