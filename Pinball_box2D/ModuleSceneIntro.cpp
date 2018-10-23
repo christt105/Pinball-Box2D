@@ -632,7 +632,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 	if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3) {
 		b2Vec2 force(bodyB->body->GetWorldCenter() - bodyA->body->GetWorldCenter());
-		force *= 5;
+		force *= 3;
 		bodyB->body->ApplyLinearImpulse(force, bodyB->body->GetWorldCenter(), true);
 		App->audio->PlayFx(circle_fx);
 	}
