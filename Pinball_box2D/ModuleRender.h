@@ -24,4 +24,7 @@ public:
 public:
 	SDL_Renderer* renderer;
 	SDL_Rect camera;
+
+	int		zoom = NULL;
+	int		max_zoom = 5;
 };
