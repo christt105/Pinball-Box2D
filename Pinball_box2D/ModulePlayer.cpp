@@ -96,8 +96,11 @@ update_status ModulePlayer::Update()
 	// DEBUG MODE
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		bodies.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 11));
-		bodies.getLast()->data->listener = this;
+		ball = App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 11);
+		ball->body->SetBullet(true);
+		ball->listener = this;
+		//bodies.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 11));
+		//bodies.getLast()->data->listener = this;
 	}
 	// All draw functions ------------------------------------------------------
 	p2List_item<PhysBody*>* b = bodies.getFirst();
