@@ -9,6 +9,7 @@
 #include "ModulePhysics.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleFlipper.h"
+#include "ModuleCircleDirection.h"
 
 #include "Application.h"
 
@@ -23,6 +24,7 @@ Application::Application()
 	scene_intro = new ModuleSceneIntro(this);
 	physics = new ModulePhysics(this);
 	flippers = new ModuleFlipper(this);
+	circle = new ModuleCircleDirection(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -39,6 +41,7 @@ Application::Application()
 	// Scenes
 	AddModule(scene_intro);
 	AddModule(flippers);
+	AddModule(circle);
 	
 	// Player
 	AddModule(player);
