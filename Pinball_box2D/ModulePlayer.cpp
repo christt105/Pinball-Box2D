@@ -50,6 +50,7 @@ update_status ModulePlayer::Update()
 			ball = nullptr;
 		}
 		ball = App->physics->CreateCircle(SCREEN_WIDTH - 23, SCREEN_HEIGHT - 250, 11);
+		ball->body->SetBullet(true);
 		ball->listener = this;
 
 		dead = false;
