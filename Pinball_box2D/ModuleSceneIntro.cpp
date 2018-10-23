@@ -16,13 +16,17 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	background_tx = NULL;
 	sensed = false;
 
-	circle_robound1_rect.x = 190;
+	/*circle_robound1_rect.x = 190;
 	circle_robound1_rect.y = 17;
 	circle_robound1_rect.w = circle_robound1_rect.h = 45;
 
 	circle_robound2_rect.x = 260;
 	circle_robound2_rect.y = 17;
-	circle_robound2_rect.w = circle_robound2_rect.h = 45;
+	circle_robound2_rect.w = circle_robound2_rect.h = 45;*/
+
+	tp_rect.x = 468;
+	tp_rect.y = 28;
+	tp_rect.w = tp_rect.h = 22;
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -380,7 +384,7 @@ bool ModuleSceneIntro::Start()
 	circle2->listener = this;
 	circle3->listener = this;
 
-	//tp 468 28
+	//tp 
 	tp_1 = App->physics->CreateRectangleSensor(121, 390, 15, 15);
 	tp_2 = App->physics->CreateRectangleSensor(331, 390, 15, 15);
 	tp_1->listener = this;
@@ -457,6 +461,12 @@ update_status ModuleSceneIntro::Update()
 	App->renderer->Blit(circle_robound_tx, 147, 247, &circle_robound2_rect, 1.0F, angle_rot);
 
 	angle_rot-=0.5F;
+
+	//Tp
+	App->renderer->Blit(circle_robound_tx, 108, 378, &tp_rect, 1.0F, angle_rot);
+	App->renderer->Blit(circle_robound_tx, 322, 378, &tp_rect, 1.0F, angle_rot);
+	App->renderer->Blit(circle_robound_tx, 20, 750, &tp_rect, 1.0F, angle_rot);
+	App->renderer->Blit(circle_robound_tx, 410, 750, &tp_rect, 1.0F, angle_rot);
 
 	//Kicker
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) //Keep pressing

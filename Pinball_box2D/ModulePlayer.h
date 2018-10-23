@@ -23,7 +23,7 @@ public:
 	SDL_Rect			ball_rect;
 	
 
-	bool dead;
+	bool dead = true;
 	bool tp1;
 	bool tp2;
 };
