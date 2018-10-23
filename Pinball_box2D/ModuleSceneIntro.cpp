@@ -429,10 +429,12 @@ update_status ModuleSceneIntro::Update()
 {
 	int x, y;
 
-	// Title info
-	p2SString title("My name is Jeff!!!");
-
-	App->window->SetTitle(title.GetString());
+	//// Title info
+	//App->input->GetMouseX();
+	//App->input->GetMouseY();
+	//iPoint map_coordinates_pixel(x, y);
+	//p2SString title("sdadasd");
+	//App->window->SetTitle(title.GetString());
 
 	// Rebound Circles
 	App->renderer->Blit(circle_robound_tx, 202, 187, &circle_robound1_rect);

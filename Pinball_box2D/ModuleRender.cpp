@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleWindow.h"
 #include "ModuleRender.h"
+#include "ModuleInput.h"
 #include <math.h>
 
 ModuleRender::ModuleRender(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -44,6 +45,25 @@ update_status ModuleRender::PreUpdate()
 {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 	SDL_RenderClear(renderer);
+
+	//ZOOM
+	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+	{
+		if (zoom < max_zoom)
+		{
+			zoom++;
+			SDL_RenderSetLogicalSize(renderer, camera.w * zoom, camera.h * zoom);
+		}
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
+	{
+		if (zoom > 0)
+		{
+			zoom--;
+			SDL_RenderSetLogicalSize(renderer, camera.w  * zoom, camera.h * zoom);
+		}
+	}
+
 	return UPDATE_CONTINUE;
 }
 
