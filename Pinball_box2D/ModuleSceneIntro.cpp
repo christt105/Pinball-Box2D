@@ -469,9 +469,9 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	int x, y;
 	App->player->dead = true;
 
-	if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3) {
+	/*if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3) {
 		LOG("COLLISION WITH A CIRCLE");
-	}
+	}*/
 	
 	//App->audio->PlayFx(bonus_fx);
 

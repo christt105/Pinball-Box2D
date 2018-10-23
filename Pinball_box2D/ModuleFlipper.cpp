@@ -133,11 +133,11 @@ update_status ModuleFlipper::Update() {
 }
 
 void ModuleFlipper::MoveLeft() {
-	left.flipper->body->ApplyAngularImpulse(-3.0f, true);
+	left.flipper->body->ApplyAngularImpulse(-9.0f, true);
 }
 
 void ModuleFlipper::MoveRight() {
-	right.flipper->body->ApplyAngularImpulse(3.0f, true);
+	right.flipper->body->ApplyAngularImpulse(9.0f, true);
 }
 
 update_status ModuleFlipper::PostUpdate() {
