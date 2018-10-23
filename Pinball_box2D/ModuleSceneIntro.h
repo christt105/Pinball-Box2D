@@ -97,4 +97,8 @@ public:
 	bool				pink2 = false;
 	bool				pink3 = false;
 	bool				pink4 = false;
+
+	uint				init_time = 0; 
+	uint				current_time = 0; 
+	bool				timer = true;
 };
