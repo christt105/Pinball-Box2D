@@ -41,9 +41,9 @@ update_status ModuleCircleDirection::PreUpdate() {
 
 update_status ModuleCircleDirection::Update() {
 
-	App->renderer->Blit(App->scene_intro->circle_robound_tx, 205, 360, &circle);
+	App->renderer->Blit(App->scene_intro->circle_robound_tx, 200, 360, &circle);
 
-	App->renderer->Blit(App->scene_intro->circle_robound_tx, 219, 375, &mark, 1.0F, angle);
+	App->renderer->Blit(App->scene_intro->circle_robound_tx, 219, 380, &mark, 1.0F, angle);
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -54,11 +54,11 @@ void ModuleCircleDirection::ChangeDirection() {
 
 	switch (direction) {
 		case UP_LEFT:
-			angle = 135.0F;
+			angle = 150.0F;
 			break;
 
 		case UP_RIGHT:
-			angle = -135.0F;
+			angle = -150.0F;
 			break;
 		
 		case LEFT:
@@ -70,11 +70,11 @@ void ModuleCircleDirection::ChangeDirection() {
 			break;
 
 		case DOWN_LEFT:
-			angle = 45.0;
+			angle = 30.0;
 			break;
 		
 		case DOWN_RIGHT:
-			angle = -45.0F;
+			angle = -30.0F;
 			break;
 		
 		default:

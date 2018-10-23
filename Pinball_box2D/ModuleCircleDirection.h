@@ -38,8 +38,8 @@ private:
 	float	angle = 0.0F;
 
 public:
-	SDL_Rect	circle = { 0,0,46,46 };
-	SDL_Rect	mark = { 61,14,18,17 };
+	SDL_Rect	circle = { 0,0,58,55 };
+	SDL_Rect	mark = { 77,18,21,21 };
 
 	Direction	direction;
 

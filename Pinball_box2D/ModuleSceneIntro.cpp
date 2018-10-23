@@ -16,13 +16,13 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	background_tx = NULL;
 	sensed = false;
 
-	/*circle_robound1_rect.x = 190;
+	circle_robound1_rect.x = 190;
 	circle_robound1_rect.y = 17;
 	circle_robound1_rect.w = circle_robound1_rect.h = 45;
 
 	circle_robound2_rect.x = 260;
 	circle_robound2_rect.y = 17;
-	circle_robound2_rect.w = circle_robound2_rect.h = 45;*/
+	circle_robound2_rect.w = circle_robound2_rect.h = 45;
 
 	tp_rect.x = 468;
 	tp_rect.y = 28;
@@ -545,7 +545,6 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	}
 
 	if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3) {
-		LOG("HE COLISIONADO CON UN CIRCULO");
 		b2Vec2 force(bodyB->body->GetWorldCenter() - bodyA->body->GetWorldCenter());
 		force *= 5;
 		bodyB->body->ApplyLinearImpulse(force, bodyB->body->GetWorldCenter(), true);
