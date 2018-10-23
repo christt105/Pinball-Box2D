@@ -22,8 +22,9 @@ bool ModuleCircleDirection::Start() {
 
 	time_start = SDL_GetTicks();
 	direction = UP_LEFT;
+	angle = 150.0F;
 
-	sensor_mark = App->physics->CreateRectangleSensor(228, 390, 10, 2);
+	sensor_mark = App->physics->CreateRectangleSensor(228, 390, 10, 10);
 	sensor_mark->listener = this;
 
 	return true;
@@ -49,6 +50,7 @@ update_status ModuleCircleDirection::PreUpdate() {
 update_status ModuleCircleDirection::Update() {
 
 	if (active_mark) {
+		App->player->ball->body->SetTransform(b2Vec2(PIXEL_TO_METERS(227), PIXEL_TO_METERS(387)), 0.0f);
 		App->player->ball->body->SetActive(false);
 		if (time_ball + interval_ball <= SDL_GetTicks()) {
 			App->player->ball->body->SetActive(true);
@@ -80,16 +82,16 @@ b2Vec2 ModuleCircleDirection::VectorDirection() {
 	b2Vec2 ret;
 	switch (direction) {
 	case UP_LEFT:
-		ret = b2Vec2(-0.5F, -1);
+		ret = b2Vec2(-0.5F, -2);
 		break;
 	case UP_RIGHT:
-		ret = b2Vec2(0.5F, -1);
+		ret = b2Vec2(0.5F, -2);
 		break;
 	case LEFT:
-		ret = b2Vec2(-1, 0);
+		ret = b2Vec2(-2, 0);
 		break;
 	case RIGHT:
-		ret = b2Vec2(1, 0);
+		ret = b2Vec2(2, 0);
 		break;
 	case DOWN_LEFT:
 		ret = b2Vec2(-0.5F, 1);
