@@ -27,6 +27,13 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	tp_rect.x = 468;
 	tp_rect.y = 28;
 	tp_rect.w = tp_rect.h = 22;
+	
+	unlocker_rect.x = 522;
+	unlocker_rect.y = 16;
+	unlocker_rect.w = 26;
+	unlocker_rect.h = 85;
+
+
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -461,12 +468,16 @@ update_status ModuleSceneIntro::Update()
 	App->renderer->Blit(circle_robound_tx, 147, 247, &circle_robound2_rect, 1.0F, angle_rot);
 
 	angle_rot-=0.5F;
+	//Unlocker
+	if(unlocker_closed)
+		App->renderer->Blit(circle_robound_tx, 413, 113, &unlocker_rect);
 
 	//Tp
 	App->renderer->Blit(circle_robound_tx, 108, 378, &tp_rect, 1.0F, angle_rot);
 	App->renderer->Blit(circle_robound_tx, 322, 378, &tp_rect, 1.0F, angle_rot);
 	App->renderer->Blit(circle_robound_tx, 20, 750, &tp_rect, 1.0F, angle_rot);
 	App->renderer->Blit(circle_robound_tx, 410, 750, &tp_rect, 1.0F, angle_rot);
+
 
 	//Kicker
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) //Keep pressing
@@ -504,6 +515,7 @@ update_status ModuleSceneIntro::Update()
 		if (unlocker_rectangle == nullptr)
 		{
 			unlocker_rectangle = App->physics->CreateRectangle(420, 140, 2, 70, b2_staticBody);
+			
 			LOG("A NEW UNLOCKER CREATED");
 		}
 
@@ -531,6 +543,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	if (bodyA == unlocker)
 	{
 		unlocker_closed = true;
+		
 	}
 	
 	if (bodyA == tp_1)

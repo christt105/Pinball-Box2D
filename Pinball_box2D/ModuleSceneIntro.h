@@ -73,6 +73,7 @@ public:
 	SDL_Rect			circle_robound1_rect;
 	SDL_Rect			circle_robound2_rect;
 	SDL_Rect			tp_rect;
+	SDL_Rect			unlocker_rect;
 	float				angle_rot = 0.0F;
 	
 	uint				bonus_fx;
