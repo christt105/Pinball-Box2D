@@ -446,9 +446,11 @@ update_status ModuleSceneIntro::Update()
 	App->window->SetTitle(title.GetString());
 
 	// Rebound Circles
-	App->renderer->Blit(circle_robound_tx, 202, 187, &circle_robound1_rect);
-	App->renderer->Blit(circle_robound_tx, 262, 247, &circle_robound2_rect);
-	App->renderer->Blit(circle_robound_tx, 147, 247, &circle_robound2_rect);
+	App->renderer->Blit(circle_robound_tx, 202, 187, &circle_robound1_rect, 1.0F, angle_rot);
+	App->renderer->Blit(circle_robound_tx, 262, 247, &circle_robound2_rect, 1.0F, angle_rot);
+	App->renderer->Blit(circle_robound_tx, 147, 247, &circle_robound2_rect, 1.0F, angle_rot);
+
+	angle_rot-=0.5F;
 
 	//Kicker
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) //Keep pressing
@@ -534,6 +536,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	
 	if (bodyA == triangle_left) {
 		bodyB->body->ApplyLinearImpulse(b2Vec2(-2, -2), bodyB->body->GetWorldCenter(), true);
+		
 		App->audio->PlayFx(triangle_fx);
 	}
 	if (bodyA == triangle_right) {
