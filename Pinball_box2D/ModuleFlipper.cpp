@@ -33,13 +33,13 @@ bool ModuleFlipper::Start() {
 	};
 
 	int flipper_right_chain[14] = {
-		-6, 13,
-		-12, 1,
-		-76, 5,
-		-85, 13,
-		-79, 22,
-		-16, 25,
-		-6, 13
+			-6, 13,
+			-12, 1,
+			-76, 5,
+			-85, 13,
+			-79, 22,
+			-16, 25,
+			-6, 13
 	};
 
 	left.flipper = App->physics->CreatePolygon(100, 920, flipper_left_chain, 14);
@@ -57,13 +57,13 @@ bool ModuleFlipper::Start() {
 	left.joint = (b2RevoluteJoint*)App->physics->CreateJoint(&revolutionDef);
 
 	right.flipper = App->physics->CreatePolygon(300, 920, flipper_right_chain, 14);
-	right.rotor = App->physics->CreateCircleStatic(295, 930, 3);
+	right.rotor = App->physics->CreateCircleStatic(300, 930, 3);
 
 	revolutionDef.bodyA = right.rotor->body;
 	revolutionDef.bodyB = right.flipper->body;
 	revolutionDef.collideConnected = false;
 	revolutionDef.localAnchorA.Set(0, 0);
-	revolutionDef.localAnchorB.Set(PIXEL_TO_METERS(-20), PIXEL_TO_METERS(5));
+	revolutionDef.localAnchorB.Set(PIXEL_TO_METERS(-21), PIXEL_TO_METERS(5));
 	revolutionDef.enableLimit = true;
 	revolutionDef.upperAngle = 30 * DEGTORAD;
 	revolutionDef.lowerAngle = -20 * DEGTORAD;
@@ -90,9 +90,9 @@ bool ModuleFlipper::CleanUp() {
 
 update_status ModuleFlipper::PreUpdate() {
 
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && !left.mov)
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) && !left.mov)
 		left.mov = true;
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && !right.mov)
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) && !right.mov)
 		right.mov = true;
 
 	return update_status::UPDATE_CONTINUE;
@@ -126,18 +126,18 @@ update_status ModuleFlipper::Update() {
 	SDL_Rect f1 = { 0,0,87,27 };
 	SDL_Rect f2 = { 100,0,87,27 };
 	App->renderer->Blit(flipper_tx, flipper_left_x, flipper_left_y, &f1, 1.0F, left.flipper->GetRotation(), 5, 5);
-	App->renderer->Blit(flipper_tx, flipper_right_x-f2.w, flipper_right_y, &f2, 1.0F, right.flipper->GetRotation(), 90, 10);
+	App->renderer->Blit(flipper_tx, flipper_right_x-f2.w, flipper_right_y, &f2, 1.0F, right.flipper->GetRotation(), 75, 20);
 
 
 	return update_status::UPDATE_CONTINUE;
 }
 
 void ModuleFlipper::MoveLeft() {
-	left.flipper->body->ApplyAngularImpulse(-3.0f, true);
+	left.flipper->body->ApplyAngularImpulse(-9.0f, true);
 }
 
 void ModuleFlipper::MoveRight() {
-	right.flipper->body->ApplyAngularImpulse(3.0f, true);
+	right.flipper->body->ApplyAngularImpulse(9.0f, true);
 }
 
 update_status ModuleFlipper::PostUpdate() {

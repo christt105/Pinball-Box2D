@@ -281,9 +281,9 @@ bool ModuleSceneIntro::Start()
 		393, 843,
 		312, 911,
 		309, 915,
-		311, 924,
-		314, 936,
-		319, 935,
+		320, 924,
+		320, 936,
+		320, 935,
 		402, 867,
 		405, 862,
 		405, 761,
@@ -503,9 +503,9 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	}
 	
 
-	if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3) {
+	/*if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3) {
 		LOG("COLLISION WITH A CIRCLE");
-	}
+	}*/
 	
 	//App->audio->PlayFx(bonus_fx);
 
