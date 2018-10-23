@@ -51,6 +51,8 @@ update_status ModulePlayer::Update()
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
 		dead = true;
+		App->scene_intro->unlocker_closed = false;
+
 	}
 
 	if (dead)

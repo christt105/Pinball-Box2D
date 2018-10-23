@@ -535,10 +535,6 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 	
-
-	
-		
-
 	//Tp
 	App->renderer->Blit(circle_robound_tx, 108, 378, &tp_rect, 1.0F, angle_rot);
 	App->renderer->Blit(circle_robound_tx, 322, 378, &tp_rect, 1.0F, angle_rot);
