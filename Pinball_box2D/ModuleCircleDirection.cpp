@@ -24,7 +24,7 @@ bool ModuleCircleDirection::Start() {
 	direction = UP_LEFT;
 	angle = 150.0F;
 
-	sensor_mark = App->physics->CreateRectangleSensor(228, 390, 10, 10);
+	sensor_mark = App->physics->CreateRectangleSensor(225, 390, 40, 10);
 	sensor_mark->listener = this;
 
 	return true;
