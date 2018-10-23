@@ -76,4 +76,5 @@ public:
 	uint				bonus_fx;
 	uint				kicker_fx;
 	uint				circle_fx;
+	uint				triangle_fx;
 };

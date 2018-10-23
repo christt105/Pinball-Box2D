@@ -43,6 +43,7 @@ bool ModuleSceneIntro::Start()
 	bonus_fx = App->audio->LoadFx("pinball/Audio/SFx/bonus.wav");
 	kicker_fx = App->audio->LoadFx("pinball/Audio/SFx/kicker.wav");
 	circle_fx = App->audio->LoadFx("pinball/Audio/SFx/CircleRebounder.wav");
+	triangle_fx = App->audio->LoadFx("pinball/Audio/SFx/Triangle.wav");
 
 	int background_chain[166] = {
 	464, 256,
@@ -368,6 +369,9 @@ bool ModuleSceneIntro::Start()
 	capsule2 = App->physics->CreateChain(0, 0, capsule_2_top_chain, 17, b2_staticBody);
 	capsule3 = App->physics->CreateChain(0, 0, capsule_3_top_chain, 17, b2_staticBody);
 
+	triangle_left->listener = this;
+	triangle_right->listener = this;
+
 	//Circle
 	circle1 = App->physics->CreateCircleStatic(225, 210, 20);
 	circle2 = App->physics->CreateCircleStatic(285, 270, 20);
@@ -536,18 +540,12 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		App->audio->PlayFx(circle_fx);
 	}
 	
-	//App->audio->PlayFx(bonus_fx);
-
-	/*
-	if(bodyA)
-	{
-		bodyA->GetPosition(x, y);
-		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
+	if (bodyA == triangle_left) {
+		bodyB->body->ApplyLinearImpulse(b2Vec2(-2, -2), bodyB->body->GetWorldCenter(), true);
+		App->audio->PlayFx(triangle_fx);
 	}
-
-	if(bodyB)
-	{
-		bodyB->GetPosition(x, y);
-		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
-	}*/
+	if (bodyA == triangle_right) {
+		bodyB->body->ApplyLinearImpulse(b2Vec2(2, -2), bodyB->body->GetWorldCenter(), true);
+		App->audio->PlayFx(triangle_fx);
+	}
 }
