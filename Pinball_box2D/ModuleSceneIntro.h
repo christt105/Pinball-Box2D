@@ -50,6 +50,9 @@ public:
 	PhysBody*			circle1 = nullptr;
 	PhysBody*			circle2 = nullptr;
 	PhysBody*			circle3 = nullptr;
+	PhysBody*			tp_1 = nullptr;
+	PhysBody*			tp_2 = nullptr;
+
 
 public: 
 
