@@ -461,7 +461,7 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::PreUpdate() {
 
 	App->renderer->Blit(background_tx, 0, 0);
-	//App->renderer->Blit(layout_alpha_tx, 0, 0);
+	App->renderer->Blit(layout_alpha_tx, 0, 0);
 	App->renderer->Blit(layout_tx, 0, 0);
 
 	int speed = 3;
@@ -518,6 +518,11 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(circle_robound_tx, 295, 125, &pink_on_rect);
 	else
 		App->renderer->Blit(circle_robound_tx, 295, 125, &pink_off_rect);
+
+	if (pink1 && pink2 && pink3 && pink4)
+		pink1 = pink2 = pink3 = pink4 = false;
+
+
 
 	//Tp
 	App->renderer->Blit(circle_robound_tx, 108, 378, &tp_rect, 1.0F, angle_rot);
@@ -617,12 +622,12 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	if (bodyA == pink_3)
 	{
 		pink3 = true;
-		LOG("PINK 1 LIGHT ON");
+		LOG("PINK 3 LIGHT ON");
 	}
 	if (bodyA == pink_4)
 	{
 		pink4 = true;
-		LOG("PINK 1 LIGHT ON");
+		LOG("PINK 4 LIGHT ON");
 	}
 
 	if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3) {
