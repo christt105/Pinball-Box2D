@@ -37,8 +37,10 @@ bool ModuleSceneIntro::Start()
 	background_tx = App->textures->Load("pinball/Textures/Background.png");
 	layout_tx = App->textures->Load("pinball/Textures/Layout.png");
 	circle_robound_tx = App->textures->Load("pinball/Textures/Circle_rebound.png");
+
 	bonus_fx = App->audio->LoadFx("pinball/Audio/SFx/bonus.wav");
 	kicker_fx = App->audio->LoadFx("pinball/Audio/SFx/kicker.wav");
+	circle_fx = App->audio->LoadFx("pinball/Audio/SFx/CircleRebounder.wav");
 
 	int background_chain[166] = {
 	464, 256,
@@ -522,6 +524,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		b2Vec2 force(bodyB->body->GetWorldCenter() - bodyA->body->GetWorldCenter());
 		force *= 5;
 		bodyB->body->ApplyLinearImpulse(force, bodyB->body->GetWorldCenter(), true);
+		App->audio->PlayFx(circle_fx);
 	}
 	
 	//App->audio->PlayFx(bonus_fx);
