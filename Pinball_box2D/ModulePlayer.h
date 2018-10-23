@@ -24,4 +24,6 @@ public:
 	
 
 	bool dead;
+	bool tp1;
+	bool tp2;
 };

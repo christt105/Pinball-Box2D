@@ -376,6 +376,12 @@ bool ModuleSceneIntro::Start()
 	circle2->listener = this;
 	circle3->listener = this;
 
+	//tp 468 28
+	tp_1 = App->physics->CreateRectangleSensor(121, 390, 15, 15);
+	tp_2 = App->physics->CreateRectangleSensor(331, 390, 15, 15);
+	tp_1->listener = this;
+	tp_2->listener = this;
+
 	//Kicker
 	kicker.launch = App->physics->CreateRectangleSensor(488, 936, 24, 15);
 	kicker.stop = App->physics->CreateRectangle(488, 938, 24, 20, b2_dynamicBody);
@@ -492,12 +498,6 @@ update_status ModuleSceneIntro::Update()
 		LOG("-- UNLOCKER DESTROYED ");
 
 	}
-		
-	
-		
-	
-
-	 
 	return UPDATE_CONTINUE;
 }
 
@@ -510,15 +510,23 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		App->player->dead = true;
 		unlocker_closed = false;
 		LOG("DEAD");
-
 	}
-
 
 	if (bodyA == unlocker)
 	{
 		unlocker_closed = true;
 	}
 	
+	if (bodyA == tp_1)
+	{
+		App->player->tp1 = true;
+		LOG("TP 1");
+	}
+	if (bodyA == tp_2)
+	{
+		App->player->tp2 = true;
+		LOG("TP 2");
+	}
 
 	if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3) {
 		LOG("HE COLISIONADO CON UN CIRCULO");

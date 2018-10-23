@@ -56,6 +56,33 @@ update_status ModulePlayer::Update()
 		dead = false;
 	}
 
+	//Tp ball
+	if (tp1)
+	{
+		if (ball != nullptr)
+		{
+			ball->body->GetWorld()->DestroyBody(ball->body);
+			ball = nullptr;
+		}
+		ball = App->physics->CreateCircle(22, 775, 11);
+		ball->body->SetBullet(true);
+		ball->listener = this;
+
+		tp1 = false;
+	}
+	if (tp2)
+	{
+		if (ball != nullptr)
+		{
+			ball->body->GetWorld()->DestroyBody(ball->body);
+			ball = nullptr;
+		}
+		ball = App->physics->CreateCircle(420, 775, 11);
+		ball->body->SetBullet(true);
+		ball->listener = this;
+
+		tp2 = false;
+	}
 	// Ball
 	if (ball != nullptr)
 	{
