@@ -411,10 +411,14 @@ bool ModuleSceneIntro::Start()
 	tp_2->listener = this;
 
 	//Pink lights sensors
-	pink_1 = App->physics->CreateRectangleSensor(145, 125, 15, 15);
-	pink_2 = App->physics->CreateRectangleSensor(195, 125, 15, 15);
-	pink_3 = App->physics->CreateRectangleSensor(245, 125, 15, 15);
-	pink_4 = App->physics->CreateRectangleSensor(295, 125, 15, 15);
+	pink_1 = App->physics->CreateRectangleSensor(153, 135, 15, 10);
+	pink_2 = App->physics->CreateRectangleSensor(203, 135, 15, 10);
+	pink_3 = App->physics->CreateRectangleSensor(253, 135, 15, 10);
+	pink_4 = App->physics->CreateRectangleSensor(303, 135, 15, 10);
+	pink_1->listener = this;
+	pink_2->listener = this;
+	pink_3->listener = this;
+	pink_4->listener = this;
 
 	
 
@@ -498,18 +502,22 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(circle_robound_tx, 413, 113, &unlocker_rect);
 
 	//Pink lights
-
-
-
-	App->renderer->Blit(circle_robound_tx, 145, 125, &pink_off_rect);
-	App->renderer->Blit(circle_robound_tx, 195, 125, &pink_off_rect);
-	App->renderer->Blit(circle_robound_tx, 245, 125, &pink_off_rect);
-	App->renderer->Blit(circle_robound_tx, 295, 125, &pink_off_rect);
-
-	App->renderer->Blit(circle_robound_tx, 145, 125, &pink_on_rect);
-	App->renderer->Blit(circle_robound_tx, 195, 125, &pink_on_rect);
-	App->renderer->Blit(circle_robound_tx, 245, 125, &pink_on_rect);
-	App->renderer->Blit(circle_robound_tx, 295, 125, &pink_on_rect);
+	if (pink1)
+		App->renderer->Blit(circle_robound_tx, 145, 125, &pink_on_rect);
+	else
+		App->renderer->Blit(circle_robound_tx, 145, 125, &pink_off_rect);
+	if (pink2)
+		App->renderer->Blit(circle_robound_tx, 195, 125, &pink_on_rect);
+	else
+		App->renderer->Blit(circle_robound_tx, 195, 125, &pink_off_rect);
+	if(pink3)
+		App->renderer->Blit(circle_robound_tx, 245, 125, &pink_on_rect);
+	else
+		App->renderer->Blit(circle_robound_tx, 245, 125, &pink_off_rect);
+	if(pink4)
+		App->renderer->Blit(circle_robound_tx, 295, 125, &pink_on_rect);
+	else
+		App->renderer->Blit(circle_robound_tx, 295, 125, &pink_off_rect);
 
 	//Tp
 	App->renderer->Blit(circle_robound_tx, 108, 378, &tp_rect, 1.0F, angle_rot);
@@ -594,6 +602,27 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{
 		App->player->tp2 = true;
 		LOG("TP 2");
+	}
+	
+	if (bodyA == pink_1)
+	{
+		pink1 = true;
+		LOG("PINK 1 LIGHT ON");
+	}
+	if (bodyA == pink_2)
+	{
+		pink2 = true;
+		LOG("PINK 2 LIGHT ON");
+	}
+	if (bodyA == pink_3)
+	{
+		pink3 = true;
+		LOG("PINK 1 LIGHT ON");
+	}
+	if (bodyA == pink_4)
+	{
+		pink4 = true;
+		LOG("PINK 1 LIGHT ON");
 	}
 
 	if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3) {
