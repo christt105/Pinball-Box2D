@@ -130,7 +130,7 @@ update_status ModuleFlipper::Update() {
 	SDL_Rect f1 = { 0,0,87,27 };
 	SDL_Rect f2 = { 100,0,87,27 };
 	App->renderer->Blit(flipper_tx, flipper_left_x, flipper_left_y, &f1, 1.0F, left.flipper->GetRotation(), 5, 5);
-	App->renderer->Blit(flipper_tx, flipper_right_x-f2.w, flipper_right_y, &f2, 1.0F, right.flipper->GetRotation(), 75, 20);
+	App->renderer->Blit(flipper_tx, flipper_right_x-f2.w, flipper_right_y, &f2, 1.0F, right.flipper->GetRotation(), 75, 5);
 
 
 	return update_status::UPDATE_CONTINUE;
