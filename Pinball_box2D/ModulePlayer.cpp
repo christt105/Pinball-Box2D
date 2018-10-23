@@ -35,7 +35,18 @@ bool ModulePlayer::Start()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	
+	// DEBUG MODE
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	{
+		if (ball != nullptr)
+		{
+			ball->body->GetWorld()->DestroyBody(ball->body);
+			ball = nullptr;
+		}
+		ball = App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 11);
+		ball->body->SetBullet(true);
+		ball->listener = this;
+	}
 	// Spawn ball
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
@@ -93,15 +104,7 @@ update_status ModulePlayer::Update()
 
 	
 
-	// DEBUG MODE
-	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-	{
-		ball = App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 11);
-		ball->body->SetBullet(true);
-		ball->listener = this;
-		//bodies.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 11));
-		//bodies.getLast()->data->listener = this;
-	}
+	
 	// All draw functions ------------------------------------------------------
 	p2List_item<PhysBody*>* b = bodies.getFirst();
 	
