@@ -35,9 +35,11 @@ private:
 	Uint32	interval = 2000; //2 seconds
 	Uint32	time_start = 0;
 
+	float	angle = 0.0F;
+
 public:
-	SDL_Rect	circle = { 0,0,92,92 };
-	SDL_Rect	mark = { 121,30,35,35 };
+	SDL_Rect	circle = { 0,0,46,46 };
+	SDL_Rect	mark = { 61,14,18,17 };
 
 	Direction	direction;
 

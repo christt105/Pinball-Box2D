@@ -31,7 +31,7 @@ bool ModuleCircleDirection::CleanUp() {
 
 update_status ModuleCircleDirection::PreUpdate() {
 
-	if (time_start + interval >= SDL_GetTicks()) {
+	if (time_start + interval <= SDL_GetTicks()) {
 		time_start = SDL_GetTicks();
 		ChangeDirection();
 	}
@@ -41,7 +41,9 @@ update_status ModuleCircleDirection::PreUpdate() {
 
 update_status ModuleCircleDirection::Update() {
 
-	App->renderer->Blit(App->scene_intro->circle_robound_tx, 200, 360, &circle);
+	App->renderer->Blit(App->scene_intro->circle_robound_tx, 205, 360, &circle);
+
+	App->renderer->Blit(App->scene_intro->circle_robound_tx, 219, 375, &mark, 1.0F, angle);
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -49,5 +51,35 @@ update_status ModuleCircleDirection::Update() {
 void ModuleCircleDirection::ChangeDirection() {
 
 	direction = static_cast<Direction>(rand() % Direction::MAX);
+
+	switch (direction) {
+		case UP_LEFT:
+			angle = 135.0F;
+			break;
+
+		case UP_RIGHT:
+			angle = -135.0F;
+			break;
+		
+		case LEFT:
+			angle = 90.0F;
+			break;
+		
+		case RIGHT:
+			angle = -90.0F;
+			break;
+
+		case DOWN_LEFT:
+			angle = 45.0;
+			break;
+		
+		case DOWN_RIGHT:
+			angle = -45.0F;
+			break;
+		
+		default:
+			angle = 0.0F;
+			break;
+	}
 
 }
