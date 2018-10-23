@@ -20,6 +20,7 @@ struct Kicker {
 
 
 
+
 class ModuleSceneIntro : public Module
 {
 public:
@@ -53,10 +54,17 @@ public:
 	PhysBody*			tp_1 = nullptr;
 	PhysBody*			tp_2 = nullptr;
 
+	PhysBody*			pink_1 = nullptr;
+	PhysBody*			pink_2 = nullptr;
+	PhysBody*			pink_3 = nullptr;
+	PhysBody*			pink_4 = nullptr;
+
 
 public: 
 
 	Kicker kicker;
+	Kicker impulse_1;
+	Kicker impulse_2;
 
 	PhysBody*			sensor = nullptr;
 
@@ -68,16 +76,25 @@ public:
 
 	SDL_Texture*		background_tx = nullptr;
 	SDL_Texture*		layout_tx = nullptr;
+	SDL_Texture*		layout_alpha_tx = nullptr;
 	SDL_Texture*		circle_robound_tx;
 
 	SDL_Rect			circle_robound1_rect;
 	SDL_Rect			circle_robound2_rect;
 	SDL_Rect			tp_rect;
 	SDL_Rect			unlocker_rect;
+	SDL_Rect			pink_off_rect;
+	SDL_Rect			pink_on_rect;
+
 	float				angle_rot = 0.0F;
 	
 	uint				bonus_fx;
 	uint				kicker_fx;
 	uint				circle_fx;
 	uint				triangle_fx;
+
+	bool				pink1 = false;
+	bool				pink2 = false;
+	bool				pink3 = false;
+	bool				pink4 = false;
 };

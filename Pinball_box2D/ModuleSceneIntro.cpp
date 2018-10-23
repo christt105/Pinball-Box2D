@@ -33,6 +33,16 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	unlocker_rect.w = 26;
 	unlocker_rect.h = 85;
 
+	pink_off_rect.x = 571;
+	pink_off_rect.y = 39;
+	pink_off_rect.w = 15;
+	pink_off_rect.h = 15;
+	
+	pink_on_rect.x = 597;
+	pink_on_rect.y = 36;
+	pink_on_rect.w = 23;
+	pink_on_rect.h = 23;
+
 
 }
 
@@ -49,7 +59,10 @@ bool ModuleSceneIntro::Start()
 
 	background_tx = App->textures->Load("pinball/Textures/Background.png");
 	layout_tx = App->textures->Load("pinball/Textures/Layout.png");
+	layout_alpha_tx = App->textures->Load("pinball/Textures/Layout_alpha.png");
 	circle_robound_tx = App->textures->Load("pinball/Textures/Circle_rebound.png");
+	kicker.kicker_tx = App->textures->Load("pinball/Textures/kicker.png");
+
 
 	bonus_fx = App->audio->LoadFx("pinball/Audio/SFx/bonus.wav");
 	kicker_fx = App->audio->LoadFx("pinball/Audio/SFx/kicker.wav");
@@ -397,12 +410,19 @@ bool ModuleSceneIntro::Start()
 	tp_1->listener = this;
 	tp_2->listener = this;
 
+	//Pink lights sensors
+	pink_1 = App->physics->CreateRectangleSensor(145, 125, 15, 15);
+	pink_2 = App->physics->CreateRectangleSensor(195, 125, 15, 15);
+	pink_3 = App->physics->CreateRectangleSensor(245, 125, 15, 15);
+	pink_4 = App->physics->CreateRectangleSensor(295, 125, 15, 15);
+
+	
+
 	//Kicker
 	kicker.launch = App->physics->CreateRectangleSensor(488, 936, 24, 15);
 	kicker.stop = App->physics->CreateRectangle(488, 938, 24, 20, b2_dynamicBody);
 	kicker.joint = App->physics->CreatePrismaticJoint(kicker.launch->body, kicker.stop->body, { 0, 0 }, { 0, 0 }); // 0, 0 equals A and B anchors
-	kicker.kicker_tx = App->textures->Load("pinball/Textures/kicker.png");
-	
+
 	//Unlocker
 	unlocker = App->physics->CreateRectangleSensor( 400, 120, 20, 20);
 	unlocker->listener = this;
@@ -410,6 +430,9 @@ bool ModuleSceneIntro::Start()
 	//Rectangle Sensor
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 50);
 	sensor->listener = this;
+
+	
+
 
 	return ret;
 }
@@ -423,6 +446,7 @@ bool ModuleSceneIntro::CleanUp()
 
 	App->textures->Unload(background_tx);
 	App->textures->Unload(layout_tx);
+	App->textures->Unload(layout_alpha_tx);
 	App->textures->Unload(kicker.kicker_tx);
 	App->textures->Unload(circle_robound_tx);
 
@@ -433,6 +457,7 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::PreUpdate() {
 
 	App->renderer->Blit(background_tx, 0, 0);
+	//App->renderer->Blit(layout_alpha_tx, 0, 0);
 	App->renderer->Blit(layout_tx, 0, 0);
 
 	int speed = 3;
@@ -471,6 +496,20 @@ update_status ModuleSceneIntro::Update()
 	//Unlocker
 	if(unlocker_closed)
 		App->renderer->Blit(circle_robound_tx, 413, 113, &unlocker_rect);
+
+	//Pink lights
+
+
+
+	App->renderer->Blit(circle_robound_tx, 145, 125, &pink_off_rect);
+	App->renderer->Blit(circle_robound_tx, 195, 125, &pink_off_rect);
+	App->renderer->Blit(circle_robound_tx, 245, 125, &pink_off_rect);
+	App->renderer->Blit(circle_robound_tx, 295, 125, &pink_off_rect);
+
+	App->renderer->Blit(circle_robound_tx, 145, 125, &pink_on_rect);
+	App->renderer->Blit(circle_robound_tx, 195, 125, &pink_on_rect);
+	App->renderer->Blit(circle_robound_tx, 245, 125, &pink_on_rect);
+	App->renderer->Blit(circle_robound_tx, 295, 125, &pink_on_rect);
 
 	//Tp
 	App->renderer->Blit(circle_robound_tx, 108, 378, &tp_rect, 1.0F, angle_rot);
