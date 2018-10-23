@@ -79,6 +79,11 @@ bool ModuleFlipper::CleanUp() {
 
 	App->textures->Unload(flipper_tx);
 	flipper_tx = nullptr;
+	
+	left.flipper->body->GetWorld()->DestroyBody(left.flipper->body);
+	left.rotor->body->GetWorld()->DestroyBody(left.rotor->body);
+	right.flipper->body->GetWorld()->DestroyBody(right.flipper->body);
+	right.rotor->body->GetWorld()->DestroyBody(right.rotor->body);
 
 	left.flipper = nullptr;
 	left.rotor = nullptr;
