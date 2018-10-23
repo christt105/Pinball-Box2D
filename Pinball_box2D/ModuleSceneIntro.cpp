@@ -39,8 +39,10 @@ bool ModuleSceneIntro::Start()
 	background_tx = App->textures->Load("pinball/Textures/Background.png");
 	layout_tx = App->textures->Load("pinball/Textures/Layout.png");
 	circle_robound_tx = App->textures->Load("pinball/Textures/Circle_rebound.png");
+
 	bonus_fx = App->audio->LoadFx("pinball/Audio/SFx/bonus.wav");
 	kicker_fx = App->audio->LoadFx("pinball/Audio/SFx/kicker.wav");
+	circle_fx = App->audio->LoadFx("pinball/Audio/SFx/CircleRebounder.wav");
 
 	int background_chain[166] = {
 	464, 256,
@@ -370,7 +372,9 @@ bool ModuleSceneIntro::Start()
 	circle1 = App->physics->CreateCircleStatic(225, 210, 20);
 	circle2 = App->physics->CreateCircleStatic(285, 270, 20);
 	circle3 = App->physics->CreateCircleStatic(170, 270, 20);
-	//circle1->listener = this;
+	circle1->listener = this;
+	circle2->listener = this;
+	circle3->listener = this;
 
 	//Kicker
 	kicker.launch = App->physics->CreateRectangleSensor(488, 936, 24, 15);
@@ -516,9 +520,13 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	}
 	
 
-	/*if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3) {
-		LOG("COLLISION WITH A CIRCLE");
-	}*/
+	if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3) {
+		LOG("HE COLISIONADO CON UN CIRCULO");
+		b2Vec2 force(bodyB->body->GetWorldCenter() - bodyA->body->GetWorldCenter());
+		force *= 5;
+		bodyB->body->ApplyLinearImpulse(force, bodyB->body->GetWorldCenter(), true);
+		App->audio->PlayFx(circle_fx);
+	}
 	
 	//App->audio->PlayFx(bonus_fx);
 

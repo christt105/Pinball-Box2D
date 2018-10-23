@@ -70,6 +70,7 @@ public:
 	SDL_Rect			circle_robound1_rect;
 	SDL_Rect			circle_robound2_rect;
 	
-	uint bonus_fx;
-	uint kicker_fx;
+	uint				bonus_fx;
+	uint				kicker_fx;
+	uint				circle_fx;
 };
