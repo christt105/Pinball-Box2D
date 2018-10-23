@@ -17,6 +17,8 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 	ball_rect.x = 47;
 	ball_rect.y = 6;
 	ball_rect.w = ball_rect.h = 24;
+
+	score = 0;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -28,6 +30,7 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 
 	ball_tx = App->textures->Load("pinball/Textures/Pinball_Ball.png");
+	
 
 	return true;
 }

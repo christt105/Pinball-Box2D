@@ -21,6 +21,8 @@ public:
 	SDL_Texture*		ball_tx;
 	
 	SDL_Rect			ball_rect;
+
+	int					score = 0;
 	
 
 	bool dead = true;
