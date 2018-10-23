@@ -471,15 +471,19 @@ update_status ModuleSceneIntro::Update()
 		if (unlocker_rectangle == nullptr)
 		{
 			unlocker_rectangle = App->physics->CreateRectangle(420, 140, 2, 70, b2_staticBody);
+			LOG("A NEW RECTANGLE CREATED");
 		}
+
+	if (!unlocker_closed && unlocker_rectangle != nullptr)
+	{
+		unlocker_rectangle->body->GetWorld()->DestroyBody(unlocker_rectangle->body);
+		unlocker_rectangle = nullptr;
+		LOG("-- RECTANGLE DESTROYED ");
+
+	}
 		
-	else
-		if (unlocker_rectangle != nullptr)
-		{
-			
-			unlocker_rectangle->body->GetWorld()->DestroyBody(unlocker_rectangle->body);
-			unlocker_rectangle = nullptr;
-		}
+	
+		
 	
 
 	 
@@ -494,6 +498,8 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{
 		App->player->dead = true;
 		unlocker_closed = false;
+		LOG("DEAD");
+
 	}
 
 
