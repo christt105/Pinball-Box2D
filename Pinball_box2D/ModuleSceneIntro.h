@@ -50,6 +50,10 @@ public:
 	Kicker kicker;
 
 	PhysBody*			sensor = nullptr;
+
+
+	PhysBody*			unlocker = nullptr;
+
 	bool				sensed;
 
 	SDL_Texture*		background_tx = nullptr;

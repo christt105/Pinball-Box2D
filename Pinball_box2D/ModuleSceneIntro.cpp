@@ -365,9 +365,9 @@ bool ModuleSceneIntro::Start()
 
 	//Circle
 	circle1 = App->physics->CreateCircleStatic(225, 210, 20);
-	circle1->listener = this;
 	circle2 = App->physics->CreateCircleStatic(285, 270, 20);
 	circle3 = App->physics->CreateCircleStatic(170, 270, 20);
+	//circle1->listener = this;
 
 	//Kicker
 	kicker.launch = App->physics->CreateRectangleSensor(488, 936, 24, 15);
@@ -375,6 +375,9 @@ bool ModuleSceneIntro::Start()
 	kicker.joint = App->physics->CreatePrismaticJoint(kicker.launch->body, kicker.stop->body, { 0, 0 }, { 0, 0 }); // 0, 0 equals A and B anchors
 	kicker.kicker_tx = App->textures->Load("pinball/Textures/kicker.png");
 	
+	//Unlocker
+	unlocker = App->physics->CreateRectangleSensor( 445, 165, 20, 20);
+	unlocker->listener = this;
 
 	//Rectangle Sensor
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 50);
@@ -452,7 +455,7 @@ update_status ModuleSceneIntro::Update()
 		kicker.stop->body->SetTransform({ kicker.stop->body->GetPosition().x, kicker.launch->body->GetPosition().y }, 0);
 	}
 	
-	if (kicker.stop->body->GetPosition().y < kicker.launch->body->GetPosition().y)
+	if (kicker.stop->body->GetPosition().y < kicker.launch->body->GetPosition().y) //launch down stop
 	{
 		kicker.joint->SetMotorSpeed(0);
 		kicker.stop->body->SetTransform({ kicker.stop->body->GetPosition().x, kicker.launch->body->GetPosition().y }, 0);

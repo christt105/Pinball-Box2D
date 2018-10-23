@@ -23,10 +23,10 @@ enum update_status
 // Configuration -----------
 #define SCREEN_WIDTH 512
 #define SCREEN_HEIGHT 1024
-#define SCREEN_SIZE 1
+#define SCREEN_SIZE 0.7f
 #define WIN_FULLSCREEN false
 #define WIN_RESIZABLE false
 #define WIN_BORDERLESS false
-#define WIN_FULLSCREEN_DESKTOP false
+#define WIN_FULLSCREEN_DESKTOP true
 #define VSYNC true
 #define TITLE "2D Physics Playground"
