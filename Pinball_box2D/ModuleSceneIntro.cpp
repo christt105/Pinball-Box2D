@@ -55,6 +55,7 @@ bool ModuleSceneIntro::Start()
 	LOG("Loading Intro assets");
 	bool ret = true;
 
+
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
 	background_tx = App->textures->Load("pinball/Textures/Background.png");
@@ -484,8 +485,8 @@ update_status ModuleSceneIntro::PreUpdate() {
 update_status ModuleSceneIntro::Update()
 {
 	int x, y;
-	
-	
+
+
 	// Title info
 	iPoint map_coordinates_pixel(App->input->GetMouseX(), App->input->GetMouseY());
 	p2SString title("Pixel: %d, %d", map_coordinates_pixel.x + App->renderer->camera.x, map_coordinates_pixel.y + App->renderer->camera.y);
@@ -519,10 +520,24 @@ update_status ModuleSceneIntro::Update()
 	else
 		App->renderer->Blit(circle_robound_tx, 295, 125, &pink_off_rect);
 
+	if (pink1 && pink2 && pink3 && pink4 && timer)
+	{
+		init_time = SDL_GetTicks(); //Timer
+		timer = false;
+	}
 	if (pink1 && pink2 && pink3 && pink4)
-		pink1 = pink2 = pink3 = pink4 = false;
+	{
+		current_time = SDL_GetTicks() - init_time; //Timer
+		if (current_time > 1000)
+		{
+			pink1 = pink2 = pink3 = pink4 = false;
+			timer = true;
+		}
+	}
+	
 
-
+	
+		
 
 	//Tp
 	App->renderer->Blit(circle_robound_tx, 108, 378, &tp_rect, 1.0F, angle_rot);
