@@ -104,6 +104,6 @@ void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const
 		rect.x = j % font->row_chars * rect.w;
 		rect.y = j / font->row_chars * rect.h;
 
-		App->render->Blit(font->graphic, x + i * font->char_w, y, &rect, 0.0f, false);
+		App->renderer->Blit(font->graphic, x + i * font->char_w, y, &rect, 0.0f, false);
 	}
 }

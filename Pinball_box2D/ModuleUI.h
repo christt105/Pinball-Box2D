@@ -8,7 +8,7 @@ class ModuleUI : public Module
 {
 public:
 
-	ModuleUI();
+	ModuleUI(Application* app, bool start_enabled = true);
 	~ModuleUI();
 
 	bool Start();
@@ -16,7 +16,7 @@ public:
 	bool CleanUp();
 
 public:
-	enum POINTS {
+	/*enum POINTS {
 		HUNDRED,
 		HUNDREDX2,
 		HUNDREDX3,
@@ -29,15 +29,18 @@ public:
 		THOUSANDX5,
 
 		MAX_POINTS
-	};
+	};*/
 
-	SDL_Texture * numbers_tx = nullptr;
+	//SDL_Texture * numbers_tx = nullptr;
 	SDL_Texture * score_tx = nullptr;
 
 	SDL_Rect number = { 0,0,45,64 };
 
-	SDL_Rect points[POINTS];
+	//SDL_Rect points[POINTS::MAX_POINTS]; //Rects of little numbers that appears next ball like +100 or +3000 that increase puntuation
+
+	int font = -1;
 
 	int score = 0;
+	int high_score = 0;
 };
 #endif // !__MODULEUI_H__

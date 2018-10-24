@@ -11,6 +11,7 @@
 #include "ModuleFlipper.h"
 #include "ModuleCircleDirection.h"
 #include "ModuleFonts.h"
+#include "ModuleUI.h"
 
 #include "Application.h"
 
@@ -27,6 +28,7 @@ Application::Application()
 	flippers	= new ModuleFlipper(this);
 	circle		= new ModuleCircleDirection(this);
 	fonts		= new ModuleFonts(this);
+	ui			= new ModuleUI(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -40,6 +42,7 @@ Application::Application()
 	AddModule(input);
 	AddModule(audio);
 	AddModule(fonts);
+	AddModule(ui);
 	
 	// Scenes
 	AddModule(scene_intro);

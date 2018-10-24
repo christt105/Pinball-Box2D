@@ -15,6 +15,7 @@ class ModulePhysics;
 class ModuleFlipper;
 class ModuleCircleDirection;
 class ModuleFonts;
+class ModuleUI;
 
 class Application
 {
@@ -30,6 +31,7 @@ public:
 	ModuleFlipper*			flippers;
 	ModuleCircleDirection*	circle;
 	ModuleFonts*			fonts;
+	ModuleUI*				ui;
 
 private:
 
