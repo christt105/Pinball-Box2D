@@ -113,8 +113,16 @@ update_status ModulePlayer::Update()
 			App->audio->PlayFx(App->scene_intro->game_over_fx, 0);
 
 		}
-		if(!game_over)
+		if (!game_over)
+		{
 			App->audio->PlayFx(App->scene_intro->dead_fx);
+		}
+		else
+		{
+			game_over = false;
+			lives = 5;
+		}
+
 
 	
 	}

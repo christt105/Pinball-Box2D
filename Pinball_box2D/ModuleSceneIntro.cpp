@@ -575,7 +575,7 @@ update_status ModuleSceneIntro::Update()
 
 	//Arrows
 
-	if (arrow.light1 && arrow.arrow_time) {
+	if (arrow.light1) {
 		App->renderer->Blit(circle_robound_tx, 10, 386, &arrow.arrow_on_rect);
 	}
 	else
