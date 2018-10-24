@@ -671,7 +671,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		App->ui->score += 100;
 	}
 
-	if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3 || bodyA == rebound_tp1 || bodyA == rebound_tp2) {
+	if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3) {
 		b2Vec2 force(bodyB->body->GetWorldCenter() - bodyA->body->GetWorldCenter());
 		force *= 3;
 		bodyB->body->ApplyLinearImpulse(force, bodyB->body->GetWorldCenter(), true);
@@ -679,10 +679,8 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		App->audio->PlayFx(circle_fx);
 	}
 	if (bodyA == rebound_tp1 || bodyA == rebound_tp2) {
-		b2Vec2 force(bodyB->body->GetWorldCenter() - bodyA->body->GetWorldCenter());
-		force *= 10;
-		bodyB->body->ApplyLinearImpulse(force, bodyB->body->GetWorldCenter(), true);
-		App->ui->score += 100;
+		bodyB->body->ApplyLinearImpulse(b2Vec2(0,-50), bodyB->body->GetWorldCenter(), true);
+		App->ui->score += 1000;
 		App->audio->PlayFx(circle_fx);
 	}
 
