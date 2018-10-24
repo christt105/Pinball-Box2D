@@ -576,7 +576,8 @@ update_status ModuleSceneIntro::Update()
 	{
 		kicker.joint->SetMotorSpeed(kicker.force);
 		kicker.force = 0;
-		App->audio->PlayFx(kicker_fx, 0);
+		if(!unlocker_closed)
+			App->audio->PlayFx(kicker_fx, 0);
 
 	}
 	else if (kicker.joint->GetMotorSpeed() < 1) 
@@ -620,7 +621,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{
 		App->player->dead = true;
 		unlocker_closed = false;
-		App->audio->PlayFx(dead_fx);
+		
 
 		LOG("DEAD");
 	}

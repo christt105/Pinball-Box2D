@@ -68,8 +68,20 @@ update_status ModulePlayer::Update()
 		ball = App->physics->CreateCircle(SCREEN_WIDTH - 23, SCREEN_HEIGHT - 250, 11);
 		ball->body->SetBullet(true);
 		ball->listener = this;
-
 		dead = false;
+
+		lives--;
+
+		if (lives <= 0)
+		{
+			game_over = true;
+			App->audio->PlayFx(App->scene_intro->game_over_fx, 0);
+
+		}
+		if(!game_over)
+			App->audio->PlayFx(App->scene_intro->dead_fx);
+
+	
 	}
 
 	//Tp ball

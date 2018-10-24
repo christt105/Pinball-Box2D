@@ -23,6 +23,8 @@ public:
 	SDL_Rect			ball_rect;	
 
 	bool dead = true;
+	bool game_over = false;
+	uint lives = 6;
 	bool tp1;
 	bool tp2;
 };
