@@ -27,4 +27,6 @@ public:
 	uint lives = 6;
 	bool tp1;
 	bool tp2;
+	uint counter = 1;
+	uint counter2 = 0;
 };

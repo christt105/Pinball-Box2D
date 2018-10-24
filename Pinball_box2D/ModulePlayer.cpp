@@ -8,15 +8,19 @@
 #include "ModulePhysics.h"
 #include "ModulePlayer.h"
 
+#define PIXEL_BALL 40
 
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
+
+	//160
+	//120
 	ball_tx = nullptr;
 
-	ball_rect.x = 47;
-	ball_rect.y = 6;
-	ball_rect.w = ball_rect.h = 24;
+	ball_rect.x = 0;
+	ball_rect.y = 0;
+	ball_rect.w = ball_rect.h = 23;
 
 }
 
@@ -49,7 +53,24 @@ update_status ModulePlayer::Update()
 		ball->body->SetBullet(true);
 		ball->listener = this;
 	}
-
+	//Change ball skin
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+		ball_rect.x = PIXEL_BALL*counter;
+		ball_rect.y = PIXEL_BALL*counter2;
+		
+		counter++;
+		if (counter >= 4)
+		{
+			counter = 0;
+			counter2++;
+		}
+		if (counter2 >= 3)
+		{
+			counter2 = 0;
+		}
+	}
+	
 	// Spawn ball
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
