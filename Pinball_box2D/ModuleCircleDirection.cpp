@@ -51,6 +51,7 @@ update_status ModuleCircleDirection::Update() {
 
 	if (active_mark) {
 		App->player->ball->body->SetTransform(b2Vec2(PIXEL_TO_METERS(227), PIXEL_TO_METERS(387)), 0.0f);
+		App->player->ball->body->SetLinearVelocity(b2Vec2_zero);
 		App->player->ball->body->SetActive(false);
 		if (time_ball + interval_ball <= SDL_GetTicks()) {
 			App->player->ball->body->SetActive(true);
