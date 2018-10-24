@@ -7,6 +7,7 @@
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "ModulePlayer.h"
+#include "ModuleUI.h"
 
 #define PIXEL_BALL 43
 
@@ -38,6 +39,7 @@ bool ModulePlayer::Start()
 
 	ball_tx = App->textures->Load("pinball/Textures/Pinball_Ball.png");
 	ball = App->physics->CreateCircle(SCREEN_WIDTH - 23, SCREEN_HEIGHT - 250, 11);
+	lives = 5;
 	ball->body->SetBullet(true);
 	ball->listener = this;
 
@@ -106,6 +108,8 @@ update_status ModulePlayer::Update()
 		if (lives <= 0)
 		{
 			game_over = true;
+			App->ui->score = 0;
+			lives = 5;
 			App->audio->PlayFx(App->scene_intro->game_over_fx, 0);
 
 		}

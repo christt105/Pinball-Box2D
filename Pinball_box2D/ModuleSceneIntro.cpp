@@ -46,11 +46,15 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	tp_rebound_rect.y = 36;
 	tp_rebound_rect.w = 52;
 	tp_rebound_rect.h = 25;
-
 	
+	arrow.arrow_rect.x = 742;
+	arrow.arrow_rect.y = 27;
+	arrow.arrow_rect.w = arrow.arrow_rect.h = 37;
 	
-
-
+	arrow.arrow_on_rect.x = 800;
+	arrow.arrow_on_rect.y = 27;
+	arrow.arrow_on_rect.w = arrow.arrow_on_rect.h = 37;
+	
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -170,21 +174,7 @@ bool ModuleSceneIntro::Start()
 	444, 201,
 	458, 232,
 	464, 256
-	};
-
-	int flipper_right_chain[18] = {
-			0, 83,
-			155, -1,
-			168, 7,
-			176, 19,
-			171, 41,
-			157, 50,
-			15, 96,
-			5, 97,
-			0, 91
-	};
-
-	
+	};	
 
 	// Right Half big structure
 	int structure_right_chain[104] = {
@@ -443,6 +433,28 @@ bool ModuleSceneIntro::Start()
 	pink_3->listener = this;
 	pink_4->listener = this;
 
+	//Arrows sensor
+	arrow.arrow1 = App->physics->CreateRectangleSensor(30, 406, 25, 25);
+	arrow.arrow2 = App->physics->CreateRectangleSensor(35, 298, 25, 25);
+	arrow.arrow3 = App->physics->CreateRectangleSensor(51, 200, 25, 25);
+	arrow.arrow4 = App->physics->CreateRectangleSensor(103, 111,25, 25);
+	arrow.arrow5 = App->physics->CreateRectangleSensor(187, 55, 25, 25);
+	arrow.arrow6 = App->physics->CreateRectangleSensor(270, 55, 25, 25);
+	arrow.arrow7 = App->physics->CreateRectangleSensor(430, 413,25, 25);
+	arrow.arrow8 = App->physics->CreateRectangleSensor(425, 305,25, 25);
+	arrow.arrow9 = App->physics->CreateRectangleSensor(400, 207,25, 25);
+	arrow.arrow10 = App->physics->CreateRectangleSensor(373,98,25, 25);
+	
+	arrow.arrow1->listener = this;
+	arrow.arrow2->listener = this;
+	arrow.arrow3->listener = this;
+	arrow.arrow4->listener = this;
+	arrow.arrow5->listener = this;
+	arrow.arrow6->listener = this;
+	arrow.arrow7->listener = this;
+	arrow.arrow8->listener = this;
+	arrow.arrow9->listener = this;
+	arrow.arrow10->listener = this;
 	
 
 	//Kicker
@@ -457,10 +469,6 @@ bool ModuleSceneIntro::Start()
 	//Rectangle Sensor
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 50);
 	sensor->listener = this;
-
-	
-
-
 	return ret;
 }
 
@@ -478,7 +486,6 @@ bool ModuleSceneIntro::CleanUp()
 	App->textures->Unload(kicker.kicker_tx);
 	App->textures->Unload(circle_robound_tx);
 
-
 	return true;
 }
 
@@ -491,6 +498,67 @@ update_status ModuleSceneIntro::PreUpdate() {
 	App->renderer->Blit(layout_tx, 0, 0);
 	App->renderer->Blit(press_space_tx, 130, 600);
 
+	//Arrows
+
+	if (arrow.light1) {
+		App->renderer->Blit(circle_robound_tx, 10, 386, &arrow.arrow_on_rect);
+	}
+	else
+		App->renderer->Blit(circle_robound_tx, 10, 386, &arrow.arrow_rect);
+
+	if (arrow.light2) {
+		App->renderer->Blit(circle_robound_tx, 15, 278, &arrow.arrow_on_rect);
+	}
+	else
+		App->renderer->Blit(circle_robound_tx, 15, 278, &arrow.arrow_rect);
+
+	if (arrow.light3) {
+		App->renderer->Blit(circle_robound_tx, 31, 180, &arrow.arrow_on_rect);
+	}
+	else
+		App->renderer->Blit(circle_robound_tx, 31, 180, &arrow.arrow_rect);
+
+	if (arrow.light4) {
+		App->renderer->Blit(circle_robound_tx, 83, 91, &arrow.arrow_on_rect);
+	}
+	else
+		App->renderer->Blit(circle_robound_tx, 83, 91, &arrow.arrow_rect);
+
+	if (arrow.light5) {
+		App->renderer->Blit(circle_robound_tx, 167, 51, &arrow.arrow_on_rect);
+	}
+	else
+		App->renderer->Blit(circle_robound_tx, 167, 51, &arrow.arrow_rect);
+
+	if (arrow.light6) {
+		App->renderer->Blit(circle_robound_tx, 250, 51, &arrow.arrow_on_rect);
+	}
+	else
+		App->renderer->Blit(circle_robound_tx, 250, 51, &arrow.arrow_rect);
+
+	if (arrow.light7) {
+		App->renderer->Blit(circle_robound_tx, 410, 393, &arrow.arrow_on_rect);
+	}
+	else
+		App->renderer->Blit(circle_robound_tx, 410, 393, &arrow.arrow_rect);
+
+	if (arrow.light8) {
+		App->renderer->Blit(circle_robound_tx, 405, 285, &arrow.arrow_on_rect);
+	}
+	else
+		App->renderer->Blit(circle_robound_tx, 405, 285, &arrow.arrow_rect);
+
+	if (arrow.light9) {
+		App->renderer->Blit(circle_robound_tx, 380, 187, &arrow.arrow_on_rect);
+	}
+	else
+		App->renderer->Blit(circle_robound_tx, 380, 187, &arrow.arrow_rect);
+
+	if (arrow.light10) {
+		App->renderer->Blit(circle_robound_tx, 353, 98, &arrow.arrow_on_rect);
+	}
+	else
+		App->renderer->Blit(circle_robound_tx, 353, 98, &arrow.arrow_rect);
 
 	int speed = 3;
 
@@ -605,13 +673,12 @@ update_status ModuleSceneIntro::Update()
 	App->renderer->Blit(kicker.kicker_tx, x, y);
 
 	//Unlock
-	if(unlocker_closed)
-		if (unlocker_rectangle == nullptr)
-		{
-			unlocker_rectangle = App->physics->CreateRectangle(420, 140, 2, 70, b2_staticBody);
+	if (unlocker_closed && unlocker_rectangle == nullptr)
+	{
+		unlocker_rectangle = App->physics->CreateRectangle(420, 140, 2, 70, b2_staticBody);
 
-			LOG("A NEW UNLOCKER CREATED");
-		}
+		LOG("A NEW UNLOCKER CREATED");
+	}
 
 	if (!unlocker_closed && unlocker_rectangle != nullptr)
 	{
@@ -629,7 +696,6 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	int x, y;
 
 	if (bodyA == sensor)
 	{
@@ -683,8 +749,81 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		App->audio->PlayFx(pink_light_fx);
 
 	}
+//Arrow sensors
 
-	if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3 || bodyA == rebound_tp1 || bodyA == rebound_tp2) {
+	if (bodyA == arrow.arrow1)
+	{
+		arrow.light1 = true;
+		App->ui->score += 100;
+		App->audio->PlayFx(pink_light_fx);
+	}
+	if (bodyA == arrow.arrow2)
+	{
+		arrow.light2 = true;
+		App->ui->score += 100;
+		App->audio->PlayFx(pink_light_fx);
+	}
+	if (bodyA == arrow.arrow3)
+	{
+		arrow.light3 = true;
+		App->ui->score += 100;
+		App->audio->PlayFx(pink_light_fx);
+	}
+	if (bodyA == arrow.arrow4)
+	{
+		arrow.light4 = true;
+		App->ui->score += 100;
+		App->audio->PlayFx(pink_light_fx);
+	}
+	if (bodyA == arrow.arrow5)
+	{
+		arrow.light5 = true;
+		App->ui->score += 100;
+		App->audio->PlayFx(pink_light_fx);
+	}
+	if (bodyA == arrow.arrow6)
+	{
+		arrow.light6 = true;
+		App->ui->score += 100;
+		App->audio->PlayFx(pink_light_fx);
+	}
+	if (bodyA == arrow.arrow7)
+	{
+		arrow.light7 = true;
+		App->ui->score += 100;
+		App->audio->PlayFx(pink_light_fx);
+	}
+	if (bodyA == arrow.arrow8)
+	{
+		arrow.light8 = true;
+		App->ui->score += 100;
+		App->audio->PlayFx(pink_light_fx);
+	}
+	if (bodyA == arrow.arrow9)
+	{
+		arrow.light9 = true;
+		App->ui->score += 100;
+		App->audio->PlayFx(pink_light_fx);
+	}
+	if (bodyA == arrow.arrow10)
+	{
+		arrow.light10 = true;
+		App->ui->score += 100;
+		App->audio->PlayFx(pink_light_fx);
+	}
+
+
+
+
+
+
+
+
+
+
+
+	
+	if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3) {
 		b2Vec2 force(bodyB->body->GetWorldCenter() - bodyA->body->GetWorldCenter());
 		force *= 3;
 		bodyB->body->ApplyLinearImpulse(force, bodyB->body->GetWorldCenter(), true);
@@ -692,10 +831,8 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		App->audio->PlayFx(circle_fx);
 	}
 	if (bodyA == rebound_tp1 || bodyA == rebound_tp2) {
-		b2Vec2 force(bodyB->body->GetWorldCenter() - bodyA->body->GetWorldCenter());
-		force *= 10;
-		bodyB->body->ApplyLinearImpulse(force, bodyB->body->GetWorldCenter(), true);
-		App->ui->score += 100;
+		bodyB->body->ApplyLinearImpulse(b2Vec2(0,-50), bodyB->body->GetWorldCenter(), true);
+		App->ui->score += 1000;
 		App->audio->PlayFx(tp_rebounder_fx);
 	}
 

@@ -39,8 +39,7 @@ bool ModuleCircleDirection::CleanUp() {
 
 update_status ModuleCircleDirection::PreUpdate() {
 
-	if(!active_mark)
-		if (time_start + interval <= SDL_GetTicks()) {
+	if(!active_mark && time_start + interval <= SDL_GetTicks()){
 			time_start = SDL_GetTicks();
 			ChangeDirection();
 		}

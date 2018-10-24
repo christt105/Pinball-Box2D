@@ -38,12 +38,17 @@ update_status ModuleUI::Update() {
 	if (score > high_score)
 		high_score = score;
 
+	SDL_Rect r = { 0,0,152,24 }; //High score text
+	App->renderer->Blit(score_tx, SCREEN_WIDTH - 154, 2, &r);
+
+	r = { 6,32,140,37 }; //score box
+	App->renderer->Blit(score_tx, 0, 0, &r);
 
 	sprintf_s(score_text, 10, "%7d", score);
-	App->fonts->BlitText(0, 0, font, score_text);
+	App->fonts->BlitText(15, 10, font, score_text);
 
 	sprintf_s(high_score_text, 10, "%7d", high_score);
-	App->fonts->BlitText(0, 64, font, high_score_text);
+	App->fonts->BlitText(SCREEN_WIDTH - 130, 30, font, high_score_text);
 
 	return UPDATE_CONTINUE;
 }

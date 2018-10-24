@@ -389,11 +389,6 @@ b2RevoluteJoint* ModulePhysics::CreateJoint(b2JointDef* jointDef) {
 	return (b2RevoluteJoint*)world->CreateJoint(jointDef);
 }
 
-//void ModulePhysics::DestroyJoint(b2Joint* joint) {
-//	world->DestroyJoint(joint);
-//}
-
-
 void PhysBody::GetPosition(int& x, int &y) const
 {
 	b2Vec2 pos = body->GetPosition();

@@ -18,6 +18,32 @@ struct Kicker {
 	float force = 0.0f;
 };
 
+struct Arrow {
+	PhysBody* arrow1;
+	PhysBody* arrow2;
+	PhysBody* arrow3;
+	PhysBody* arrow4;
+	PhysBody* arrow5;
+	PhysBody* arrow6;
+	PhysBody* arrow7;
+	PhysBody* arrow8;
+	PhysBody* arrow9;
+	PhysBody* arrow10;
+	bool light1 = false;
+	bool light2 = false;
+	bool light3 = false;
+	bool light4 = false;
+	bool light5 = false;
+	bool light6 = false;
+	bool light7 = false;
+	bool light8 = false;
+	bool light9 = false;
+	bool light10 = false;
+	SDL_Rect			arrow_rect;
+	SDL_Rect			arrow_on_rect;
+
+};
+
 
 
 
@@ -66,6 +92,8 @@ public:
 	Kicker kicker;
 	Kicker impulse_1;
 	Kicker impulse_2;
+
+	Arrow arrow;
 
 	PhysBody*			sensor = nullptr;
 
