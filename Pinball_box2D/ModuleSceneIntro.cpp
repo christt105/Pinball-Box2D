@@ -813,16 +813,6 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	}
 
 
-
-
-
-
-
-
-
-
-
-	
 	if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3) {
 		b2Vec2 force(bodyB->body->GetWorldCenter() - bodyA->body->GetWorldCenter());
 		force *= 3;
