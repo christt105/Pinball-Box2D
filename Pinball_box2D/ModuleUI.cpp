@@ -42,5 +42,8 @@ update_status ModuleUI::Update() {
 	sprintf_s(score_text, 10, "%7d", score);
 	App->fonts->BlitText(0, 0, font, score_text);
 
+	sprintf_s(high_score_text, 10, "%7d", high_score);
+	App->fonts->BlitText(0, 64, font, high_score_text);
+
 	return UPDATE_CONTINUE;
 }
