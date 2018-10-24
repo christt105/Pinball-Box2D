@@ -22,39 +22,49 @@ bool ModuleFlipper::Start() {
 
 	flipper_tx = App->textures->Load("pinball/Textures/flippersAndTriangularBoundsFx.png");
 
+	CreateFlippers();
+
+	fx_flipper = App->audio->LoadFx("pinball/Audio/SFx/Flipper.wav");
+
+	return ret;
+}
+
+void ModuleFlipper::CreateFlippers()
+{
 	int flipper_left_chain[14] = {
-			6, 13,
-			12, 1,
-			76, 5,
-			85, 13,
-			79, 22,
-			16, 25,
-			6, 13
+		6, 13,
+		12, 1,
+		76, 5,
+		85, 13,
+		79, 22,
+		16, 25,
+		6, 13
 	};
 
 	int flipper_right_chain[14] = {
-			-6, 13,
-			-12, 1,
-			-76, 5,
-			-85, 13,
-			-79, 22,
-			-16, 25,
-			-6, 13
+		-6, 13,
+		-12, 1,
+		-76, 5,
+		-85, 13,
+		-79, 22,
+		-16, 25,
+		-6, 13
 	};
 
-	left.flipper = App->physics->CreatePolygon(100, 920, flipper_left_chain, 14);
-	left.rotor = App->physics->CreateCircleStatic(160, 930, 3);
+	//Left flipper
+	left.flipper = App->physics->CreatePolygon(100, 920, flipper_left_chain, 14);	//Body flipper
+	left.rotor = App->physics->CreateCircleStatic(160, 930, 3);						//Circle, pivot where flipper will rotate around
 
-	b2RevoluteJointDef revolutionDef;
+	b2RevoluteJointDef revolutionDef; //Definition of joint Flipper-rotor
 	revolutionDef.bodyA = left.rotor->body;
 	revolutionDef.bodyB = left.flipper->body;
 	revolutionDef.collideConnected = false;
 	revolutionDef.localAnchorA.Set(0, 0);
 	revolutionDef.localAnchorB.Set(PIXEL_TO_METERS(20), PIXEL_TO_METERS(5));
 	revolutionDef.enableLimit = true;
-	revolutionDef.upperAngle = 30 * DEGTORAD; 
+	revolutionDef.upperAngle = 30 * DEGTORAD;
 	revolutionDef.lowerAngle = -20 * DEGTORAD;
-	left.joint = (b2RevoluteJoint*)App->physics->CreateJoint(&revolutionDef);
+	left.joint = (b2RevoluteJoint*)App->physics->CreateJoint(&revolutionDef); //Save joint in a var included in struct of flipper
 
 	right.flipper = App->physics->CreatePolygon(300, 920, flipper_right_chain, 14);
 	right.rotor = App->physics->CreateCircleStatic(300, 930, 3);
@@ -68,10 +78,6 @@ bool ModuleFlipper::Start() {
 	revolutionDef.upperAngle = 30 * DEGTORAD;
 	revolutionDef.lowerAngle = -20 * DEGTORAD;
 	right.joint = (b2RevoluteJoint*)App->physics->CreateJoint(&revolutionDef);
-
-	fx_flipper = App->audio->LoadFx("pinball/Audio/SFx/Flipper.wav");
-
-	return ret;
 }
 
 bool ModuleFlipper::CleanUp() {

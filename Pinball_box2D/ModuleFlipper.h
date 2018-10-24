@@ -25,6 +25,7 @@ public:
 	~ModuleFlipper();
 
 	bool Start();
+	void CreateFlippers();
 	update_status PreUpdate();
 	update_status Update();
 	update_status PostUpdate();
