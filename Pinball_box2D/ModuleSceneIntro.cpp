@@ -47,6 +47,9 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	tp_rebound_rect.w = 52;
 	tp_rebound_rect.h = 25;
 
+	
+	
+
 
 }
 
@@ -610,6 +613,10 @@ update_status ModuleSceneIntro::Update()
 		LOG("-- UNLOCKER DESTROYED ");
 
 	}
+	
+
+
+
 	return UPDATE_CONTINUE;
 }
 

@@ -14,13 +14,17 @@
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 
-	//160
-	//120
+	
 	ball_tx = nullptr;
 
 	ball_rect.x = 0;
 	ball_rect.y = 0;
 	ball_rect.w = ball_rect.h = 23;
+
+	live_rect.x = 694;
+	live_rect.y = 24;
+	live_rect.w = live_rect.h = 38;
+
 
 }
 
@@ -33,7 +37,9 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 
 	ball_tx = App->textures->Load("pinball/Textures/Pinball_Ball.png");
-	
+	ball = App->physics->CreateCircle(SCREEN_WIDTH - 23, SCREEN_HEIGHT - 250, 11);
+	ball->body->SetBullet(true);
+	ball->listener = this;
 
 	return true;
 }
@@ -70,7 +76,11 @@ update_status ModulePlayer::Update()
 			counter2 = 0;
 		}
 	}
-	
+	//Lives blit
+	if (lives >= 2) 		App->renderer->Blit(App->scene_intro->circle_robound_tx, 350, 972, &live_rect);
+	if (lives >= 3) 		App->renderer->Blit(App->scene_intro->circle_robound_tx, 375, 972, &live_rect);
+	if (lives >= 4) 		App->renderer->Blit(App->scene_intro->circle_robound_tx, 400, 972, &live_rect);
+	if (lives >= 5) 		App->renderer->Blit(App->scene_intro->circle_robound_tx, 425, 972, &live_rect);
 	// Spawn ball
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
@@ -92,7 +102,7 @@ update_status ModulePlayer::Update()
 		dead = false;
 
 		lives--;
-
+		
 		if (lives <= 0)
 		{
 			game_over = true;
@@ -153,6 +163,9 @@ update_status ModulePlayer::Update()
 		App->renderer->Blit(ball_tx, x, y, &ball_rect, 1.0f, b->data->GetRotation());
 		b = b->next;
 	}
+
+
+	
 
 	return UPDATE_CONTINUE;
 }

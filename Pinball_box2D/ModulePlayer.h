@@ -21,10 +21,12 @@ public:
 	SDL_Texture*		ball_tx;
 	
 	SDL_Rect			ball_rect;	
+	SDL_Rect			live_rect;
 
-	bool dead = true;
+
+	bool dead = false;
 	bool game_over = false;
-	uint lives = 6;
+	uint lives = 5;
 	bool tp1;
 	bool tp2;
 	uint counter = 1;
