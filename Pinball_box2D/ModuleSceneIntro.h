@@ -98,6 +98,8 @@ public:
 	uint				dead_fx;
 	uint				game_over_fx;
 	uint				tp_rebounder_fx;
+	uint				unlocker_closed_fx;
+	uint				center_launch_fx;
 
 	bool				pink1 = false;
 	bool				pink2 = false;

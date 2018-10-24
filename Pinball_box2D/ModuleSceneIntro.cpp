@@ -82,6 +82,8 @@ bool ModuleSceneIntro::Start()
 	dead_fx = App->audio->LoadFx("pinball/Audio/SFx/dead.wav");
 	game_over_fx = App->audio->LoadFx("pinball/Audio/SFx/game_over.wav");
 	tp_rebounder_fx = App->audio->LoadFx("pinball/Audio/SFx/Tp_Rebounder.wav");
+	unlocker_closed_fx = App->audio->LoadFx("pinball/Audio/SFx/unlocker_closed.wav");
+	center_launch_fx = App->audio->LoadFx("pinball/Audio/SFx/center_launch.wav");
 
 	int background_chain[166] = {
 	464, 256,
@@ -640,7 +642,8 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	if (bodyA == unlocker)
 	{
 		unlocker_closed = true;
-		
+		App->audio->PlayFx(unlocker_closed_fx);
+
 	}
 	
 	if (bodyA == tp_1)
