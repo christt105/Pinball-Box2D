@@ -70,6 +70,7 @@ bool ModuleSceneIntro::Start()
 	layout_alpha_tx = App->textures->Load("pinball/Textures/Layout_alpha.png");
 	circle_robound_tx = App->textures->Load("pinball/Textures/Circle_rebound.png");
 	kicker.kicker_tx = App->textures->Load("pinball/Textures/kicker.png");
+	press_space_tx = App->textures->Load("pinball/Textures/Press_Space.png");
 
 	App->audio->PlayMusic("pinball/Audio/Scene.ogg");
 	Mix_VolumeMusic(MIX_MAX_VOLUME / 4);
@@ -80,6 +81,9 @@ bool ModuleSceneIntro::Start()
 	triangle_fx = App->audio->LoadFx("pinball/Audio/SFx/Triangle.wav");
 	dead_fx = App->audio->LoadFx("pinball/Audio/SFx/dead.wav");
 	game_over_fx = App->audio->LoadFx("pinball/Audio/SFx/game_over.wav");
+	tp_rebounder_fx = App->audio->LoadFx("pinball/Audio/SFx/Tp_Rebounder.wav");
+	unlocker_closed_fx = App->audio->LoadFx("pinball/Audio/SFx/unlocker_closed.wav");
+	center_launch_fx = App->audio->LoadFx("pinball/Audio/SFx/center_launch.wav");
 
 	int background_chain[166] = {
 	464, 256,
@@ -468,6 +472,7 @@ bool ModuleSceneIntro::CleanUp()
 
 	App->textures->Unload(background_tx);
 	App->textures->Unload(layout_tx);
+	App->textures->Unload(press_space_tx);
 	App->textures->Unload(layout_alpha_tx);
 	App->textures->Unload(kicker.kicker_tx);
 	App->textures->Unload(circle_robound_tx);
@@ -483,6 +488,7 @@ update_status ModuleSceneIntro::PreUpdate() {
 	App->renderer->Blit(circle_robound_tx, 403, 925, &tp_rebound_rect);
 	App->renderer->Blit(circle_robound_tx, 8, 923, &tp_rebound_rect);
 	App->renderer->Blit(layout_tx, 0, 0);
+	App->renderer->Blit(press_space_tx, 130, 600);
 
 
 	int speed = 3;
@@ -636,7 +642,8 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	if (bodyA == unlocker)
 	{
 		unlocker_closed = true;
-		
+		App->audio->PlayFx(unlocker_closed_fx);
+
 	}
 	
 	if (bodyA == tp_1)
@@ -681,7 +688,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	if (bodyA == rebound_tp1 || bodyA == rebound_tp2) {
 		bodyB->body->ApplyLinearImpulse(b2Vec2(0,-50), bodyB->body->GetWorldCenter(), true);
 		App->ui->score += 1000;
-		App->audio->PlayFx(circle_fx);
+		App->audio->PlayFx(tp_rebounder_fx);
 	}
 
 	if (bodyA == triangle_left) {

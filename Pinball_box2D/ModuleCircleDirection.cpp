@@ -5,6 +5,7 @@
 #include "ModuleSceneIntro.h"
 #include "ModulePhysics.h"
 #include "ModulePlayer.h"
+#include "ModuleAudio.h"
 
 ModuleCircleDirection::ModuleCircleDirection(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -58,6 +59,8 @@ update_status ModuleCircleDirection::Update() {
 			time_mark = SDL_GetTicks();
 			sensor_mark->body->SetActive(false);
 			active_mark = false;
+			App->audio->PlayFx(App->scene_intro->center_launch_fx);
+
 		}
 	}
 	else if (!sensor_mark->body->IsActive() && !active_mark && time_mark + interval_mark <= SDL_GetTicks())

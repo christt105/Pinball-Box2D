@@ -79,6 +79,7 @@ public:
 	SDL_Texture*		layout_tx = nullptr;
 	SDL_Texture*		layout_alpha_tx = nullptr;
 	SDL_Texture*		circle_robound_tx;
+	SDL_Texture*		press_space_tx;
 
 	SDL_Rect			circle_robound1_rect;
 	SDL_Rect			circle_robound2_rect;
@@ -96,6 +97,9 @@ public:
 	uint				triangle_fx;
 	uint				dead_fx;
 	uint				game_over_fx;
+	uint				tp_rebounder_fx;
+	uint				unlocker_closed_fx;
+	uint				center_launch_fx;
 
 	bool				pink1 = false;
 	bool				pink2 = false;
