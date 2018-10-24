@@ -434,16 +434,16 @@ bool ModuleSceneIntro::Start()
 	pink_4->listener = this;
 
 	//Arrows sensor
-	arrow.arrow1 = App->physics->CreateRectangleSensor(30, 406, 25, 25);
-	arrow.arrow2 = App->physics->CreateRectangleSensor(35, 298, 25, 25);
-	arrow.arrow3 = App->physics->CreateRectangleSensor(51, 200, 25, 25);
-	arrow.arrow4 = App->physics->CreateRectangleSensor(103, 111,25, 25);
-	arrow.arrow5 = App->physics->CreateRectangleSensor(187, 55, 25, 25);
-	arrow.arrow6 = App->physics->CreateRectangleSensor(270, 55, 25, 25);
-	arrow.arrow7 = App->physics->CreateRectangleSensor(430, 413,25, 25);
-	arrow.arrow8 = App->physics->CreateRectangleSensor(425, 305,25, 25);
-	arrow.arrow9 = App->physics->CreateRectangleSensor(400, 207,25, 25);
-	arrow.arrow10 = App->physics->CreateRectangleSensor(373,98,25, 25);
+	arrow.arrow1 = App->physics->CreateRectangleSensor(20, 406, 5, 5);
+	arrow.arrow2 = App->physics->CreateRectangleSensor(25, 298, 5, 5);
+	arrow.arrow3 = App->physics->CreateRectangleSensor(41, 200, 5, 5);
+	arrow.arrow4 = App->physics->CreateRectangleSensor(90, 100, 5, 5);
+	arrow.arrow5 = App->physics->CreateRectangleSensor(187, 55, 5, 5);
+	arrow.arrow6 = App->physics->CreateRectangleSensor(270, 55, 5, 5);
+	arrow.arrow7 = App->physics->CreateRectangleSensor(440, 413, 5, 5);
+	arrow.arrow8 = App->physics->CreateRectangleSensor(435, 305, 5, 5);
+	arrow.arrow9 = App->physics->CreateRectangleSensor(420, 207,5, 5);
+	arrow.arrow10 = App->physics->CreateRectangleSensor(373, 98, 5, 5);
 	
 	arrow.arrow1->listener = this;
 	arrow.arrow2->listener = this;
@@ -577,6 +577,7 @@ update_status ModuleSceneIntro::Update()
 
 	if (arrow.light1) {
 		App->renderer->Blit(circle_robound_tx, 10, 386, &arrow.arrow_on_rect);
+
 	}
 	else
 		App->renderer->Blit(circle_robound_tx, 10, 386, &arrow.arrow_rect);
@@ -638,10 +639,12 @@ update_status ModuleSceneIntro::Update()
 	if ((arrow.light1 || arrow.light2 || arrow.light3 || arrow.light4 || arrow.light5 || arrow.light6 || arrow.light7 || arrow.light8 || arrow.light9 || arrow.light10) && arrow.arrow_time)
 	{
 		init_time = SDL_GetTicks(); //Timer
+		
 		arrow.arrow_time = false;
 	}
 	if (arrow.light1 || arrow.light2 || arrow.light3 || arrow.light4 || arrow.light5 || arrow.light6 || arrow.light7 || arrow.light8 || arrow.light9 || arrow.light10)
 	{
+		
 		current_time = SDL_GetTicks() - init_time; //Timer
 		if (current_time > 1000)
 		{
@@ -704,9 +707,6 @@ update_status ModuleSceneIntro::Update()
 		LOG("-- UNLOCKER DESTROYED ");
 
 	}
-	
-
-
 
 	return UPDATE_CONTINUE;
 }
@@ -773,60 +773,70 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		arrow.light1 = true;
 		App->ui->score += 100;
 		App->audio->PlayFx(pink_light_fx);
+		
 	}
 	if (bodyA == arrow.arrow2)
 	{
 		arrow.light2 = true;
 		App->ui->score += 100;
 		App->audio->PlayFx(pink_light_fx);
+		
 	}
 	if (bodyA == arrow.arrow3)
 	{
 		arrow.light3 = true;
 		App->ui->score += 100;
 		App->audio->PlayFx(pink_light_fx);
+		
 	}
 	if (bodyA == arrow.arrow4)
 	{
 		arrow.light4 = true;
 		App->ui->score += 100;
 		App->audio->PlayFx(pink_light_fx);
+		
 	}
 	if (bodyA == arrow.arrow5)
 	{
 		arrow.light5 = true;
 		App->ui->score += 100;
 		App->audio->PlayFx(pink_light_fx);
+		
 	}
 	if (bodyA == arrow.arrow6)
 	{
 		arrow.light6 = true;
 		App->ui->score += 100;
 		App->audio->PlayFx(pink_light_fx);
+		
 	}
 	if (bodyA == arrow.arrow7)
 	{
 		arrow.light7 = true;
 		App->ui->score += 100;
 		App->audio->PlayFx(pink_light_fx);
+		
 	}
 	if (bodyA == arrow.arrow8)
 	{
 		arrow.light8 = true;
 		App->ui->score += 100;
 		App->audio->PlayFx(pink_light_fx);
+		
 	}
 	if (bodyA == arrow.arrow9)
 	{
 		arrow.light9 = true;
 		App->ui->score += 100;
 		App->audio->PlayFx(pink_light_fx);
+		
 	}
 	if (bodyA == arrow.arrow10)
 	{
 		arrow.light10 = true;
 		App->ui->score += 100;
 		App->audio->PlayFx(pink_light_fx);
+		
 	}
 
 

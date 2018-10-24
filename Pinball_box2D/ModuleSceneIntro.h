@@ -42,7 +42,6 @@ struct Arrow {
 	SDL_Rect arrow_rect;
 	SDL_Rect arrow_on_rect;
 	bool arrow_time = false;
-
 };
 
 
