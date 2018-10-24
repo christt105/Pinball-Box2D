@@ -64,6 +64,7 @@ bool ModuleSceneIntro::Start()
 	circle_robound_tx = App->textures->Load("pinball/Textures/Circle_rebound.png");
 	kicker.kicker_tx = App->textures->Load("pinball/Textures/kicker.png");
 
+	App->audio->PlayMusic("pinball/Audio/Scene.ogg");
 
 	bonus_fx = App->audio->LoadFx("pinball/Audio/SFx/bonus.wav");
 	kicker_fx = App->audio->LoadFx("pinball/Audio/SFx/kicker.wav");
