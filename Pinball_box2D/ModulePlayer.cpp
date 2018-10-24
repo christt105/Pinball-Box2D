@@ -49,6 +49,7 @@ update_status ModulePlayer::Update()
 		ball->body->SetBullet(true);
 		ball->listener = this;
 	}
+
 	// Spawn ball
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{

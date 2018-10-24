@@ -414,6 +414,12 @@ bool ModuleSceneIntro::Start()
 	tp_1->listener = this;
 	tp_2->listener = this;
 
+	//Rebound tp
+	rebound_tp1 = App->physics->CreateCircleStatic(28, 950, 20);
+	rebound_tp2 = App->physics->CreateCircleStatic(425, 950, 20);
+	rebound_tp1->listener = this;
+	rebound_tp2->listener = this;
+
 	//Pink lights sensors
 	pink_1 = App->physics->CreateRectangleSensor(153, 135, 15, 10);
 	pink_2 = App->physics->CreateRectangleSensor(203, 135, 15, 10);
@@ -645,14 +651,21 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		App->ui->score += 100;
 	}
 
-	if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3) {
+	if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3 || bodyA == rebound_tp1 || bodyA == rebound_tp2) {
 		b2Vec2 force(bodyB->body->GetWorldCenter() - bodyA->body->GetWorldCenter());
 		force *= 3;
 		bodyB->body->ApplyLinearImpulse(force, bodyB->body->GetWorldCenter(), true);
 		App->ui->score += 100;
 		App->audio->PlayFx(circle_fx);
 	}
-	
+	if (bodyA == rebound_tp1 || bodyA == rebound_tp2) {
+		b2Vec2 force(bodyB->body->GetWorldCenter() - bodyA->body->GetWorldCenter());
+		force *= 10;
+		bodyB->body->ApplyLinearImpulse(force, bodyB->body->GetWorldCenter(), true);
+		App->ui->score += 100;
+		App->audio->PlayFx(circle_fx);
+	}
+
 	if (bodyA == triangle_left) {
 		bodyB->body->ApplyLinearImpulse(b2Vec2(-2, -2), bodyB->body->GetWorldCenter(), true);
 		App->ui->score += 100;

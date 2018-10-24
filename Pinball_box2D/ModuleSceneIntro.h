@@ -51,9 +51,10 @@ public:
 	PhysBody*			circle1 = nullptr;
 	PhysBody*			circle2 = nullptr;
 	PhysBody*			circle3 = nullptr;
+	PhysBody*			rebound_tp1 = nullptr;
+	PhysBody*			rebound_tp2 = nullptr;
 	PhysBody*			tp_1 = nullptr;
 	PhysBody*			tp_2 = nullptr;
-
 	PhysBody*			pink_1 = nullptr;
 	PhysBody*			pink_2 = nullptr;
 	PhysBody*			pink_3 = nullptr;
