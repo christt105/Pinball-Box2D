@@ -86,6 +86,7 @@ public:
 	SDL_Rect			unlocker_rect;
 	SDL_Rect			pink_off_rect;
 	SDL_Rect			pink_on_rect;
+	SDL_Rect			tp_rebound_rect;
 
 	float				angle_rot = 0.0F;
 	
@@ -93,6 +94,7 @@ public:
 	uint				kicker_fx;
 	uint				circle_fx;
 	uint				triangle_fx;
+	uint				dead_fx;
 
 	bool				pink1 = false;
 	bool				pink2 = false;

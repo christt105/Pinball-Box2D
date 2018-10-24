@@ -36,13 +36,16 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 
 	pink_off_rect.x = 571;
 	pink_off_rect.y = 39;
-	pink_off_rect.w = 15;
-	pink_off_rect.h = 15;
+	pink_off_rect.w = pink_off_rect.h = 15;
 	
 	pink_on_rect.x = 597;
 	pink_on_rect.y = 36;
-	pink_on_rect.w = 23;
-	pink_on_rect.h = 23;
+	pink_on_rect.w = pink_on_rect.h = 23;
+	
+	tp_rebound_rect.x = 633;
+	tp_rebound_rect.y = 36;
+	tp_rebound_rect.w = 52;
+	tp_rebound_rect.h = 25;
 
 
 }
@@ -72,6 +75,7 @@ bool ModuleSceneIntro::Start()
 	kicker_fx = App->audio->LoadFx("pinball/Audio/SFx/kicker.wav");
 	circle_fx = App->audio->LoadFx("pinball/Audio/SFx/CircleRebounder.wav");
 	triangle_fx = App->audio->LoadFx("pinball/Audio/SFx/Triangle.wav");
+	dead_fx = App->audio->LoadFx("pinball/Audio/SFx/Lost_ball.wav");
 
 	int background_chain[166] = {
 	464, 256,
@@ -472,7 +476,10 @@ update_status ModuleSceneIntro::PreUpdate() {
 
 	App->renderer->Blit(background_tx, 0, 0);
 	App->renderer->Blit(layout_alpha_tx, 0, 0);
+	App->renderer->Blit(circle_robound_tx, 403, 925, &tp_rebound_rect);
+	App->renderer->Blit(circle_robound_tx, 8, 923, &tp_rebound_rect);
 	App->renderer->Blit(layout_tx, 0, 0);
+
 
 	int speed = 3;
 
@@ -610,6 +617,8 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{
 		App->player->dead = true;
 		unlocker_closed = false;
+		App->audio->PlayFx(dead_fx);
+
 		LOG("DEAD");
 	}
 
