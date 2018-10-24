@@ -14,20 +14,22 @@ class ModuleSceneIntro;
 class ModulePhysics;
 class ModuleFlipper;
 class ModuleCircleDirection;
+class ModuleFonts;
 
 class Application
 {
 public:
-	ModuleRender* renderer;
-	ModuleWindow* window;
-	ModuleTextures* textures;
-	ModuleInput* input;
-	ModuleAudio* audio;
-	ModulePlayer* player;
-	ModuleSceneIntro* scene_intro;
-	ModulePhysics* physics;
-	ModuleFlipper* flippers;
-	ModuleCircleDirection* circle;
+	ModuleRender*			renderer;
+	ModuleWindow*			window;
+	ModuleTextures*			textures;
+	ModuleInput*			input;
+	ModuleAudio*			audio;
+	ModulePlayer*			player;
+	ModuleSceneIntro*		scene_intro;
+	ModulePhysics*			physics;
+	ModuleFlipper*			flippers;
+	ModuleCircleDirection*	circle;
+	ModuleFonts*			fonts;
 
 private:
 
