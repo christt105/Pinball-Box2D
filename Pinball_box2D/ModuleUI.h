@@ -34,7 +34,7 @@ public:
 	//SDL_Texture * numbers_tx = nullptr;
 	SDL_Texture * score_tx = nullptr;
 
-	SDL_Rect number = { 0,0,45,64 };
+	SDL_Rect number = { 0,0,16,22 };
 
 	//SDL_Rect points[POINTS::MAX_POINTS]; //Rects of little numbers that appears next ball like +100 or +3000 that increase puntuation
 
