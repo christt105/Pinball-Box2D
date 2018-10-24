@@ -535,6 +535,7 @@ update_status ModuleSceneIntro::Update()
 		{
 			pink1 = pink2 = pink3 = pink4 = false;
 			timer = true;
+			App->ui->score += 10000;
 		}
 	}
 	
@@ -623,25 +624,25 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		LOG("TP 2");
 	}
 	
-	if (bodyA == pink_1)
+	if (bodyA == pink_1 && !pink1)
 	{
-		pink1 = true;
-		LOG("PINK 1 LIGHT ON");
+		pink1 = true;		
+		App->ui->score += 100;
 	}
-	if (bodyA == pink_2)
+	if (bodyA == pink_2 && !pink2)
 	{
 		pink2 = true;
-		LOG("PINK 2 LIGHT ON");
+		App->ui->score += 100;
 	}
-	if (bodyA == pink_3)
+	if (bodyA == pink_3 && !pink3)
 	{
 		pink3 = true;
-		LOG("PINK 3 LIGHT ON");
+		App->ui->score += 100;
 	}
-	if (bodyA == pink_4)
+	if (bodyA == pink_4 && !pink4)
 	{
 		pink4 = true;
-		LOG("PINK 4 LIGHT ON");
+		App->ui->score += 100;
 	}
 
 	if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3) {
