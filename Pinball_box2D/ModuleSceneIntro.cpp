@@ -84,6 +84,7 @@ bool ModuleSceneIntro::Start()
 	tp_rebounder_fx = App->audio->LoadFx("pinball/Audio/SFx/Tp_Rebounder.wav");
 	unlocker_closed_fx = App->audio->LoadFx("pinball/Audio/SFx/unlocker_closed.wav");
 	center_launch_fx = App->audio->LoadFx("pinball/Audio/SFx/center_launch.wav");
+	pink_light_fx = App->audio->LoadFx("pinball/Audio/SFx/pink_light.wav");
 
 	int background_chain[166] = {
 	464, 256,
@@ -661,21 +662,26 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{
 		pink1 = true;		
 		App->ui->score += 100;
+		App->audio->PlayFx(pink_light_fx);
 	}
 	if (bodyA == pink_2 && !pink2)
 	{
 		pink2 = true;
 		App->ui->score += 100;
+		App->audio->PlayFx(pink_light_fx);
 	}
 	if (bodyA == pink_3 && !pink3)
 	{
 		pink3 = true;
 		App->ui->score += 100;
+		App->audio->PlayFx(pink_light_fx);
 	}
 	if (bodyA == pink_4 && !pink4)
 	{
 		pink4 = true;
 		App->ui->score += 100;
+		App->audio->PlayFx(pink_light_fx);
+
 	}
 
 	if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3 || bodyA == rebound_tp1 || bodyA == rebound_tp2) {
