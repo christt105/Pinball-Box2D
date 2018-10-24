@@ -9,7 +9,7 @@
 ModuleCircleDirection::ModuleCircleDirection(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	interval = 2000;
-	interval_ball = 3000;
+	interval_ball = 9000;
 }
 
 ModuleCircleDirection::~ModuleCircleDirection()
