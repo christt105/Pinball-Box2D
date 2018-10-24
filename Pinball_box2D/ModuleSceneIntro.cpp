@@ -65,6 +65,7 @@ bool ModuleSceneIntro::Start()
 	kicker.kicker_tx = App->textures->Load("pinball/Textures/kicker.png");
 
 	App->audio->PlayMusic("pinball/Audio/Scene.ogg");
+	Mix_VolumeMusic(MIX_MAX_VOLUME / 4);
 
 	bonus_fx = App->audio->LoadFx("pinball/Audio/SFx/bonus.wav");
 	kicker_fx = App->audio->LoadFx("pinball/Audio/SFx/kicker.wav");
