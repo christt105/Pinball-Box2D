@@ -18,7 +18,6 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 	ball_rect.y = 6;
 	ball_rect.w = ball_rect.h = 24;
 
-	score = 0;
 }
 
 ModulePlayer::~ModulePlayer()

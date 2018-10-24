@@ -40,7 +40,9 @@ public:
 
 	int font = -1;
 
-	int score = 0;
-	int high_score = 0;
+	int		score = 0;
+	char	score_text[15];
+	int		high_score = 0;
+	char	high_score_text[15];
 };
 #endif // !__MODULEUI_H__

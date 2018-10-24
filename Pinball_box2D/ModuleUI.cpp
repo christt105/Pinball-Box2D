@@ -16,7 +16,7 @@ bool ModuleUI::Start()
 
 	score_tx = App->textures->Load("pinball/Textures/high_score.png");
 
-	font = App->fonts->Load("pinball/Textures/numbers.png", "1234567890", 1);
+	font = App->fonts->Load("pinball/Textures/numbers.png", "0123456789", 1);
 
 	score = 0;
 
@@ -38,7 +38,9 @@ update_status ModuleUI::Update() {
 	if (score > high_score)
 		high_score = score;
 
-	App->fonts->BlitText(0, 0, font, "1234567890");
+
+	sprintf_s(score_text, 10, "%7d", score);
+	App->fonts->BlitText(0, 0, font, score_text);
 
 	return UPDATE_CONTINUE;
 }

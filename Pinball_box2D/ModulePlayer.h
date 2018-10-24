@@ -20,10 +20,7 @@ public:
 	PhysBody*			ball;
 	SDL_Texture*		ball_tx;
 	
-	SDL_Rect			ball_rect;
-
-	int					score = 0;
-	
+	SDL_Rect			ball_rect;	
 
 	bool dead = true;
 	bool tp1;
