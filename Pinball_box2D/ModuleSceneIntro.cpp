@@ -170,21 +170,7 @@ bool ModuleSceneIntro::Start()
 	444, 201,
 	458, 232,
 	464, 256
-	};
-
-	int flipper_right_chain[18] = {
-			0, 83,
-			155, -1,
-			168, 7,
-			176, 19,
-			171, 41,
-			157, 50,
-			15, 96,
-			5, 97,
-			0, 91
-	};
-
-	
+	};	
 
 	// Right Half big structure
 	int structure_right_chain[104] = {
@@ -605,13 +591,12 @@ update_status ModuleSceneIntro::Update()
 	App->renderer->Blit(kicker.kicker_tx, x, y);
 
 	//Unlock
-	if(unlocker_closed)
-		if (unlocker_rectangle == nullptr)
-		{
-			unlocker_rectangle = App->physics->CreateRectangle(420, 140, 2, 70, b2_staticBody);
+	if (unlocker_closed && unlocker_rectangle == nullptr)
+	{
+		unlocker_rectangle = App->physics->CreateRectangle(420, 140, 2, 70, b2_staticBody);
 
-			LOG("A NEW UNLOCKER CREATED");
-		}
+		LOG("A NEW UNLOCKER CREATED");
+	}
 
 	if (!unlocker_closed && unlocker_rectangle != nullptr)
 	{
@@ -629,7 +614,6 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	int x, y;
 
 	if (bodyA == sensor)
 	{
