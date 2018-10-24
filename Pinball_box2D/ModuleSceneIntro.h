@@ -95,6 +95,7 @@ public:
 	uint				circle_fx;
 	uint				triangle_fx;
 	uint				dead_fx;
+	uint				game_over_fx;
 
 	bool				pink1 = false;
 	bool				pink2 = false;

@@ -75,7 +75,8 @@ bool ModuleSceneIntro::Start()
 	kicker_fx = App->audio->LoadFx("pinball/Audio/SFx/kicker.wav");
 	circle_fx = App->audio->LoadFx("pinball/Audio/SFx/CircleRebounder.wav");
 	triangle_fx = App->audio->LoadFx("pinball/Audio/SFx/Triangle.wav");
-	dead_fx = App->audio->LoadFx("pinball/Audio/SFx/Triangle.wav");
+	dead_fx = App->audio->LoadFx("pinball/Audio/SFx/dead.wav");
+	game_over_fx = App->audio->LoadFx("pinball/Audio/SFx/game_over.wav");
 
 	int background_chain[166] = {
 	464, 256,
