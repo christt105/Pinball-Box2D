@@ -8,7 +8,7 @@
 #include "ModulePhysics.h"
 #include "ModulePlayer.h"
 
-#define PIXEL_BALL 40
+#define PIXEL_BALL 43
 
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -17,9 +17,9 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 	
 	ball_tx = nullptr;
 
-	ball_rect.x = 0;
+	ball_rect.x = PIXEL_BALL;
 	ball_rect.y = 0;
-	ball_rect.w = ball_rect.h = 23;
+	ball_rect.w = ball_rect.h = 22;
 
 	live_rect.x = 694;
 	live_rect.y = 24;
