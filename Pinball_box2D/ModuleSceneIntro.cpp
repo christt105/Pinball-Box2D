@@ -498,68 +498,7 @@ update_status ModuleSceneIntro::PreUpdate() {
 	App->renderer->Blit(layout_tx, 0, 0);
 	App->renderer->Blit(press_space_tx, 130, 600);
 
-	//Arrows
-
-	if (arrow.light1) {
-		App->renderer->Blit(circle_robound_tx, 10, 386, &arrow.arrow_on_rect);
-	}
-	else
-		App->renderer->Blit(circle_robound_tx, 10, 386, &arrow.arrow_rect);
-
-	if (arrow.light2) {
-		App->renderer->Blit(circle_robound_tx, 15, 278, &arrow.arrow_on_rect);
-	}
-	else
-		App->renderer->Blit(circle_robound_tx, 15, 278, &arrow.arrow_rect);
-
-	if (arrow.light3) {
-		App->renderer->Blit(circle_robound_tx, 31, 180, &arrow.arrow_on_rect);
-	}
-	else
-		App->renderer->Blit(circle_robound_tx, 31, 180, &arrow.arrow_rect);
-
-	if (arrow.light4) {
-		App->renderer->Blit(circle_robound_tx, 83, 91, &arrow.arrow_on_rect);
-	}
-	else
-		App->renderer->Blit(circle_robound_tx, 83, 91, &arrow.arrow_rect);
-
-	if (arrow.light5) {
-		App->renderer->Blit(circle_robound_tx, 167, 51, &arrow.arrow_on_rect);
-	}
-	else
-		App->renderer->Blit(circle_robound_tx, 167, 51, &arrow.arrow_rect);
-
-	if (arrow.light6) {
-		App->renderer->Blit(circle_robound_tx, 250, 51, &arrow.arrow_on_rect);
-	}
-	else
-		App->renderer->Blit(circle_robound_tx, 250, 51, &arrow.arrow_rect);
-
-	if (arrow.light7) {
-		App->renderer->Blit(circle_robound_tx, 410, 393, &arrow.arrow_on_rect);
-	}
-	else
-		App->renderer->Blit(circle_robound_tx, 410, 393, &arrow.arrow_rect);
-
-	if (arrow.light8) {
-		App->renderer->Blit(circle_robound_tx, 405, 285, &arrow.arrow_on_rect);
-	}
-	else
-		App->renderer->Blit(circle_robound_tx, 405, 285, &arrow.arrow_rect);
-
-	if (arrow.light9) {
-		App->renderer->Blit(circle_robound_tx, 380, 187, &arrow.arrow_on_rect);
-	}
-	else
-		App->renderer->Blit(circle_robound_tx, 380, 187, &arrow.arrow_rect);
-
-	if (arrow.light10) {
-		App->renderer->Blit(circle_robound_tx, 353, 98, &arrow.arrow_on_rect);
-	}
-	else
-		App->renderer->Blit(circle_robound_tx, 353, 98, &arrow.arrow_rect);
-
+	//DEGUB MOVEMENT CAMERA
 	int speed = 3;
 
 	if (App->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT)
@@ -633,6 +572,84 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 	
+
+	//Arrows
+
+	if (arrow.light1 && arrow.arrow_time) {
+		App->renderer->Blit(circle_robound_tx, 10, 386, &arrow.arrow_on_rect);
+	}
+	else
+		App->renderer->Blit(circle_robound_tx, 10, 386, &arrow.arrow_rect);
+
+	if (arrow.light2) {
+		App->renderer->Blit(circle_robound_tx, 15, 278, &arrow.arrow_on_rect);
+	}
+	else
+		App->renderer->Blit(circle_robound_tx, 15, 278, &arrow.arrow_rect);
+
+	if (arrow.light3) {
+		App->renderer->Blit(circle_robound_tx, 31, 180, &arrow.arrow_on_rect);
+	}
+	else
+		App->renderer->Blit(circle_robound_tx, 31, 180, &arrow.arrow_rect);
+
+	if (arrow.light4) {
+		App->renderer->Blit(circle_robound_tx, 83, 91, &arrow.arrow_on_rect);
+	}
+	else
+		App->renderer->Blit(circle_robound_tx, 83, 91, &arrow.arrow_rect);
+
+	if (arrow.light5) {
+		App->renderer->Blit(circle_robound_tx, 167, 51, &arrow.arrow_on_rect);
+	}
+	else
+		App->renderer->Blit(circle_robound_tx, 167, 51, &arrow.arrow_rect);
+
+	if (arrow.light6) {
+		App->renderer->Blit(circle_robound_tx, 250, 51, &arrow.arrow_on_rect);
+	}
+	else
+		App->renderer->Blit(circle_robound_tx, 250, 51, &arrow.arrow_rect);
+
+	if (arrow.light7) {
+		App->renderer->Blit(circle_robound_tx, 410, 393, &arrow.arrow_on_rect);
+	}
+	else
+		App->renderer->Blit(circle_robound_tx, 410, 393, &arrow.arrow_rect);
+
+	if (arrow.light8) {
+		App->renderer->Blit(circle_robound_tx, 405, 285, &arrow.arrow_on_rect);
+	}
+	else
+		App->renderer->Blit(circle_robound_tx, 405, 285, &arrow.arrow_rect);
+
+	if (arrow.light9) {
+		App->renderer->Blit(circle_robound_tx, 380, 187, &arrow.arrow_on_rect);
+	}
+	else
+		App->renderer->Blit(circle_robound_tx, 380, 187, &arrow.arrow_rect);
+
+	if (arrow.light10) {
+		App->renderer->Blit(circle_robound_tx, 353, 98, &arrow.arrow_on_rect);
+	}
+	else
+		App->renderer->Blit(circle_robound_tx, 353, 98, &arrow.arrow_rect);
+
+	if ((arrow.light1 || arrow.light2 || arrow.light3 || arrow.light4 || arrow.light5 || arrow.light6 || arrow.light7 || arrow.light8 || arrow.light9 || arrow.light10) && arrow.arrow_time)
+	{
+		init_time = SDL_GetTicks(); //Timer
+		arrow.arrow_time = false;
+	}
+	if (arrow.light1 || arrow.light2 || arrow.light3 || arrow.light4 || arrow.light5 || arrow.light6 || arrow.light7 || arrow.light8 || arrow.light9 || arrow.light10)
+	{
+		current_time = SDL_GetTicks() - init_time; //Timer
+		if (current_time > 1000)
+		{
+			arrow.light1 = arrow.light2 = arrow.light3 = arrow.light4 = arrow.light5 = arrow.light6 = arrow.light7 = arrow.light8 = arrow.light9 = arrow.light10 = false;
+			arrow.arrow_time = true;
+		}
+	}
+
 	//Tp
 	App->renderer->Blit(circle_robound_tx, 108, 378, &tp_rect, 1.0F, angle_rot);
 	App->renderer->Blit(circle_robound_tx, 322, 378, &tp_rect, 1.0F, angle_rot);

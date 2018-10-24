@@ -39,8 +39,9 @@ struct Arrow {
 	bool light8 = false;
 	bool light9 = false;
 	bool light10 = false;
-	SDL_Rect			arrow_rect;
-	SDL_Rect			arrow_on_rect;
+	SDL_Rect arrow_rect;
+	SDL_Rect arrow_on_rect;
+	bool arrow_time = false;
 
 };
 
