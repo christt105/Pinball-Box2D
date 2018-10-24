@@ -75,7 +75,7 @@ bool ModuleSceneIntro::Start()
 	kicker_fx = App->audio->LoadFx("pinball/Audio/SFx/kicker.wav");
 	circle_fx = App->audio->LoadFx("pinball/Audio/SFx/CircleRebounder.wav");
 	triangle_fx = App->audio->LoadFx("pinball/Audio/SFx/Triangle.wav");
-	dead_fx = App->audio->LoadFx("pinball/Audio/SFx/Lost_ball.wav");
+	dead_fx = App->audio->LoadFx("pinball/Audio/SFx/Triangle.wav");
 
 	int background_chain[166] = {
 	464, 256,
@@ -539,6 +539,8 @@ update_status ModuleSceneIntro::Update()
 	if (pink1 && pink2 && pink3 && pink4 && timer)
 	{
 		init_time = SDL_GetTicks(); //Timer
+		App->audio->PlayFx(bonus_fx);
+
 		timer = false;
 	}
 	if (pink1 && pink2 && pink3 && pink4)
@@ -595,7 +597,7 @@ update_status ModuleSceneIntro::Update()
 		if (unlocker_rectangle == nullptr)
 		{
 			unlocker_rectangle = App->physics->CreateRectangle(420, 140, 2, 70, b2_staticBody);
-			
+
 			LOG("A NEW UNLOCKER CREATED");
 		}
 
