@@ -854,12 +854,12 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	}
 
 	if (bodyA == triangle_left) {
-		bodyB->body->ApplyLinearImpulse(b2Vec2(-2, -2), bodyB->body->GetWorldCenter(), true);
+		bodyB->body->ApplyLinearImpulse(b2Vec2(-4, -4), bodyB->body->GetWorldCenter(), true);
 		App->ui->score += 100;
 		App->audio->PlayFx(triangle_fx);
 	}
 	if (bodyA == triangle_right) {
-		bodyB->body->ApplyLinearImpulse(b2Vec2(2, -2), bodyB->body->GetWorldCenter(), true);
+		bodyB->body->ApplyLinearImpulse(b2Vec2(4, -4), bodyB->body->GetWorldCenter(), true);
 		App->ui->score += 100;
 		App->audio->PlayFx(triangle_fx);
 	}
