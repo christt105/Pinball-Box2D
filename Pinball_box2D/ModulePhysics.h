@@ -56,9 +56,10 @@ public:
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 
+	bool debug = false;
+
 private:
 
-	bool debug = false;
 	b2World* world = nullptr;
 	b2Body* ground = nullptr;
 
