@@ -637,7 +637,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	if (light_circle1)
 	{
-		App->renderer->Blit(circle_robound_tx, 263, 247, &circle_light2_rect);
+		App->renderer->Blit(circle_robound_tx, 263, 247, &circle_light2_rect, 1.0F, angle_rot);
 		current_time = SDL_GetTicks() - init_time; //Timer
 		if (current_time > 250)
 		{
@@ -654,7 +654,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	if (light_circle2)
 	{
-		App->renderer->Blit(circle_robound_tx, 146, 248, &circle_light2_rect);
+		App->renderer->Blit(circle_robound_tx, 146, 248, &circle_light2_rect, 1.0F, angle_rot);
 		current_time = SDL_GetTicks() - init_time; //Timer
 		if (current_time > 250)
 		{
@@ -671,7 +671,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	if (light_circle3)
 	{
-		App->renderer->Blit(circle_robound_tx, 202, 187, &circle_light1_rect);
+		App->renderer->Blit(circle_robound_tx, 202, 187, &circle_light1_rect, 1.0F, angle_rot);
 		current_time = SDL_GetTicks() - init_time; //Timer
 		if (current_time > 250)
 		{
