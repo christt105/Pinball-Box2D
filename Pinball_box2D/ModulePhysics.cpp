@@ -363,14 +363,19 @@ update_status ModulePhysics::PostUpdate()
 
 	}
 
-	if(mouse_up == true && mouse_joint != NULL)
-	{
+	if (mouse_up)
+		DestroyMouseJoint();
+
+	return UPDATE_CONTINUE;
+}
+
+void ModulePhysics::DestroyMouseJoint()
+{
+	if (mouse_joint != nullptr) {
 		world->DestroyJoint(mouse_joint);
 		mouse_joint = NULL;
 		body_clicked = NULL;
 	}
-
-	return UPDATE_CONTINUE;
 }
 
 

@@ -52,6 +52,7 @@ public:
 
 	
 	b2RevoluteJoint*  CreateJoint(b2JointDef*);
+	void DestroyMouseJoint();
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
