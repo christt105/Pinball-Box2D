@@ -84,7 +84,7 @@ update_status ModulePlayer::Update()
 	if (lives >= 5) 		App->renderer->Blit(App->scene_intro->circle_robound_tx, 425, 972, &live_rect);
 
 	// Spawn ball========================================================
-	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN && !game_over)
 	{
 		dead = true;
 		App->scene_intro->unlocker_closed = false;
