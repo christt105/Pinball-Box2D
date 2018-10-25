@@ -99,9 +99,7 @@ update_status ModulePlayer::Update()
 			ball->body->GetWorld()->DestroyBody(ball->body);
 			ball = nullptr;
 		}
-		ball = App->physics->CreateCircle(SCREEN_WIDTH - 23, SCREEN_HEIGHT - 250, 11);
-		ball->body->SetBullet(true);
-		ball->listener = this;
+		
 		dead = false;
 
 		lives--;
@@ -115,7 +113,12 @@ update_status ModulePlayer::Update()
 
 		}
 		if (!game_over)
+		{
 			App->audio->PlayFx(App->scene_intro->dead_fx);
+			ball = App->physics->CreateCircle(SCREEN_WIDTH - 23, SCREEN_HEIGHT - 250, 11);
+			ball->body->SetBullet(true);
+			ball->listener = this;
+		}
 	}
 
 	if(game_over)
@@ -126,6 +129,10 @@ update_status ModulePlayer::Update()
 		games_lost++;
 		game_over = false;
 		lives = 5;
+		App->audio->PlayFx(App->scene_intro->dead_fx);
+		ball = App->physics->CreateCircle(SCREEN_WIDTH - 23, SCREEN_HEIGHT - 250, 11);
+		ball->body->SetBullet(true);
+		ball->listener = this;
 	}
 	//Tp ball
 	if (tp1)
