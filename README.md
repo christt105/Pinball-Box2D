@@ -1,4 +1,4 @@
-﻿# Pinball-Box2D
+# Pinball-Box2D
 
 Pinball made with box2D.
 
@@ -8,8 +8,8 @@ Click [here](https://github.com/christt105/Pinball-Box2D) to go to repository.
 
 ## Contributors
 
-Marc Gálvez Llorens [(optus23)](https://github.com/optus23).
-Christian Martínez de la Rosa [(christt105)](https://github.com/christt105).
+Marc Gálvez Llorens ([optus23])(https://github.com/optus23).
+Christian Martínez de la Rosa ([christt105])(https://github.com/christt105).
 
 You can also see the [contributors](https://github.com/christt105/Pinball-Box2D/graphs/contributors) in our repository.
 
@@ -19,13 +19,27 @@ We made third pinball of "Pinball Flipper" game for android. You can find game [
 
 ## Diferences
 
+In our game if we press space, texture of ball wil change.
+Some fx are diferent.
+When ball is teleported in holes, our game doesn't wait to throw ball.
+
 ## Controls
 
-Down arrow to charge kicker.
-Left arrow to action left flipper.
-Right arrow to action right flipper
+- Down arrow to charge kicker.
+- Left arrow to action left flipper.
+- Right arrow to action right flipper.
+- Space to change ball.
 
-F1 to activate debug mode and be able to see colliders.
+### Developer
+  - F1 to activate debug mode and be able to see colliders. 
+  - F3 to make game smaller.
+  - F4 to make game bigger.
+  - I to move up camera.
+  - K to move down camera.
+  - J to move left camera.
+  - L to move right camera.
+  - 1 to teleport ball to mouse position.
+  - 2 to die.
 
 ## Combo
 
