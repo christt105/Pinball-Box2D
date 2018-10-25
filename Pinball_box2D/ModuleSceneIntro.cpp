@@ -15,6 +15,7 @@
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
+	// SDL_Rects Logic ========================================================
 	background_tx = NULL;
 	sensed = false;
 	circle_light1_rect.x = 398;
@@ -70,22 +71,19 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	triangle_light2_rect.x = 98;
 	triangle_light2_rect.y = 69;
 	triangle_light2_rect.w = triangle_light2_rect.h = 85;
-
-	
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
 {}
 
-// Load assets
 bool ModuleSceneIntro::Start()
 {
 	LOG("Loading Intro assets");
 	bool ret = true;
 
-
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
+	// Load SDL_Textures ========================================================
 	background_tx = App->textures->Load("pinball/Textures/Background.png");
 	layout_tx = App->textures->Load("pinball/Textures/Layout.png");
 	layout_alpha_tx = App->textures->Load("pinball/Textures/Layout_alpha.png");
@@ -93,7 +91,6 @@ bool ModuleSceneIntro::Start()
 	kicker.kicker_tx = App->textures->Load("pinball/Textures/kicker.png");
 	press_space_tx = App->textures->Load("pinball/Textures/Press_Space.png");
 	
-
 	App->audio->PlayMusic("pinball/Audio/Music/Scene.ogg");
 	Mix_VolumeMusic(MIX_MAX_VOLUME / 4);
 
@@ -108,6 +105,7 @@ bool ModuleSceneIntro::Start()
 	center_launch_fx = App->audio->LoadFx("pinball/Audio/SFx/center_launch.wav");
 	pink_light_fx = App->audio->LoadFx("pinball/Audio/SFx/pink_light.wav");
 
+	// Chain Arrays ========================================================
 	int background_chain[166] = {
 	464, 256,
 	470, 270,
@@ -370,7 +368,6 @@ bool ModuleSceneIntro::Start()
 		355, 759,
 		361, 759
 	};
-
 	//Top barriers
 	int capsule_1_top_chain[18] = {
 		171, 106,
@@ -406,7 +403,7 @@ bool ModuleSceneIntro::Start()
 		270, 109
 	};
 
-	//Chains
+	// Create Chains ========================================================
 	back = App->physics->CreateChain(0, 0, background_chain, 165, b2_staticBody);
 	structure_right = App->physics->CreateChain(0, 0, structure_right_chain, 103, b2_staticBody);
 	structure_left = App->physics->CreateChain(0, 0, structure_left_chain, 121, b2_staticBody);
@@ -417,11 +414,10 @@ bool ModuleSceneIntro::Start()
 	capsule1 = App->physics->CreateChain(0, 0, capsule_1_top_chain, 17, b2_staticBody);
 	capsule2 = App->physics->CreateChain(0, 0, capsule_2_top_chain, 17, b2_staticBody);
 	capsule3 = App->physics->CreateChain(0, 0, capsule_3_top_chain, 17, b2_staticBody);
-
 	triangle_left->listener = this;
 	triangle_right->listener = this;
 
-	//Circle
+	// Create Static Circles ========================================================
 	circle1 = App->physics->CreateCircleStatic(225, 210, 20);
 	circle2 = App->physics->CreateCircleStatic(285, 270, 20);
 	circle3 = App->physics->CreateCircleStatic(170, 270, 20);
@@ -429,19 +425,17 @@ bool ModuleSceneIntro::Start()
 	circle2->listener = this;
 	circle3->listener = this;
 
-	//tp 
-	tp_1 = App->physics->CreateRectangleSensor(121, 390, 15, 15);
-	tp_2 = App->physics->CreateRectangleSensor(331, 390, 15, 15);
-	tp_1->listener = this;
-	tp_2->listener = this;
-
-	//Rebound tp
 	rebound_tp1 = App->physics->CreateCircleStatic(28, 950, 20);
 	rebound_tp2 = App->physics->CreateCircleStatic(425, 950, 20);
 	rebound_tp1->listener = this;
 	rebound_tp2->listener = this;
 
-	//Pink lights sensors
+	// Create Rectangles Sensors ========================================================
+	tp_1 = App->physics->CreateRectangleSensor(121, 390, 15, 15);
+	tp_2 = App->physics->CreateRectangleSensor(331, 390, 15, 15);
+	tp_1->listener = this;
+	tp_2->listener = this;
+
 	pink_1 = App->physics->CreateRectangleSensor(153, 135, 15, 10);
 	pink_2 = App->physics->CreateRectangleSensor(203, 135, 15, 10);
 	pink_3 = App->physics->CreateRectangleSensor(253, 135, 15, 10);
@@ -451,7 +445,6 @@ bool ModuleSceneIntro::Start()
 	pink_3->listener = this;
 	pink_4->listener = this;
 
-	//Arrows sensor
 	arrow.arrow1 = App->physics->CreateRectangleSensor(20, 406, 5, 5);
 	arrow.arrow2 = App->physics->CreateRectangleSensor(25, 298, 5, 5);
 	arrow.arrow3 = App->physics->CreateRectangleSensor(41, 200, 5, 5);
@@ -462,7 +455,6 @@ bool ModuleSceneIntro::Start()
 	arrow.arrow8 = App->physics->CreateRectangleSensor(435, 305, 5, 5);
 	arrow.arrow9 = App->physics->CreateRectangleSensor(420, 207,5, 5);
 	arrow.arrow10 = App->physics->CreateRectangleSensor(373, 87, 5, 5);
-	
 	arrow.arrow1->listener = this;
 	arrow.arrow2->listener = this;
 	arrow.arrow3->listener = this;
@@ -474,19 +466,17 @@ bool ModuleSceneIntro::Start()
 	arrow.arrow9->listener = this;
 	arrow.arrow10->listener = this;
 	
+	unlocker = App->physics->CreateRectangleSensor(400, 120, 20, 20);
+	unlocker->listener = this;
 
-	//Kicker
+	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 50);
+	sensor->listener = this;
+	
+	//Joint Kicker ========================================================
 	kicker.launch = App->physics->CreateRectangleSensor(488, 936, 24, 15);
 	kicker.stop = App->physics->CreateRectangle(488, 938, 24, 20, b2_dynamicBody);
 	kicker.joint = App->physics->CreatePrismaticJoint(kicker.launch->body, kicker.stop->body, { 0, 0 }, { 0, 0 }); // 0, 0 equals A and B anchors
-
-	//Unlocker
-	unlocker = App->physics->CreateRectangleSensor( 400, 120, 20, 20);
-	unlocker->listener = this;
-
-	//Rectangle Sensor
-	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 50);
-	sensor->listener = this;
+	
 	return ret;
 }
 
@@ -494,9 +484,9 @@ bool ModuleSceneIntro::Start()
 bool ModuleSceneIntro::CleanUp()
 {
 	LOG("Unloading Intro scene");
-
 	back = nullptr;
 
+	//Unload All SDL_Textures ========================================================
 	App->textures->Unload(background_tx);
 	App->textures->Unload(layout_tx);
 	App->textures->Unload(press_space_tx);
@@ -508,6 +498,7 @@ bool ModuleSceneIntro::CleanUp()
 }
 
 update_status ModuleSceneIntro::PreUpdate() {
+
 
 	App->renderer->Blit(background_tx, 0, 0);
 	App->renderer->Blit(layout_alpha_tx, 0, 0);
