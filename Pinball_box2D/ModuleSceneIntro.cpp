@@ -779,7 +779,7 @@ update_status ModuleSceneIntro::Update()
 
 
 	//Kicker
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) //Keep pressing
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && !App->player->game_over) //Keep pressing
 	{
 		kicker.joint->SetMotorSpeed(-2);
 		kicker.force += 1.0f;
@@ -788,7 +788,7 @@ update_status ModuleSceneIntro::Update()
 			kicker.force = 100;
 		}
 	}
-	else if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP) //Stop pressing
+	else if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP && !App->player->game_over) //Stop pressing
 	{
 		kicker.joint->SetMotorSpeed(kicker.force);
 		kicker.force = 0;
