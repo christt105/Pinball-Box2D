@@ -19,6 +19,7 @@ public:
 	p2List<PhysBody*>	bodies;
 	PhysBody*			ball;
 	SDL_Texture*		ball_tx;
+	SDL_Texture*		game_over_tx;
 	
 	SDL_Rect			ball_rect;	
 	SDL_Rect			live_rect;
@@ -31,4 +32,5 @@ public:
 	bool tp2;
 	uint counter = 2;
 	uint counter2 = 0;
+	uint games_lost = 1;
 };
