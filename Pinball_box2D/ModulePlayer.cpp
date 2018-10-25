@@ -14,8 +14,6 @@
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-
-	
 	ball_tx = nullptr;
 
 	ball_rect.x = PIXEL_BALL;
@@ -50,7 +48,7 @@ bool ModulePlayer::Start()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	// DEBUG MODE
+	// DEBUG MODE ========================================================
 	if (App->physics->debug && App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		if (ball != nullptr)
@@ -62,7 +60,7 @@ update_status ModulePlayer::Update()
 		ball->body->SetBullet(true);
 		ball->listener = this;
 	}
-	//Change ball skin
+	//Change ball skin ========================================================
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
 		ball_rect.x = PIXEL_BALL*counter;
@@ -79,17 +77,17 @@ update_status ModulePlayer::Update()
 			counter2 = 0;
 		}
 	}
-	//Lives blit
+	//Lives blit========================================================
 	if (lives >= 2) 		App->renderer->Blit(App->scene_intro->circle_robound_tx, 350, 972, &live_rect);
 	if (lives >= 3) 		App->renderer->Blit(App->scene_intro->circle_robound_tx, 375, 972, &live_rect);
 	if (lives >= 4) 		App->renderer->Blit(App->scene_intro->circle_robound_tx, 400, 972, &live_rect);
 	if (lives >= 5) 		App->renderer->Blit(App->scene_intro->circle_robound_tx, 425, 972, &live_rect);
-	// Spawn ball
+
+	// Spawn ball========================================================
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
 		dead = true;
 		App->scene_intro->unlocker_closed = false;
-
 	}
 
 	if (dead)
@@ -134,7 +132,8 @@ update_status ModulePlayer::Update()
 		ball->body->SetBullet(true);
 		ball->listener = this;
 	}
-	//Tp ball
+
+	//Tp ball ========================================================
 	if (tp1)
 	{
 		if (ball != nullptr)
@@ -164,30 +163,13 @@ update_status ModulePlayer::Update()
 
 		tp2 = false;
 	}
-	// Ball
+	// Blit Ball ========================================================
 	if (ball != nullptr)
 	{
 		int x, y;
 		ball->GetPosition(x, y);
 		App->renderer->Blit(ball_tx, x, y, &ball_rect, 1.0f, ball->GetRotation());
 	}
-
-	
-
-	
-	// All draw functions ------------------------------------------------------
-	p2List_item<PhysBody*>* b = bodies.getFirst();
-	
-	while (b != nullptr)
-	{
-		int x, y;
-		b->data->GetPosition(x, y);
-		App->renderer->Blit(ball_tx, x, y, &ball_rect, 1.0f, b->data->GetRotation());
-		b = b->next;
-	}
-
-
-	
 
 	return UPDATE_CONTINUE;
 }

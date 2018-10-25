@@ -499,7 +499,7 @@ bool ModuleSceneIntro::CleanUp()
 
 update_status ModuleSceneIntro::PreUpdate() {
 
-
+	//Blit in PreUpdate ========================================================
 	App->renderer->Blit(background_tx, 0, 0);
 	App->renderer->Blit(layout_alpha_tx, 0, 0);
 	App->renderer->Blit(circle_robound_tx, 403, 925, &tp_rebound_rect);
@@ -507,7 +507,7 @@ update_status ModuleSceneIntro::PreUpdate() {
 	App->renderer->Blit(layout_tx, 0, 0);
 	App->renderer->Blit(press_space_tx, 130, 600);
 
-	//DEGUB MOVEMENT CAMERA
+	//Debug Movement Camera ========================================================
 	int speed = 3;
 
 	if (App->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT)
@@ -527,12 +527,8 @@ update_status ModuleSceneIntro::PreUpdate() {
 // Update: draw objects
 update_status ModuleSceneIntro::Update()
 {
-	int x, y;
 
-
-	// Title info Pixel: %d, %d map_coordinates_pixel.x + App->renderer->camera.x, map_coordinates_pixel.y + App->renderer->camera.y
-	iPoint map_coordinates_pixel(App->input->GetMouseX(), App->input->GetMouseY());
-	
+	//Debug Movement Camera ========================================================
 	if (App->player->game_over)
 	{
 		p2SString title("GAAAME OVER !!!! Games Lost: %d", App->player->games_lost);
@@ -544,19 +540,27 @@ update_status ModuleSceneIntro::Update()
 		App->window->SetTitle(title.GetString());
 	}
 
-	
 
-	// Rebound Circles
-	App->renderer->Blit(circle_robound_tx, 202, 187, &circle_robound1_rect, 1.0F, angle_rot);
-	App->renderer->Blit(circle_robound_tx, 262, 247, &circle_robound2_rect, 1.0F, angle_rot);
-	App->renderer->Blit(circle_robound_tx, 147, 247, &circle_robound2_rect, 1.0F, angle_rot);
-
-	angle_rot-=0.5F;
-	//Unlocker
+	//Logic Unlocker ========================================================
 	if(unlocker_closed)
 		App->renderer->Blit(circle_robound_tx, 413, 113, &unlocker_rect);
 
-	//Pink lights
+	if (unlocker_closed && unlocker_rectangle == nullptr)
+	{
+		unlocker_rectangle = App->physics->CreateRectangle(420, 140, 2, 70, b2_staticBody);
+
+		LOG("A NEW UNLOCKER CREATED");
+	}
+
+	if (!unlocker_closed && unlocker_rectangle != nullptr)
+	{
+		unlocker_rectangle->body->GetWorld()->DestroyBody(unlocker_rectangle->body);
+		unlocker_rectangle = nullptr;
+		LOG("-- UNLOCKER DESTROYED ");
+
+	}
+
+	//Logic Pink lights ========================================================
 	if (pink1)
 		App->renderer->Blit(circle_robound_tx, 145, 125, &pink_on_rect);
 	else
@@ -592,7 +596,7 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 	
-	//Triangle rebounders lights
+	//Logic Triangle rebounders lights ========================================================
 	if (light_triangle1 && timer)
 	{
 		init_time = SDL_GetTicks(); //Timer
@@ -628,9 +632,12 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 
-	//Circle rebounders lights
+	//Logic Rebound Circle ========================================================
+	App->renderer->Blit(circle_robound_tx, 202, 187, &circle_robound1_rect, 1.0F, angle_rot);
+	App->renderer->Blit(circle_robound_tx, 262, 247, &circle_robound2_rect, 1.0F, angle_rot);
+	App->renderer->Blit(circle_robound_tx, 147, 247, &circle_robound2_rect, 1.0F, angle_rot);
+	angle_rot -= 0.5F;
 
-	
 	if (light_circle1 && timer)
 	{
 		init_time = SDL_GetTicks(); //Timer
@@ -682,8 +689,8 @@ update_status ModuleSceneIntro::Update()
 
 		}
 	}
-	//Arrows
 
+	//Logic Arrows ========================================================
 	if (arrow.light1) {
 		App->renderer->Blit(circle_robound_tx, 10, 386, &arrow.arrow_on_rect);
 
@@ -762,14 +769,14 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 
-	//Tp
+	//Blit Tp ========================================================
 	App->renderer->Blit(circle_robound_tx, 108, 378, &tp_rect, 1.0F, angle_rot);
 	App->renderer->Blit(circle_robound_tx, 322, 378, &tp_rect, 1.0F, angle_rot);
 	App->renderer->Blit(circle_robound_tx, 20, 750, &tp_rect, 1.0F, angle_rot);
 	App->renderer->Blit(circle_robound_tx, 410, 750, &tp_rect, 1.0F, angle_rot);
 
 
-	//Kicker
+	//Logic Kicker ========================================================
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && !App->player->game_over) //Keep pressing
 	{
 		kicker.joint->SetMotorSpeed(-2);
@@ -798,30 +805,17 @@ update_status ModuleSceneIntro::Update()
 		kicker.stop->body->SetTransform({ kicker.stop->body->GetPosition().x, kicker.launch->body->GetPosition().y }, 0);
 	}
 
+	int x, y;
 	kicker.stop->GetPosition(x, y);
 	App->renderer->Blit(kicker.kicker_tx, x, y);
 
-	//Unlock
-	if (unlocker_closed && unlocker_rectangle == nullptr)
-	{
-		unlocker_rectangle = App->physics->CreateRectangle(420, 140, 2, 70, b2_staticBody);
-
-		LOG("A NEW UNLOCKER CREATED");
-	}
-
-	if (!unlocker_closed && unlocker_rectangle != nullptr)
-	{
-		unlocker_rectangle->body->GetWorld()->DestroyBody(unlocker_rectangle->body);
-		unlocker_rectangle = nullptr;
-		LOG("-- UNLOCKER DESTROYED ");
-
-	}
 
 	return UPDATE_CONTINUE;
 }
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
+	//Logic Collision ========================================================
 
 	if (bodyA == sensor)
 	{
@@ -875,7 +869,6 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		App->audio->PlayFx(pink_light_fx);
 
 	}
-//Arrow sensors
 
 	if (bodyA == arrow.arrow1)
 	{
@@ -951,7 +944,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 	if (bodyA == circle1 || bodyA == circle2 || bodyA == circle3) {
 		b2Vec2 force(bodyB->body->GetWorldCenter() - bodyA->body->GetWorldCenter());
-		force *= 10;
+		force *= 7;
 		bodyB->body->ApplyLinearImpulse(force, bodyB->body->GetWorldCenter(), true);
 		App->ui->score += 100;
 		App->audio->PlayFx(circle_fx);

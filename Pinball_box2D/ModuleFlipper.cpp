@@ -32,6 +32,8 @@ bool ModuleFlipper::Start() {
 
 void ModuleFlipper::CreateFlippers()
 {
+
+	//Chain Array ========================================================
 	int flipper_left_chain[14] = {
 		6, 13,
 		12, 1,
@@ -52,7 +54,7 @@ void ModuleFlipper::CreateFlippers()
 		-6, 13
 	};
 
-	//Left flipper
+	//Left flipper ========================================================
 	left.flipper = App->physics->CreatePolygon(100, 920, flipper_left_chain, 14);	//Body flipper
 	left.rotor = App->physics->CreateCircleStatic(160, 930, 3);						//Circle, pivot where flipper will rotate around
 
@@ -84,6 +86,7 @@ void ModuleFlipper::CreateFlippers()
 bool ModuleFlipper::CleanUp() {
 	LOG("Unloading flippers");
 
+	//Unload all Textures and Destroy Bodies ======================================================== 
 	App->textures->Unload(flipper_tx);
 	flipper_tx = nullptr;
 	
@@ -102,6 +105,7 @@ bool ModuleFlipper::CleanUp() {
 
 update_status ModuleFlipper::PreUpdate() {
 
+	//Inputs Left Right ========================================================
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) && !left.mov && !App->player->game_over) {
 		if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
 			App->audio->PlayFx(fx_flipper);
@@ -118,6 +122,7 @@ update_status ModuleFlipper::PreUpdate() {
 
 update_status ModuleFlipper::Update() {
 
+	// Logic Flippers ========================================================
 	if (left.mov) {
 		MoveLeft();
 		left.mov = false;
