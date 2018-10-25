@@ -38,6 +38,7 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 
 	ball_tx = App->textures->Load("pinball/Textures/Pinball_Ball.png");
+	game_over_tx = App->textures->Load("pinball/Textures/game_over.png");
 	ball = App->physics->CreateCircle(SCREEN_WIDTH - 23, SCREEN_HEIGHT - 250, 11);
 	lives = 5;
 	ball->body->SetBullet(true);
@@ -114,19 +115,18 @@ update_status ModulePlayer::Update()
 
 		}
 		if (!game_over)
-		{
 			App->audio->PlayFx(App->scene_intro->dead_fx);
-		}
-		else
-		{
-			game_over = false;
-			lives = 5;
-		}
-
-
-	
 	}
 
+	if(game_over)
+		App->renderer->Blit(game_over_tx, 0, 0);
+
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && game_over)
+	{
+		games_lost++;
+		game_over = false;
+		lives = 5;
+	}
 	//Tp ball
 	if (tp1)
 	{

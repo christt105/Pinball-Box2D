@@ -539,10 +539,21 @@ update_status ModuleSceneIntro::Update()
 	int x, y;
 
 
-	// Title info
+	// Title info Pixel: %d, %d map_coordinates_pixel.x + App->renderer->camera.x, map_coordinates_pixel.y + App->renderer->camera.y
 	iPoint map_coordinates_pixel(App->input->GetMouseX(), App->input->GetMouseY());
-	p2SString title("Pixel: %d, %d", map_coordinates_pixel.x + App->renderer->camera.x, map_coordinates_pixel.y + App->renderer->camera.y);
-	App->window->SetTitle(title.GetString());
+	
+	if (App->player->game_over)
+	{
+		p2SString title("GAAAME OVER !!!! Games Lost: %d", App->player->games_lost);
+		App->window->SetTitle(title.GetString());
+	}
+	else
+	{
+		p2SString title("Magic Pinball: Lives %d", App->player->lives);
+		App->window->SetTitle(title.GetString());
+	}
+
+	
 
 	// Rebound Circles
 	App->renderer->Blit(circle_robound_tx, 202, 187, &circle_robound1_rect, 1.0F, angle_rot);
