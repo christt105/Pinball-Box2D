@@ -51,7 +51,7 @@ bool ModulePlayer::Start()
 update_status ModulePlayer::Update()
 {
 	// DEBUG MODE
-	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	if (App->physics->debug && App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		if (ball != nullptr)
 		{
