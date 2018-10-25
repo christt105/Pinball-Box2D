@@ -94,7 +94,7 @@ bool ModuleSceneIntro::Start()
 	press_space_tx = App->textures->Load("pinball/Textures/Press_Space.png");
 	
 
-	App->audio->PlayMusic("pinball/Audio/Scene.ogg");
+	App->audio->PlayMusic("pinball/Audio/Music/Scene.ogg");
 	Mix_VolumeMusic(MIX_MAX_VOLUME / 4);
 
 	bonus_fx = App->audio->LoadFx("pinball/Audio/SFx/bonus.wav");
