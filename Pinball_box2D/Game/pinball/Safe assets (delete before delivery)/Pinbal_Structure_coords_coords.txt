@@ -1,4 +1,0 @@
-// Pivot 0, 0
-int Pinbal_Structure_coords[2] = {
-	2910, 1193
-};
