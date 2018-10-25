@@ -637,7 +637,7 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 
-	//Circle rebounders lights ---------------------------------------------------------------------------------
+	//Circle rebounders lights
 
 	
 	if (light_circle1 && timer)
