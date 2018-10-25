@@ -461,7 +461,7 @@ bool ModuleSceneIntro::Start()
 	arrow.arrow7 = App->physics->CreateRectangleSensor(440, 413, 5, 5);
 	arrow.arrow8 = App->physics->CreateRectangleSensor(435, 305, 5, 5);
 	arrow.arrow9 = App->physics->CreateRectangleSensor(420, 207,5, 5);
-	arrow.arrow10 = App->physics->CreateRectangleSensor(373, 98, 5, 5);
+	arrow.arrow10 = App->physics->CreateRectangleSensor(373, 87, 5, 5);
 	
 	arrow.arrow1->listener = this;
 	arrow.arrow2->listener = this;
