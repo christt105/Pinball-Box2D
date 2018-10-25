@@ -445,16 +445,16 @@ bool ModuleSceneIntro::Start()
 	pink_3->listener = this;
 	pink_4->listener = this;
 
-	arrow.arrow1 = App->physics->CreateRectangleSensor(20, 406, 5, 5);
-	arrow.arrow2 = App->physics->CreateRectangleSensor(25, 298, 5, 5);
-	arrow.arrow3 = App->physics->CreateRectangleSensor(41, 200, 5, 5);
-	arrow.arrow4 = App->physics->CreateRectangleSensor(90, 100, 5, 5);
-	arrow.arrow5 = App->physics->CreateRectangleSensor(187, 55, 5, 5);
-	arrow.arrow6 = App->physics->CreateRectangleSensor(270, 55, 5, 5);
-	arrow.arrow7 = App->physics->CreateRectangleSensor(440, 413, 5, 5);
-	arrow.arrow8 = App->physics->CreateRectangleSensor(435, 305, 5, 5);
-	arrow.arrow9 = App->physics->CreateRectangleSensor(420, 207,5, 5);
-	arrow.arrow10 = App->physics->CreateRectangleSensor(373, 87, 5, 5);
+	arrow.arrow1 = App->physics->CreateRectangleSensor(20, 406, 20, 2);
+	arrow.arrow2 = App->physics->CreateRectangleSensor(25, 298, 20, 2);
+	arrow.arrow3 = App->physics->CreateRectangleSensor(41, 200, 20, 2);
+	arrow.arrow4 = App->physics->CreateRectangleSensor(90, 100, 20, 2);
+	arrow.arrow5 = App->physics->CreateRectangleSensor(187, 55, 20, 2);
+	arrow.arrow6 = App->physics->CreateRectangleSensor(270, 55, 20, 2);
+	arrow.arrow7 = App->physics->CreateRectangleSensor(440, 413, 20, 2);
+	arrow.arrow8 = App->physics->CreateRectangleSensor(415, 305, 40, 2);
+	arrow.arrow9 = App->physics->CreateRectangleSensor(400, 207, 40, 2);
+	arrow.arrow10 = App->physics->CreateRectangleSensor(373, 87, 20, 2);
 	arrow.arrow1->listener = this;
 	arrow.arrow2->listener = this;
 	arrow.arrow3->listener = this;
