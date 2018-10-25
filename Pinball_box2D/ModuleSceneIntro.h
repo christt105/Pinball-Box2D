@@ -111,6 +111,8 @@ public:
 
 	SDL_Rect			circle_robound1_rect;
 	SDL_Rect			circle_robound2_rect;
+	SDL_Rect			circle_light1_rect;
+	SDL_Rect			circle_light2_rect;
 	SDL_Rect			tp_rect;
 	SDL_Rect			unlocker_rect;
 	SDL_Rect			pink_off_rect;
@@ -143,4 +145,7 @@ public:
 
 	bool				light_triangle1 = false;
 	bool				light_triangle2 = false;
+	bool				light_circle1 = false;
+	bool				light_circle2 = false;
+	bool				light_circle3 = false;
 };

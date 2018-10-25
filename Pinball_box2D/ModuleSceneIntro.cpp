@@ -17,14 +17,21 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 {
 	background_tx = NULL;
 	sensed = false;
+	circle_light1_rect.x = 398;
+	circle_light1_rect.y = 17;
+	circle_light1_rect.w = circle_light1_rect.h = 45;
 
 	circle_robound1_rect.x = 190;
 	circle_robound1_rect.y = 17;
 	circle_robound1_rect.w = circle_robound1_rect.h = 45;
 
-	circle_robound2_rect.x = 260;
+	circle_light2_rect.x = 261;
+	circle_light2_rect.y = 18;
+	circle_light2_rect.w = circle_light2_rect.h = 43;
+
+	circle_robound2_rect.x = 330;
 	circle_robound2_rect.y = 17;
-	circle_robound2_rect.w = circle_robound2_rect.h = 45;
+	circle_robound2_rect.w = circle_robound2_rect.h = 43;
 
 	tp_rect.x = 468;
 	tp_rect.y = 28;
@@ -601,7 +608,6 @@ update_status ModuleSceneIntro::Update()
 		
 		}
 	}
-	LOG("%d", timer);
 
 	if (light_triangle2 && timer)
 	{
@@ -620,6 +626,60 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 
+	//Circle rebounders lights ---------------------------------------------------------------------------------
+
+	
+	if (light_circle1 && timer)
+	{
+		init_time = SDL_GetTicks(); //Timer
+		timer = false;
+
+	}
+	if (light_circle1)
+	{
+		App->renderer->Blit(circle_robound_tx, 263, 247, &circle_light2_rect);
+		current_time = SDL_GetTicks() - init_time; //Timer
+		if (current_time > 250)
+		{
+			light_circle1 = false;
+			timer = true;
+
+		}
+	}
+
+	if (light_circle2 && timer)
+	{
+		init_time = SDL_GetTicks(); //Timer
+		timer = false;
+	}
+	if (light_circle2)
+	{
+		App->renderer->Blit(circle_robound_tx, 146, 248, &circle_light2_rect);
+		current_time = SDL_GetTicks() - init_time; //Timer
+		if (current_time > 250)
+		{
+			light_circle2 = false;
+			timer = true;
+		}
+	}
+
+	if (light_circle3 && timer)
+	{
+		init_time = SDL_GetTicks(); //Timer
+		timer = false;
+
+	}
+	if (light_circle3)
+	{
+		App->renderer->Blit(circle_robound_tx, 202, 187, &circle_light1_rect);
+		current_time = SDL_GetTicks() - init_time; //Timer
+		if (current_time > 250)
+		{
+			light_circle3 = false;
+			timer = true;
+
+		}
+	}
 	//Arrows
 
 	if (arrow.light1) {
@@ -893,7 +953,14 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		bodyB->body->ApplyLinearImpulse(force, bodyB->body->GetWorldCenter(), true);
 		App->ui->score += 100;
 		App->audio->PlayFx(circle_fx);
+		
+
 	}
+
+	if (bodyA == circle1) light_circle3 = true;
+	if (bodyA == circle2) light_circle1 = true;
+	if (bodyA == circle3) light_circle2 = true;
+
 	if (bodyA == rebound_tp1 || bodyA == rebound_tp2) {
 		bodyB->body->ApplyLinearImpulse(b2Vec2(0,-50), bodyB->body->GetWorldCenter(), true);
 		App->ui->score += 1000;
