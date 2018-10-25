@@ -42,7 +42,7 @@ update_status ModuleCircleDirection::PreUpdate() {
 	if(!active_mark && time_start + interval <= SDL_GetTicks()){
 			time_start = SDL_GetTicks();
 			ChangeDirection();
-		}
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -83,12 +83,14 @@ void ModuleCircleDirection::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
 
 b2Vec2 ModuleCircleDirection::VectorDirection() {
 	b2Vec2 ret;
+	float random = (rand() % 2) + 1;
+	LOG("%.2f", random);
 	switch (direction) {
 	case UP_LEFT:
-		ret = b2Vec2(-0.5F, -2);
+		ret = b2Vec2(-random, -2);
 		break;
 	case UP_RIGHT:
-		ret = b2Vec2(0.5F, -2);
+		ret = b2Vec2(random, -2);
 		break;
 	case LEFT:
 		ret = b2Vec2(-2, 0);
@@ -112,6 +114,9 @@ b2Vec2 ModuleCircleDirection::VectorDirection() {
 void ModuleCircleDirection::ChangeDirection() {
 
 	direction = static_cast<Direction>(rand() % Direction::MAX);
+
+	if(direction>=Direction::LEFT) //this will make more probable that circle direction will be up
+		direction = static_cast<Direction>(rand() % Direction::MAX);
 
 	switch (direction) {
 		case UP_LEFT:
