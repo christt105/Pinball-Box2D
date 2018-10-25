@@ -10,6 +10,7 @@
 #include "ModuleWindow.h"
 #include "ModuleUI.h"
 #include "p2Point.h"
+#include  "ModuleFlipper.h"
 
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -55,6 +56,15 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	arrow.arrow_on_rect.y = 27;
 	arrow.arrow_on_rect.w = arrow.arrow_on_rect.h = 37;
 	
+	triangle_light1_rect.x = 12;
+	triangle_light1_rect.y = 69;
+	triangle_light1_rect.w = triangle_light1_rect.h = 85;
+	
+	triangle_light2_rect.x = 98;
+	triangle_light2_rect.y = 69;
+	triangle_light2_rect.w = triangle_light2_rect.h = 85;
+
+	
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -75,6 +85,7 @@ bool ModuleSceneIntro::Start()
 	circle_robound_tx = App->textures->Load("pinball/Textures/Circle_rebound.png");
 	kicker.kicker_tx = App->textures->Load("pinball/Textures/kicker.png");
 	press_space_tx = App->textures->Load("pinball/Textures/Press_Space.png");
+	
 
 	App->audio->PlayMusic("pinball/Audio/Scene.ogg");
 	Mix_VolumeMusic(MIX_MAX_VOLUME / 4);
@@ -572,6 +583,42 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 	
+	//Triangle rebounders lights
+	if (light_triangle1 && timer)
+	{
+		init_time = SDL_GetTicks(); //Timer
+		timer = false;
+		
+	}
+	if (light_triangle1)
+	{
+		App->renderer->Blit(App->flippers->flipper_tx, 98, 762, &triangle_light1_rect);
+		current_time = SDL_GetTicks() - init_time; //Timer
+		if (current_time > 250)
+		{
+			light_triangle1 = false;
+			timer = true;
+		
+		}
+	}
+	LOG("%d", timer);
+
+	if (light_triangle2 && timer)
+	{
+		init_time = SDL_GetTicks(); //Timer
+		timer = false;
+	}
+
+	if (light_triangle2)
+	{
+		App->renderer->Blit(App->flippers->flipper_tx, 275, 762, &triangle_light2_rect);
+		current_time = SDL_GetTicks() - init_time; //Timer
+		if (current_time > 250)
+		{
+			light_triangle2 = false;
+			timer = true;
+		}
+	}
 
 	//Arrows
 
@@ -854,13 +901,16 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	}
 
 	if (bodyA == triangle_left) {
-		bodyB->body->ApplyLinearImpulse(b2Vec2(-4, -4), bodyB->body->GetWorldCenter(), true);
+		bodyB->body->ApplyLinearImpulse(b2Vec2(-3, -3), bodyB->body->GetWorldCenter(), true);
 		App->ui->score += 100;
 		App->audio->PlayFx(triangle_fx);
+		light_triangle2 = true;
 	}
 	if (bodyA == triangle_right) {
-		bodyB->body->ApplyLinearImpulse(b2Vec2(4, -4), bodyB->body->GetWorldCenter(), true);
+		bodyB->body->ApplyLinearImpulse(b2Vec2(3, -3), bodyB->body->GetWorldCenter(), true);
 		App->ui->score += 100;
 		App->audio->PlayFx(triangle_fx);
+		light_triangle1 = true;
+
 	}
 }

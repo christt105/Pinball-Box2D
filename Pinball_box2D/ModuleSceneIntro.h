@@ -116,6 +116,8 @@ public:
 	SDL_Rect			pink_off_rect;
 	SDL_Rect			pink_on_rect;
 	SDL_Rect			tp_rebound_rect;
+	SDL_Rect			triangle_light1_rect;
+	SDL_Rect			triangle_light2_rect;
 
 	float				angle_rot = 0.0F;
 	
@@ -138,4 +140,7 @@ public:
 	uint				init_time = 0; 
 	uint				current_time = 0; 
 	bool				timer = true;
+
+	bool				light_triangle1 = false;
+	bool				light_triangle2 = false;
 };
