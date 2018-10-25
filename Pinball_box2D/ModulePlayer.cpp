@@ -132,9 +132,11 @@ update_status ModulePlayer::Update()
 	{
 		if (ball != nullptr)
 		{
+			App->physics->DestroyMouseJoint();
 			ball->body->GetWorld()->DestroyBody(ball->body);
 			ball = nullptr;
 		}
+		
 		ball = App->physics->CreateCircle(22, 775, 11);
 		ball->body->SetBullet(true);
 		ball->listener = this;
@@ -145,6 +147,7 @@ update_status ModulePlayer::Update()
 	{
 		if (ball != nullptr)
 		{
+			App->physics->DestroyMouseJoint();
 			ball->body->GetWorld()->DestroyBody(ball->body);
 			ball = nullptr;
 		}
