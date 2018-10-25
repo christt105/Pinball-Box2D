@@ -6,6 +6,7 @@
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
+#include "ModulePlayer.h"
 
 
 ModuleFlipper::ModuleFlipper(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -101,12 +102,12 @@ bool ModuleFlipper::CleanUp() {
 
 update_status ModuleFlipper::PreUpdate() {
 
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) && !left.mov) {
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) && !left.mov && !App->player->game_over) {
 		if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
 			App->audio->PlayFx(fx_flipper);
 		left.mov = true;
 	}
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) && !right.mov) {
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) && !right.mov && !App->player->game_over) {
 		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 			App->audio->PlayFx(fx_flipper);
 		right.mov = true;
